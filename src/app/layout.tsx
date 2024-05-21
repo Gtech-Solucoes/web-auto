@@ -12,7 +12,7 @@ const poppins = Poppins({
 })
 
 export const metadata: Metadata = {
-  title: 'WebAuto',
+  title: 'Webauto | Compre, venda e financie carros usados, novos e motos',
   description: 'Veículos',
 }
 

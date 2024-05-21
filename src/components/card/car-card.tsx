@@ -1,4 +1,4 @@
-import { Card, CardContent, CardHeader } from '@/components/ui/card'
+import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card'
 import Image from 'next/image'
 import { Button } from '../ui/button'
 import {
@@ -51,7 +51,7 @@ export function VehicleCard() {
             </p>
           </div>
 
-          <div className="flex flex-col justify-between py-2 pt-4">
+          <div className="flex flex-col justify-between py-2 pt-6">
             <div className="flex flex-row justify-between items-center mb-1">
               <h3 className="text-lg font-semibold">R$ 89.990</h3>
               <Button size={'xs'} variant={'outline'}>
@@ -64,9 +64,11 @@ export function VehicleCard() {
             </div>
           </div>
         </CardContent>
-        <Button className="w-full rounded-none rounded-b-lg">
-          Enviar Mensagem
-        </Button>
+        <CardFooter className="p-0">
+          <Button className="w-full rounded-none rounded-b-lg ">
+            Enviar Mensagem
+          </Button>
+        </CardFooter>
       </Card>
     </>
   )

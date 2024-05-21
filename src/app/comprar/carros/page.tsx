@@ -26,6 +26,15 @@ import {
   BreadcrumbSeparator,
   BreadcrumbLink,
 } from '@/components/ui/breadcrumb'
+import {
+  Dashboard,
+  DashboardContent,
+  DashboardHeader,
+  DashboardMain,
+  DashboardTopFilter,
+} from '@/components/dashboard/dashboard'
+
+import { Metadata } from 'next'
 
 type ComponentGenericProps = {
   className?: string
@@ -70,6 +79,11 @@ const brands = [
   'GMC',
 ]
 
+export const metadata: Metadata = {
+  title: 'Carros usados e seminovos em São José do Rio Preto',
+  description: 'Veículos',
+}
+
 export default function DashboardPage() {
   const isTrue = true
   const vehicles = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17]
@@ -89,7 +103,7 @@ export default function DashboardPage() {
                 asChild
                 size={'xs'}
                 variant={isTrue ? 'default' : 'outline'}
-                className="flex-1"
+                className="flex-1 text-xs"
               >
                 <Link href="/carros">Carros</Link>
               </Button>
@@ -97,7 +111,7 @@ export default function DashboardPage() {
                 asChild
                 variant={!isTrue ? 'default' : 'outline'}
                 size={'xs'}
-                className="flex-1"
+                className="flex-1 text-xs"
               >
                 <Link href="/motos">Motos</Link>
               </Button>
@@ -231,7 +245,7 @@ export default function DashboardPage() {
               {vehicles.length} veículos disponíveis
             </p>
           </div>
-          <ScrollArea className="w-full px-2">
+          <ScrollArea className="w-full px-2 md:h-[70vh] h-full">
             <div className="flex flex-row flex-wrap items-stretch justify-center gap-4 w-full place-content-stretch">
               {vehicles.map((car) => (
                 <VehicleCard key={car} />
@@ -241,71 +255,6 @@ export default function DashboardPage() {
         </DashboardMain>
       </DashboardContent>
     </Dashboard>
-  )
-}
-
-export function Dashboard({ className, children }: ComponentGenericProps) {
-  return (
-    <div
-      className={cn([
-        'grid min-h-screen w-full md:grid-cols-[280px_1fr]',
-        className,
-      ])}
-    >
-      {children}
-    </div>
-  )
-}
-
-export function DashboardContent({
-  className,
-  children,
-}: ComponentGenericProps) {
-  return <div className={cn(['flex flex-col', className])}>{children}</div>
-}
-
-export function DashboardHeader({
-  className,
-  children,
-}: ComponentGenericProps) {
-  return (
-    <div
-      className={cn([
-        'flex h-14 items-center sm:justify-between gap-4 border-b px-4 lg:h-[60px] lg:px-6',
-        className,
-      ])}
-    >
-      {children}
-    </div>
-  )
-}
-
-export function DashboardTopFilter({
-  className,
-  children,
-}: ComponentGenericProps) {
-  return (
-    <div
-      className={cn(
-        'w-full justify-end flex h-14 items-center gap-4 border-b px-4 lg:px-6',
-        className,
-      )}
-    >
-      {children}
-    </div>
-  )
-}
-
-export function DashboardMain({ className, children }: ComponentGenericProps) {
-  return (
-    <main
-      className={cn(
-        'flex flex-1 flex-col gap-4 p-4 lg:gap-6 lg:p-6 bg-muted/40',
-        className,
-      )}
-    >
-      {children}
-    </main>
   )
 }
 

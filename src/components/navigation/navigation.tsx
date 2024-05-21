@@ -23,7 +23,7 @@ export function Navigation() {
           <NavigationMenuItem>
             <NavigationMenuTrigger>Comprar</NavigationMenuTrigger>
             <NavigationMenuContent>
-              <ul className="grid p-1 pr-[6px] pb-[6px] w-[150px]">
+              <ul className="grid w-[150px]">
                 <ListItem href="/comprar/carros" title="Carros"></ListItem>
                 <ListItem href="/comprar/motos" title="Motos"></ListItem>
               </ul>
@@ -71,8 +71,8 @@ const ListItem = React.forwardRef<
           )}
           {...props}
         >
-          <div className="text-sm font-medium leading-none">{title}</div>
-          <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
+          <div className="text-xs line font-medium leading-4">{title}</div>
+          <p className="line-clamp-2 leading-snug text-muted-foreground">
             {children}
           </p>
         </a>
