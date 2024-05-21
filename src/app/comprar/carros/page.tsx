@@ -14,7 +14,6 @@ import {
 import { Input } from '@/components/ui/input'
 import { ScrollArea } from '@/components/ui/scroll-area'
 import { VehicleCard } from '@/components/card/car-card'
-import { cn } from '@/lib/utils'
 import React from 'react'
 import { Navigation } from '@/components/navigation/navigation'
 import { NavigationMobile } from '@/components/navigation/navigation-mobile'
@@ -35,11 +34,14 @@ import {
 } from '@/components/dashboard/dashboard'
 
 import { Metadata } from 'next'
-
-type ComponentGenericProps = {
-  className?: string
-  children: React.ReactNode
-}
+import {
+  SideBar,
+  SideBarBody,
+  SideBarContent,
+  SideBarHeader,
+  SideBarItem,
+  SideBarItemTitle,
+} from '@/components/dashboard/sidebar/sidebar'
 
 export type DashboardGenericProps<T = unknown> = {
   children: React.ReactNode
@@ -89,16 +91,16 @@ export default function DashboardPage() {
   const vehicles = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17]
   return (
     <Dashboard>
-      <SiderBar>
-        <SiderBarContent>
-          <SiderBarHeader>
+      <SideBar>
+        <SideBarContent>
+          <SideBarHeader>
             <Link href="/" className="flex items-center gap-2 font-semibold">
               <Car className="h-6 w-6" />
               <span>Logo Veículos</span>
             </Link>
-          </SiderBarHeader>
-          <SiderBarBody>
-            <SiderBarItem className="flex-row items-center justify-evenly gap-2 border-none">
+          </SideBarHeader>
+          <SideBarBody>
+            <SideBarItem className="flex-row items-center justify-evenly gap-2 border-none">
               <Button
                 asChild
                 size={'xs'}
@@ -115,9 +117,9 @@ export default function DashboardPage() {
               >
                 <Link href="/motos">Motos</Link>
               </Button>
-            </SiderBarItem>
-            <SiderBarItem className="flex-col items-start">
-              <SiderBarItemTitle title="Marcas" />
+            </SideBarItem>
+            <SideBarItem className="flex-col items-start">
+              <SideBarItemTitle title="Marcas" />
               <div className="flex flex-col gap-4 w-full">
                 <Select>
                   <SelectTrigger className="w-full">
@@ -148,30 +150,30 @@ export default function DashboardPage() {
                   </SelectContent>
                 </Select>
               </div>
-            </SiderBarItem>
-            <SiderBarItem className="flex-col">
-              <SiderBarItemTitle title="Ano" />
+            </SideBarItem>
+            <SideBarItem className="flex-col">
+              <SideBarItemTitle title="Ano" />
               <div className="flex flex-row justify-between items-center gap-2">
                 <Input placeholder="De" />
                 <Input placeholder="Até" />
               </div>
-            </SiderBarItem>
-            <SiderBarItem className="flex-col">
-              <SiderBarItemTitle title="Quilometragem" />
+            </SideBarItem>
+            <SideBarItem className="flex-col">
+              <SideBarItemTitle title="Quilometragem" />
               <div className="flex flex-row justify-between items-center gap-2">
                 <Input placeholder="De" />
                 <Input placeholder="Até" />
               </div>
-            </SiderBarItem>
-            <SiderBarItem className="flex-col">
-              <SiderBarItemTitle title="Preço" />
+            </SideBarItem>
+            <SideBarItem className="flex-col">
+              <SideBarItemTitle title="Preço" />
               <div className="flex flex-row justify-between items-center gap-2">
                 <Input placeholder="De" />
                 <Input placeholder="Até" />
               </div>
-            </SiderBarItem>
-            <SiderBarItem className="flex-col">
-              <SiderBarItemTitle title="Câmbio" />
+            </SideBarItem>
+            <SideBarItem className="flex-col">
+              <SideBarItemTitle title="Câmbio" />
               <div className="flex flex-row">
                 <div className="flex items-center space-x-2">
                   <Checkbox id="manual" />
@@ -192,10 +194,10 @@ export default function DashboardPage() {
                   </label>
                 </div>
               </div>
-            </SiderBarItem>
-          </SiderBarBody>
-        </SiderBarContent>
-      </SiderBar>
+            </SideBarItem>
+          </SideBarBody>
+        </SideBarContent>
+      </SideBar>
       <DashboardContent>
         <DashboardHeader>
           <Navigation />
@@ -255,73 +257,5 @@ export default function DashboardPage() {
         </DashboardMain>
       </DashboardContent>
     </Dashboard>
-  )
-}
-
-export function SiderBar({ className, children }: ComponentGenericProps) {
-  return (
-    <aside className={cn(['hidden md:block', className])}>{children}</aside>
-  )
-}
-
-export function SiderBarContent({
-  className,
-  children,
-}: ComponentGenericProps) {
-  return (
-    <div className={cn(['flex h-full max-h-screen flex-col', className])}>
-      {children}
-    </div>
-  )
-}
-
-export function SiderBarHeader({ className, children }: ComponentGenericProps) {
-  return (
-    <div
-      className={cn([
-        'flex h-14 items-center border-b px-4 lg:h-[60px] lg:px-6',
-        className,
-      ])}
-    >
-      {children}
-    </div>
-  )
-}
-
-export function SiderBarBody({ className, children }: ComponentGenericProps) {
-  return <div className={cn(['flex-1 border-r', className])}>{children}</div>
-}
-
-export function SiderBarItem({ className, children }: ComponentGenericProps) {
-  return (
-    <div
-      className={cn([
-        'text-sm font-normal py-4 px-4 border-b w-full flex',
-        className,
-      ])}
-    >
-      {children}
-    </div>
-  )
-}
-
-type SiderBarItemTitleProps = {
-  className?: string
-  title: string
-}
-
-export function SiderBarItemTitle({
-  className,
-  title,
-}: SiderBarItemTitleProps) {
-  return (
-    <h3
-      className={cn([
-        'font-semibold text-xs mb-3 text-muted-foreground',
-        className,
-      ])}
-    >
-      {title}
-    </h3>
   )
 }
