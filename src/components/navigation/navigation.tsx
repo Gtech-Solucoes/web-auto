@@ -14,44 +14,53 @@ import {
   NavigationMenuTrigger,
   navigationMenuTriggerStyle,
 } from '@/components/ui/navigation-menu'
+import { Car } from 'lucide-react'
 
 export function Navigation() {
   return (
-    <div className="w-full hidden justify-center items-center md:flex">
-      <NavigationMenu>
-        <NavigationMenuList>
-          <NavigationMenuItem>
-            <NavigationMenuTrigger>Comprar</NavigationMenuTrigger>
-            <NavigationMenuContent>
-              <ul className="grid w-[150px]">
-                <ListItem href="/comprar/carros" title="Carros"></ListItem>
-                <ListItem href="/comprar/motos" title="Motos"></ListItem>
-              </ul>
-            </NavigationMenuContent>
-          </NavigationMenuItem>
-          <NavigationMenuItem>
-            <Link href="/docs" legacyBehavior passHref>
-              <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                Vender
-              </NavigationMenuLink>
-            </Link>
-          </NavigationMenuItem>
-          <NavigationMenuItem>
-            <Link href="/docs" legacyBehavior passHref>
-              <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                Financiamento
-              </NavigationMenuLink>
-            </Link>
-          </NavigationMenuItem>
-          <NavigationMenuItem>
-            <Link href="/docs" legacyBehavior passHref>
-              <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                Contato
-              </NavigationMenuLink>
-            </Link>
-          </NavigationMenuItem>
-        </NavigationMenuList>
-      </NavigationMenu>
+    <div className="md:flex hidden w-full justify-center items-center">
+      <div className="w-[150px]">
+        <Link href="/" className="flex items-center gap-2 font-semibold">
+          <Car className="h-6 w-6" />
+          <span>Logo Veículos</span>
+        </Link>
+      </div>
+      <div className="flex-1 flex justify-center items-center">
+        <NavigationMenu>
+          <NavigationMenuList>
+            <NavigationMenuItem>
+              <NavigationMenuTrigger>Comprar</NavigationMenuTrigger>
+              <NavigationMenuContent>
+                <ul className="grid w-[150px]">
+                  <ListItem href="/comprar/carros" title="Carros"></ListItem>
+                  <ListItem href="/comprar/motos" title="Motos"></ListItem>
+                </ul>
+              </NavigationMenuContent>
+            </NavigationMenuItem>
+            <NavigationMenuItem>
+              <Link href="/docs" legacyBehavior passHref>
+                <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                  Vender
+                </NavigationMenuLink>
+              </Link>
+            </NavigationMenuItem>
+            <NavigationMenuItem>
+              <Link href="/docs" legacyBehavior passHref>
+                <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                  Financiamento
+                </NavigationMenuLink>
+              </Link>
+            </NavigationMenuItem>
+            <NavigationMenuItem>
+              <Link href="/docs" legacyBehavior passHref>
+                <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                  Contato
+                </NavigationMenuLink>
+              </Link>
+            </NavigationMenuItem>
+          </NavigationMenuList>
+        </NavigationMenu>
+      </div>
     </div>
   )
 }

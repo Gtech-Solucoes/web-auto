@@ -15,8 +15,8 @@ import React from 'react'
 
 export function NavigationMobile() {
   return (
-    <div className="w-full md:hidden flex justify-between items-center ">
-      <Link href="/" className="flex items-center gap-2 font-semibold">
+    <div className="w-full md:hidden flex justify-between items-center">
+      <Link href="/" className="w-full flex items-center gap-2 font-semibold">
         <Car className="h-6 w-6" />
         <span>Logo Veículos</span>
       </Link>
