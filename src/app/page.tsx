@@ -1,10 +1,10 @@
 import { AutoplayCarousel } from '@/components/autoplay-carousel/carousel'
-import { VehicleCard } from '@/components/card/car-card'
 import {
   Dashboard,
   DashboardContent,
   DashboardHeader,
 } from '@/components/dashboard/dashboard'
+import { HomePageVehicles } from '@/components/homepage-vehicles'
 import { Navigation } from '@/components/navigation/navigation'
 import { NavigationMobile } from '@/components/navigation/navigation-mobile'
 import { Button } from '@/components/ui/button'
@@ -81,24 +81,7 @@ export default function Datail() {
           </div>
         </section>
 
-        <section className="w-full flex text-center justify-center flex-col md:pb-24 md:pt-0 sm:py-32">
-          <div className="mx-auto max-w-7xl px-6 lg:px-8">
-            <h2 className="text-3xl font-semibold">
-              Encontre seu próximo veículo
-            </h2>
-            <div className="flex flex-col md:grid md:grid-cols-2 xl:grid-cols-4 justify-center md:space-y-0 md:gap-6 md:mt-8 w-full items-center space-y-6 mt-6">
-              {Array.from(Array(4).keys()).map((car) => (
-                <VehicleCard key={car} />
-              ))}
-            </div>
-            <Button
-              className="max-w-72 w-full mt-8 font-bold text-base bg-black"
-              size={'lg'}
-            >
-              <Link href="/comprar">Ver todos Veículos</Link>
-            </Button>
-          </div>
-        </section>
+        <HomePageVehicles />
 
         <section className="py-24 sm:py-32 bg-current">
           <div className="mx-auto max-w-7xl px-6 lg:px-8">
@@ -146,7 +129,7 @@ export default function Datail() {
           </div>
         </section>
 
-        <section className="py-24 sm:py32" id="vender">
+        <section className="py-24 sm:py32 xl:flex xl:items-center" id="vender">
           <div className="mx-auto max-w-7xl px-6 lg:px-8 lg:flex">
             <div className="mx-auto max-w-md text-center lg:mx-0 lg:flex-auto lg:py-32 lg:text-left">
               <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
@@ -167,13 +150,13 @@ export default function Datail() {
                 </a>
               </Button>
             </div>
-            <div className="relative mt-16 h-full lg:mt-36">
+            <div className="mt-16 h-full lg:mt-36 w-full">
               <Image
                 alt="App screenshot"
                 src="https://fastback.fiat.com.br/images//Versions/fastback-turbo-at/249.webp"
                 width={1824}
                 height={1080}
-                className="max-w-screen lg:max-w-[50vw] xl:max-w-[30vw]"
+                className="max-w-screen lg:max-w-[50vw] xl:max-w-[45vw]"
               />
             </div>
           </div>
@@ -189,7 +172,10 @@ export default function Datail() {
           </div>
         </section>
 
-        <section className="py-24 sm:py32 bg-current" id="financiar">
+        <section
+          className="py-24 sm:py32 bg-current xl:flex xl:items-center"
+          id="financiar"
+        >
           <div className="mx-auto max-w-7xl px-6 lg:px-8 lg:flex lg:flex-row-reverse">
             <div className="mx-auto max-w-md text-center lg:mx-0 lg:flex-auto lg:py-32 lg:text-left">
               <h2 className="text-3xl font-bold tracking-tight sm:text-4xl text-white">
@@ -214,7 +200,7 @@ export default function Datail() {
                 src="https://fastback.fiat.com.br/images//Versions/fastback-turbo-at/249.webp"
                 width={1824}
                 height={1080}
-                className="max-w-screen lg:max-w-[50vw] xl:max-w-[30vw]"
+                className="max-w-screen lg:max-w-[50vw] xl:max-w-[45vw]"
               />
             </div>
           </div>
