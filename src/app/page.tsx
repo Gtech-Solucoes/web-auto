@@ -70,10 +70,8 @@ export default function Datail() {
           <div className="w-full flex justify-end mt-4">
             <Image
               className="absolute lg:right-[-50px]
-               w-[95vw] sm:w-[55vw] lg:w-[60vw] xl:w-[50vw] 2xl:w-[40vw] mt-4 sm:mt-0 right-[-10px] md:right-0 2xl:right-[200px] 2xl:top-[100px]"
-              src={
-                'https://fastback.fiat.com.br/images//Versions/fastback-turbo-at/249.webp'
-              }
+               w-[95vw] sm:w-[55vw] lg:w-[60vw] xl:w-[50vw] 2xl:w-[60vw] mt-4 sm:mt-0 right-[-10px] md:right-0 2xl:right-[-100px] 2xl:top-[-10px]"
+              src={'/assets/two-cars.png'}
               width={1612}
               height={861}
               alt="Imagem de um carro"

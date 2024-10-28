@@ -83,13 +83,27 @@ export default function ListVehicles({ filter, searchParams }: FilterProps) {
   const [models, setModels] = useState<string[]>([])
   const [brand, setBrand] = useState<string>(filter?.brand || '')
   const [model, setModel] = useState<string>(filter?.model || '')
-  const [yearGte, setYearGte] = useState<string>('')
-  const [yearLte, setYearLte] = useState<string>('')
-  const [priceGte, setPriceGte] = useState<string>('')
-  const [priceLte, setPriceLte] = useState<string>('')
-  const [kmGte, setKmGte] = useState<string>('')
-  const [kmLte, setKmLte] = useState<string>('')
-  const [exchange, setExchange] = useState<string>('')
+  const [yearGte, setYearGte] = useState<string>(
+    (searchParams?.yearGte as string) || '',
+  )
+  const [yearLte, setYearLte] = useState<string>(
+    (searchParams?.yearLte as string) || '',
+  )
+  const [priceGte, setPriceGte] = useState<string>(
+    (searchParams?.priceGte as string) || '',
+  )
+  const [priceLte, setPriceLte] = useState<string>(
+    (searchParams?.priceLte as string) || '',
+  )
+  const [kmGte, setKmGte] = useState<string>(
+    (searchParams?.kmGte as string) || '',
+  )
+  const [kmLte, setKmLte] = useState<string>(
+    (searchParams?.kmLte as string) || '',
+  )
+  const [exchange, setExchange] = useState<string>(
+    (searchParams?.exchange as string) || '',
+  )
 
   // Debounce dos campos de busca
   const debouncedYearGte = useDebounce(yearGte, 1000)
@@ -111,12 +125,11 @@ export default function ListVehicles({ filter, searchParams }: FilterProps) {
       const models = selectedCar.models.map((model) => model.name)
       setModels(models)
       setBrand(selectedCar.brand.toLowerCase())
-      setModel('') // Limpa o modelo selecionado
+      setModel('')
 
-      // Atualiza a URL para remover o modelo ao alterar a marca
       const newUrl = pathname.replace(
-        /(\/comprar\/carros)(\/[^/]+)?(\/[^/]*)?/, // Expressão regular para capturar a marca e o modelo
-        `$1/${selectedCar.brand.toLowerCase()}`, // Mantém apenas a nova marca
+        /(\/comprar\/carros)(\/[^/]+)?(\/[^/]*)?/,
+        `$1/${selectedCar.brand.toLowerCase()}`,
       )
 
       router.push(newUrl, { scroll: false })
@@ -155,7 +168,13 @@ export default function ListVehicles({ filter, searchParams }: FilterProps) {
         }
       }
 
-      return newSearchParams.size > 1 ? newSearchParams.toString() : null
+      newSearchParams.forEach((value, key) => {
+        if (key === '[object Object]') {
+          newSearchParams.delete(key)
+        }
+      })
+
+      return newSearchParams.toString()
     },
     [searchParams],
   )

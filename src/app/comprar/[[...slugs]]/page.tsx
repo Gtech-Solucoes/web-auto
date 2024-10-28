@@ -7,7 +7,7 @@ import ListVehicles from './list'
 
 type Props = {
   params: { slugs: string[] }
-  searchParams: { [key: string]: string | string[] | undefined }
+  searchParams: { [key: string]: string }
 }
 
 export type FilterProps = {
@@ -42,7 +42,7 @@ export default async function Page({ params, searchParams }: Props) {
   const { slugs } = params
 
   if (!slugs || !slugs.length) {
-    return <ListVehicles searchParams={searchParams} key={'any'} />
+    return <ListVehicles searchParams={searchParams || null} key={'any'} />
   }
 
   const [type, brand, model, year, , id] = slugs
@@ -65,7 +65,7 @@ export default async function Page({ params, searchParams }: Props) {
             type,
             year: Number(year),
           }}
-          searchParams={searchParams}
+          searchParams={searchParams || null}
           key={'any'}
         />
       )}
