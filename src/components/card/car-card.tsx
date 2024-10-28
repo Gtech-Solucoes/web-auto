@@ -33,6 +33,7 @@ export function VehicleCard({ data }: VehicleCardProps) {
                     alt="Car image"
                     className="w-full rounded-t-lg"
                     height="200"
+                    priority
                     src={image}
                     style={{
                       aspectRatio: '300/200',
@@ -61,7 +62,14 @@ export function VehicleCard({ data }: VehicleCardProps) {
 
             <div className="flex flex-col justify-between py-2 pt-6">
               <div className="flex flex-row justify-between items-center mb-1">
-                <h3 className="text-lg font-semibold">R$ {data?.price}</h3>
+                <h3 className="text-lg font-semibold">
+                  {new Intl.NumberFormat('pt-BR', {
+                    style: 'currency',
+                    currency: 'BRL',
+                    maximumFractionDigits: 0,
+                    minimumFractionDigits: 0,
+                  }).format(data!.price!)}
+                </h3>
                 <Button size={'xs'} variant={'outline'}>
                   Ver parcelas
                 </Button>

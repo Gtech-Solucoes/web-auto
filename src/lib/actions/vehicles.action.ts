@@ -10,13 +10,13 @@ export type Vehicle = {
   images: string[]
   brand: string
   model: string
-  year: string
+  year: number
   description: string
-  price: string
-  modelYear: string
+  price: number
+  modelYear: number
   about?: string
   itens: string[]
-  km: string
+  km: number
   body: string
   color: string
   fuel: 'FLEX' | 'GASOLINA' | 'ETANOL' | 'DIESEL'
@@ -46,9 +46,100 @@ export const getHomePageVehicles = async (): Promise<Partial<Vehicle>[]> => {
     .find({
       where: {
         homePage: true,
+        status: 'ATIVO',
       },
     })
     .exec()
+
+  const data = vehicles?.map((vehicle) => {
+    return {
+      id: vehicle._id.toString(),
+      images: vehicle.images,
+      brand: vehicle.brand,
+      model: vehicle.model,
+      year: vehicle.year,
+      price: vehicle.price,
+      description: vehicle.description,
+      status: vehicle.status,
+      modelYear: vehicle.modelYear,
+      about: vehicle.about,
+      itens: vehicle.itens,
+      km: vehicle.km,
+      fuel: vehicle.fuel,
+      exchange: vehicle.exchange,
+      singleOwner: vehicle.singleOwner,
+      paidIPVA: vehicle.paidIPVA,
+      licensed: vehicle.licensed,
+      accessCount: vehicle?.accessCount || 0,
+    }
+  })
+
+  return data
+}
+
+export type GetVehiclesInput = {
+  type: string
+  model: string
+  brand: string
+  year: number
+  searchParams: { [key: string]: string | string[] | undefined }
+}
+
+export const getVehicles = async ({
+  type,
+  model,
+  brand,
+  year,
+  searchParams,
+}: GetVehiclesInput): Promise<Partial<Vehicle>[]> => {
+  await connectToDB()
+
+  // Cria um objeto de filtro com base nos parâmetros recebidos
+  const filters: any = {
+    status: 'ATIVO',
+  }
+
+  if (type) {
+    filters.type = {
+      $regex: type === 'carros' ? 'CARRO' : 'MOTO',
+      $options: 'i',
+    }
+  }
+  if (model) {
+    filters.model = { $regex: model, $options: 'i' }
+  }
+  if (brand) {
+    filters.brand = { $regex: brand, $options: 'i' }
+  }
+  if (year) {
+    filters.year = year // Para o ano, a busca é case sensitive, mas você pode ajustar conforme necessário.
+  }
+
+  if (searchParams?.yearGte) {
+    filters.year = { ...filters.year, $gte: Number(searchParams.yearGte) }
+  }
+  if (searchParams?.yearLte) {
+    filters.year = { ...filters.year, $lte: Number(searchParams.yearLte) }
+  }
+  if (searchParams?.priceGte) {
+    filters.price = { ...filters.price, $gte: Number(searchParams.priceGte) }
+  }
+  if (searchParams?.priceLte) {
+    filters.price = { ...filters.price, $lte: Number(searchParams.priceLte) }
+  }
+  if (searchParams?.kmGte) {
+    filters.km = { ...filters.km, $gte: Number(searchParams.kmGte) }
+  }
+  if (searchParams?.kmLte) {
+    filters.km = { ...filters.km, $lte: Number(searchParams.kmLte) }
+  }
+  if (searchParams?.exchange) {
+    filters.exchange = { $regex: searchParams.exchange, $options: 'i' }
+  }
+
+  console.log('filters', filters)
+  // Busca veículos com os filtros aplicados
+  const vehicles = await vehiclesModel.find(filters).exec()
 
   const data = vehicles?.map((vehicle) => {
     return {

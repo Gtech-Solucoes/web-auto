@@ -26,7 +26,7 @@ export function HomePageVehicles() {
               ))}
             </div>
             <Button
-              className="max-w-72 w-full mt-8 font-bold text-base bg-black"
+              className="max-w-72 w-full mt-10 font-bold text-base bg-black"
               size={'lg'}
             >
               <Link href="/comprar">Ver todos Veículos</Link>

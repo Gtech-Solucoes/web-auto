@@ -8,7 +8,6 @@ export const connectToDB = async () => {
   if (!process.env.MONGODB_URL) return
 
   if (isConnected) {
-    console.log('isConnected', isConnected)
     return
   }
 

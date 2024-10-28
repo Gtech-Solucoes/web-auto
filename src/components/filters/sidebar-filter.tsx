@@ -14,44 +14,12 @@ import {
   SelectValue,
 } from '../ui/select'
 import Link from 'next/link'
+import { cars } from '@/constants/cars-brands'
 
 export function SideBarFilter() {
   const pathname = usePathname().slice(1)
   const isCarPath = pathname === ''
   const isMotoPath = pathname === 'motos'
-
-  const brands = [
-    'Toyota',
-    'Volkswagen',
-    'Ford',
-    'Chevrolet',
-    'Honda',
-    'Nissan',
-    'BMW',
-    'Mercedes-Benz',
-    'Audi',
-    'Hyundai',
-    'Kia',
-    'Fiat',
-    'Jeep',
-    'Volvo',
-    'Porsche',
-    'Land Rover',
-    'Jaguar',
-    'Subaru',
-    'Mazda',
-    'Mitsubishi',
-    'Peugeot',
-    'Citroën',
-    'Renault',
-    'Lexus',
-    'Tesla',
-    'Dodge',
-    'Chrysler',
-    'Buick',
-    'Cadillac',
-    'GMC',
-  ]
 
   return (
     <aside className="h-full w-full max-w-[300px] md:w-1/4 p-4 border-r">
@@ -64,7 +32,7 @@ export function SideBarFilter() {
               variant={isCarPath ? 'default' : 'outline'}
               className="px-6"
             >
-              <Link href="/carros">Carros</Link>
+              <Link href="/comprar/carros">Carros</Link>
             </Button>
             <Button
               asChild
@@ -72,7 +40,7 @@ export function SideBarFilter() {
               size={'default'}
               className="px-6"
             >
-              <Link href="/motos">Motos</Link>
+              <Link href="/comprar/motos">Motos</Link>
             </Button>
           </div>
         </div>
@@ -84,9 +52,9 @@ export function SideBarFilter() {
             </SelectTrigger>
             <SelectContent>
               <SelectGroup>
-                {brands.map((brand) => (
-                  <SelectItem value={brand} key={brand}>
-                    {brand}
+                {cars.map((brand) => (
+                  <SelectItem value={brand.brand} key={brand.brand}>
+                    {brand.brand}
                   </SelectItem>
                 ))}
               </SelectGroup>

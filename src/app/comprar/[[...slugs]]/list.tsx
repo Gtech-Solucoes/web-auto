@@ -1,5 +1,6 @@
+'use client'
+
 import Link from 'next/link'
-import { Search } from 'lucide-react'
 
 import { Button } from '@/components/ui/button'
 
@@ -13,7 +14,7 @@ import {
 } from '@/components/ui/select'
 import { Input } from '@/components/ui/input'
 import { VehicleCard } from '@/components/card/car-card'
-import React from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { Navigation } from '@/components/navigation/navigation'
 import { NavigationMobile } from '@/components/navigation/navigation-mobile'
 import { Checkbox } from '@/components/ui/checkbox'
@@ -41,53 +42,112 @@ import {
   SideBarItemTitle,
 } from '@/components/dashboard/sidebar/sidebar'
 import { orders } from '@/constants/order'
+import useSWR from 'swr'
+import { getVehicles } from '@/lib/actions/vehicles.action'
+import { cars } from '@/constants/cars-brands'
+import { FilterProps } from './page'
+import { useRouter, usePathname } from 'next/navigation'
+import { capitalize } from '@/utils/utils'
 
 export type DashboardGenericProps<T = unknown> = {
   children: React.ReactNode
   className?: string
 } & T
 
-const brands = [
-  'Toyota',
-  'Volkswagen',
-  'Ford',
-  'Chevrolet',
-  'Honda',
-  'Nissan',
-  'BMW',
-  'Mercedes-Benz',
-  'Audi',
-  'Hyundai',
-  'Kia',
-  'Fiat',
-  'Jeep',
-  'Volvo',
-  'Porsche',
-  'Land Rover',
-  'Jaguar',
-  'Subaru',
-  'Mazda',
-  'Mitsubishi',
-  'Peugeot',
-  'Citroën',
-  'Renault',
-  'Lexus',
-  'Tesla',
-  'Dodge',
-  'Chrysler',
-  'Buick',
-  'Cadillac',
-  'GMC',
-]
-
 export const metadata: Metadata = {
   title: 'Carros usados e seminovos em São José do Rio Preto',
   description: 'Veículos',
 }
 
-export default function ListVehicles() {
-  const isTrue = true
-  const vehicles = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17]
+export default function ListVehicles({ filter, searchParams }: FilterProps) {
+  const router = useRouter()
+  const pathname = usePathname()
+  const { data: vehicles } = useSWR(`vehicles/${filter.type}`, () =>
+    getVehicles({ ...filter, searchParams }),
+  )
+  const [models, setModels] = useState<string[]>([])
+  const [brand, setBrand] = useState<string>(filter?.brand || '')
+  const [model, setModel] = useState<string>('')
+  const [yearGte, setYearGte] = useState<string>('')
+  const [yearLte, setYearLte] = useState<string>('')
+  const [priceGte, setPriceGte] = useState<string>('')
+  const [priceLte, setPriceLte] = useState<string>('')
+  const [kmGte, setKmGte] = useState<string>('')
+  const [kmLte, setKmLte] = useState<string>('')
+  const [exchange, setExchange] = useState<string>('')
+
+  const createQueryString = useCallback(
+    (params: Record<string, string | number | null>) => {
+      console.log('params', params)
+      const newSearchParams = new URLSearchParams(searchParams?.toString())
+
+      for (const [key, value] of Object.entries(params)) {
+        if (value === null || value === '') {
+          newSearchParams.delete(key)
+        } else {
+          console.log('key', key)
+          newSearchParams.set(key, String(value))
+        }
+      }
+
+      return newSearchParams.size > 1 ? newSearchParams.toString() : null
+    },
+    [searchParams],
+  )
+
+  const handleBrandChange = (value: string) => {
+    const selectedCar = cars.find((car) => car.brand === value)
+    if (selectedCar) {
+      const models = selectedCar.models.map((model) => model.name)
+      setModels(models)
+      setBrand(selectedCar.brand.toLowerCase())
+
+      // Atualiza a parte relevante da URL
+      const newUrl = pathname.replace(
+        /(\/comprar\/carros\/)[^/]+/,
+        `$1${selectedCar.brand.toLowerCase()}`,
+      )
+      router.push(newUrl, { scroll: false })
+    }
+  }
+
+  useEffect(() => {
+    if (brand) {
+      const newUrl = pathname.replace(
+        /(\/comprar\/carros\/)[^/]+/,
+        `$1${brand}`,
+      )
+      router.push(newUrl, { scroll: false })
+    }
+  }, [brand, pathname, router])
+
+  useEffect(() => {
+    const queryString = createQueryString({
+      yearGte,
+      yearLte,
+      priceGte,
+      priceLte,
+      kmGte,
+      kmLte,
+      exchange,
+    })
+
+    if (queryString) {
+      router.push(`${pathname}?${queryString}`, { scroll: false })
+    }
+  }, [
+    yearGte,
+    yearLte,
+    priceGte,
+    priceLte,
+    kmGte,
+    kmLte,
+    exchange,
+    createQueryString,
+    pathname,
+    router,
+  ])
+
   return (
     <Dashboard>
       <DashboardContent className="w-full">
@@ -103,32 +163,32 @@ export default function ListVehicles() {
                   <Button
                     asChild
                     size={'default'}
-                    variant={isTrue ? 'default' : 'outline'}
+                    variant={filter.type === 'carros' ? 'default' : 'outline'}
                     className="flex-1 text-sm"
                   >
-                    <Link href="/carros">Carros</Link>
+                    <Link href="/comprar/carros">Carros</Link>
                   </Button>
                   <Button
                     asChild
-                    variant={!isTrue ? 'default' : 'outline'}
+                    variant={filter.type === 'motos' ? 'default' : 'outline'}
                     size={'default'}
                     className="flex-1 text-sm"
                   >
-                    <Link href="/motos">Motos</Link>
+                    <Link href="/comprar/motos">Motos</Link>
                   </Button>
                 </SideBarItem>
                 <SideBarItem className="flex-col items-start">
                   <SideBarItemTitle title="Marcas" />
                   <div className="flex flex-col gap-4 w-full">
-                    <Select>
+                    <Select onValueChange={handleBrandChange} value={brand}>
                       <SelectTrigger className="w-full">
                         <SelectValue placeholder="Marca" />
                       </SelectTrigger>
                       <SelectContent>
                         <SelectGroup>
-                          {brands.map((brand) => (
-                            <SelectItem value={brand} key={brand}>
-                              {brand}
+                          {cars.map((brand) => (
+                            <SelectItem value={brand.brand} key={brand.brand}>
+                              {capitalize(brand.brand)}
                             </SelectItem>
                           ))}
                         </SelectGroup>
@@ -140,9 +200,9 @@ export default function ListVehicles() {
                       </SelectTrigger>
                       <SelectContent>
                         <SelectGroup>
-                          {brands.map((brand) => (
-                            <SelectItem value={brand} key={brand}>
-                              {brand}
+                          {models.map((model) => (
+                            <SelectItem value={model} key={model}>
+                              {model}
                             </SelectItem>
                           ))}
                         </SelectGroup>
@@ -199,14 +259,6 @@ export default function ListVehicles() {
           </SideBar>
           <div className="flex-1">
             <DashboardTopFilter>
-              <div className="relative ml-auto flex-1 md:grow-0">
-                <Search className="absolute right-3 top-2.5 h-5 w-5" />
-                <Input
-                  type="search"
-                  placeholder="Buscar por marca ou modelo"
-                  className="w-full text-base rounded-lg bg-background md:w-[200px] lg:w-[500px]"
-                />
-              </div>
               <div>
                 <Select>
                   <SelectTrigger className="w-full">
@@ -224,7 +276,7 @@ export default function ListVehicles() {
                 </Select>
               </div>
             </DashboardTopFilter>
-            <DashboardMain>
+            <DashboardMain className="bg-muted/40 h-[94%]">
               <div className="flex items-start flex-col">
                 <Breadcrumb className="mb-2">
                   <BreadcrumbList>
@@ -239,13 +291,13 @@ export default function ListVehicles() {
                 </Breadcrumb>
                 <h2 className="text-2xl font-semibold">Carros</h2>
                 <p className="text-xs text-muted-foreground">
-                  {vehicles.length} veículos disponíveis
+                  {vehicles?.length} veículos disponíveis
                 </p>
               </div>
               <div className="w-full px-2 h-full mb-20">
                 <div className="flex flex-row flex-wrap items-stretch justify-center gap-4 w-full place-content-stretch">
-                  {vehicles.map((car) => (
-                    <VehicleCard key={car} />
+                  {vehicles?.map((car) => (
+                    <VehicleCard key={car.id} data={car} />
                   ))}
                 </div>
               </div>

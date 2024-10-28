@@ -3,9 +3,22 @@ import React from 'react'
 import Datail from './details'
 import { notFound } from 'next/navigation'
 import { capitalize } from '@/utils/utils'
+import { addAccess } from '@/lib/actions/access.action'
+import ListVehicles from './list'
 
 type Props = {
   params: { slugs: string[] }
+  searchParams: { [key: string]: string | string[] | undefined }
+}
+
+export type FilterProps = {
+  filter: {
+    type: string
+    brand: string
+    model: string
+    year: number
+  }
+  searchParams: { [key: string]: string | string[] | undefined }
 }
 
 export async function generateMetadata({ params }: Props) {
@@ -18,7 +31,7 @@ export async function generateMetadata({ params }: Props) {
   const [tipo, marca, modelo, ano] = slugs
 
   if (isDetailsRoute) {
-    const title = `${marca} ${modelo} ${ano} - Detalhes`
+    const title = `${capitalize(marca)} ${capitalize(modelo)} ${ano} - NORTHBENS`
     const description = `Detalhes do ${capitalize(tipo)} ${capitalize(marca)} ${capitalize(modelo)} ${ano}`
     return { title, description }
   }
@@ -28,10 +41,32 @@ export async function generateMetadata({ params }: Props) {
   return { title, description }
 }
 
-export default function Page({ params }: Props) {
+export default async function Page({ params, searchParams }: Props) {
   const { slugs } = params
-  const [tipo, marca, modelo, ano, , id] = slugs
+  const [type, brand, model, year, , id] = slugs
 
   const isDetailsRoute = slugs.length === 6 && slugs[4] === 'detalhes'
-  return <>{isDetailsRoute && <Datail id={id} />}</>
+
+  if (isDetailsRoute) {
+    await addAccess(id)
+  }
+
+  return (
+    <>
+      {isDetailsRoute ? (
+        <Datail id={id} />
+      ) : (
+        <ListVehicles
+          filter={{
+            brand,
+            model,
+            type,
+            year: Number(year),
+          }}
+          searchParams={searchParams}
+          key={'any'}
+        />
+      )}
+    </>
+  )
 }

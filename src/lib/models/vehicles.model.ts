@@ -24,7 +24,7 @@ const VehiclesSchema = new mongoose.Schema(
       required: true,
     },
     year: {
-      type: String,
+      type: Number,
       required: true,
     },
     description: {
@@ -32,11 +32,11 @@ const VehiclesSchema = new mongoose.Schema(
       required: true,
     },
     price: {
-      type: String,
+      type: Number,
       required: true,
     },
     modelYear: {
-      type: String,
+      type: Number,
       required: true,
     },
     about: {
@@ -47,7 +47,7 @@ const VehiclesSchema = new mongoose.Schema(
       default: [],
     },
     km: {
-      type: String,
+      type: Number,
       required: true,
     },
     body: {
