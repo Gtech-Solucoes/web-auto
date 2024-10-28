@@ -16,6 +16,7 @@ interface VehicleCardProps {
 }
 
 export function VehicleCard({ data }: VehicleCardProps) {
+  const urlType = data?.type === 'CARRO' ? 'carros' : 'motos'
   return (
     <>
       <Card className="w-[300px]">
@@ -49,7 +50,9 @@ export function VehicleCard({ data }: VehicleCardProps) {
             <CarouselNext variant={'transparent'} />
           </Carousel>
         </CardHeader>
-        <Link href="/comprar/carros/fiat/uno/2015/detalhes/671ae4c13ef9973303edff1f">
+        <Link
+          href={`/comprar/${urlType}/${data?.brand}/${data?.model}/${data?.year}/detalhes/${data?.id}`}
+        >
           <CardContent className="p-3 py-2">
             <div className="flex flex-col justify-between mb-2">
               <h3 className="font-medium text-normal uppercase">

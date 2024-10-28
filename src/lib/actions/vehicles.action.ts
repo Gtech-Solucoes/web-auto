@@ -54,6 +54,7 @@ export const getHomePageVehicles = async (): Promise<Partial<Vehicle>[]> => {
   const data = vehicles?.map((vehicle) => {
     return {
       id: vehicle._id.toString(),
+      type: vehicle.type,
       images: vehicle.images,
       brand: vehicle.brand,
       model: vehicle.model,
@@ -78,11 +79,11 @@ export const getHomePageVehicles = async (): Promise<Partial<Vehicle>[]> => {
 }
 
 export type GetVehiclesInput = {
-  type: string
-  model: string
-  brand: string
-  year: number
-  searchParams: { [key: string]: string | string[] | undefined }
+  type?: string
+  model?: string
+  brand?: string
+  year?: number
+  searchParams?: { [key: string]: string | string[] | undefined }
 }
 
 export const getVehicles = async ({
@@ -116,6 +117,7 @@ export const getVehicles = async ({
   }
 
   if (searchParams?.yearGte) {
+    console.log('searchParams', searchParams)
     filters.year = { ...filters.year, $gte: Number(searchParams.yearGte) }
   }
   if (searchParams?.yearLte) {
@@ -138,12 +140,12 @@ export const getVehicles = async ({
   }
 
   console.log('filters', filters)
-  // Busca veículos com os filtros aplicados
   const vehicles = await vehiclesModel.find(filters).exec()
 
   const data = vehicles?.map((vehicle) => {
     return {
       id: vehicle._id.toString(),
+      type: vehicle.type,
       images: vehicle.images,
       brand: vehicle.brand,
       model: vehicle.model,

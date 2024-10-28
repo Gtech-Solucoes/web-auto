@@ -48,6 +48,7 @@ import { cars } from '@/constants/cars-brands'
 import { FilterProps } from './page'
 import { useRouter, usePathname } from 'next/navigation'
 import { capitalize } from '@/utils/utils'
+import { LoadingSpinner } from '@/components/loading-spinner'
 
 export type DashboardGenericProps<T = unknown> = {
   children: React.ReactNode
@@ -59,15 +60,29 @@ export const metadata: Metadata = {
   description: 'Veículos',
 }
 
+function useDebounce(value: string, delay: number) {
+  const [debouncedValue, setDebouncedValue] = useState(value)
+
+  useEffect(() => {
+    const handler = setTimeout(() => {
+      setDebouncedValue(value)
+    }, delay)
+
+    return () => {
+      clearTimeout(handler)
+    }
+  }, [value, delay])
+
+  return debouncedValue
+}
+
 export default function ListVehicles({ filter, searchParams }: FilterProps) {
   const router = useRouter()
   const pathname = usePathname()
-  const { data: vehicles } = useSWR(`vehicles/${filter.type}`, () =>
-    getVehicles({ ...filter, searchParams }),
-  )
+
   const [models, setModels] = useState<string[]>([])
   const [brand, setBrand] = useState<string>(filter?.brand || '')
-  const [model, setModel] = useState<string>('')
+  const [model, setModel] = useState<string>(filter?.model || '')
   const [yearGte, setYearGte] = useState<string>('')
   const [yearLte, setYearLte] = useState<string>('')
   const [priceGte, setPriceGte] = useState<string>('')
@@ -76,16 +91,66 @@ export default function ListVehicles({ filter, searchParams }: FilterProps) {
   const [kmLte, setKmLte] = useState<string>('')
   const [exchange, setExchange] = useState<string>('')
 
+  // Debounce dos campos de busca
+  const debouncedYearGte = useDebounce(yearGte, 1000)
+  const debouncedYearLte = useDebounce(yearLte, 1000)
+  const debouncedPriceGte = useDebounce(priceGte, 1000)
+  const debouncedPriceLte = useDebounce(priceLte, 1000)
+  const debouncedKmGte = useDebounce(kmGte, 1000)
+  const debouncedKmLte = useDebounce(kmLte, 1000)
+  const debouncedExchange = useDebounce(exchange, 1000)
+
+  const swrKey = `${filter?.type || 'vehicles'}?${JSON.stringify(searchParams)}`
+  const { data: vehicles, isLoading } = useSWR(swrKey, () =>
+    getVehicles({ ...filter, searchParams }),
+  )
+
+  const handleBrandChange = (value: string) => {
+    const selectedCar = cars.find((car) => car.brand === value)
+    if (selectedCar) {
+      const models = selectedCar.models.map((model) => model.name)
+      setModels(models)
+      setBrand(selectedCar.brand.toLowerCase())
+      setModel('') // Limpa o modelo selecionado
+
+      // Atualiza a URL para remover o modelo ao alterar a marca
+      const newUrl = pathname.replace(
+        /(\/comprar\/carros)(\/[^/]+)?(\/[^/]*)?/, // Expressão regular para capturar a marca e o modelo
+        `$1/${selectedCar.brand.toLowerCase()}`, // Mantém apenas a nova marca
+      )
+
+      router.push(newUrl, { scroll: false })
+    }
+  }
+
+  const handleModelChange = (value: string) => {
+    setModel(value)
+
+    const newUrl = pathname.replace(
+      /(\/comprar\/carros\/[^/]+)(\/[^/]+)?/,
+      `$1/${value.toLowerCase()}`,
+    )
+    router.push(newUrl, { scroll: false })
+  }
+
+  useEffect(() => {
+    if (brand) {
+      const selectedCar = cars.find((car) => car.brand === brand)
+      if (selectedCar) {
+        const models = selectedCar.models.map((model) => model.name)
+        setModels(models)
+      }
+    }
+  }, [brand])
+
   const createQueryString = useCallback(
     (params: Record<string, string | number | null>) => {
-      console.log('params', params)
       const newSearchParams = new URLSearchParams(searchParams?.toString())
 
       for (const [key, value] of Object.entries(params)) {
         if (value === null || value === '') {
           newSearchParams.delete(key)
         } else {
-          console.log('key', key)
           newSearchParams.set(key, String(value))
         }
       }
@@ -95,59 +160,32 @@ export default function ListVehicles({ filter, searchParams }: FilterProps) {
     [searchParams],
   )
 
-  const handleBrandChange = (value: string) => {
-    const selectedCar = cars.find((car) => car.brand === value)
-    if (selectedCar) {
-      const models = selectedCar.models.map((model) => model.name)
-      setModels(models)
-      setBrand(selectedCar.brand.toLowerCase())
-
-      // Atualiza a parte relevante da URL
-      const newUrl = pathname.replace(
-        /(\/comprar\/carros\/)[^/]+/,
-        `$1${selectedCar.brand.toLowerCase()}`,
-      )
-      router.push(newUrl, { scroll: false })
-    }
-  }
-
-  useEffect(() => {
-    if (brand) {
-      const newUrl = pathname.replace(
-        /(\/comprar\/carros\/)[^/]+/,
-        `$1${brand}`,
-      )
-      router.push(newUrl, { scroll: false })
-    }
-  }, [brand, pathname, router])
-
   useEffect(() => {
     const queryString = createQueryString({
-      yearGte,
-      yearLte,
-      priceGte,
-      priceLte,
-      kmGte,
-      kmLte,
-      exchange,
+      yearGte: debouncedYearGte,
+      yearLte: debouncedYearLte,
+      priceGte: debouncedPriceGte,
+      priceLte: debouncedPriceLte,
+      kmGte: debouncedKmGte,
+      kmLte: debouncedKmLte,
+      exchange: debouncedExchange,
     })
 
     if (queryString) {
       router.push(`${pathname}?${queryString}`, { scroll: false })
     }
   }, [
-    yearGte,
-    yearLte,
-    priceGte,
-    priceLte,
-    kmGte,
-    kmLte,
-    exchange,
+    debouncedYearGte,
+    debouncedYearLte,
+    debouncedPriceGte,
+    debouncedPriceLte,
+    debouncedKmGte,
+    debouncedKmLte,
+    debouncedExchange,
     createQueryString,
     pathname,
     router,
   ])
-
   return (
     <Dashboard>
       <DashboardContent className="w-full">
@@ -163,14 +201,14 @@ export default function ListVehicles({ filter, searchParams }: FilterProps) {
                   <Button
                     asChild
                     size={'default'}
-                    variant={filter.type === 'carros' ? 'default' : 'outline'}
+                    variant={filter?.type === 'carros' ? 'default' : 'outline'}
                     className="flex-1 text-sm"
                   >
                     <Link href="/comprar/carros">Carros</Link>
                   </Button>
                   <Button
                     asChild
-                    variant={filter.type === 'motos' ? 'default' : 'outline'}
+                    variant={filter?.type === 'motos' ? 'default' : 'outline'}
                     size={'default'}
                     className="flex-1 text-sm"
                   >
@@ -194,7 +232,7 @@ export default function ListVehicles({ filter, searchParams }: FilterProps) {
                         </SelectGroup>
                       </SelectContent>
                     </Select>
-                    <Select>
+                    <Select onValueChange={handleModelChange} value={model}>
                       <SelectTrigger className="w-full">
                         <SelectValue placeholder="Modelo" />
                       </SelectTrigger>
@@ -213,22 +251,52 @@ export default function ListVehicles({ filter, searchParams }: FilterProps) {
                 <SideBarItem className="flex-col">
                   <SideBarItemTitle title="Ano" />
                   <div className="flex flex-row justify-between items-center gap-2">
-                    <Input placeholder="De" />
-                    <Input placeholder="Até" />
+                    <Input
+                      placeholder="De"
+                      type="number"
+                      value={yearGte}
+                      onChange={(e) => setYearGte(e.target.value)}
+                    />
+                    <Input
+                      placeholder="Até"
+                      type="number"
+                      value={yearLte}
+                      onChange={(e) => setYearLte(e.target.value)}
+                    />
                   </div>
                 </SideBarItem>
                 <SideBarItem className="flex-col">
                   <SideBarItemTitle title="Quilometragem" />
                   <div className="flex flex-row justify-between items-center gap-2">
-                    <Input placeholder="De" />
-                    <Input placeholder="Até" />
+                    <Input
+                      placeholder="De"
+                      type="number"
+                      value={kmGte}
+                      onChange={(e) => setKmGte(e.target.value)}
+                    />
+                    <Input
+                      placeholder="Até"
+                      type="number"
+                      value={kmLte}
+                      onChange={(e) => setKmLte(e.target.value)}
+                    />
                   </div>
                 </SideBarItem>
                 <SideBarItem className="flex-col">
                   <SideBarItemTitle title="Preço" />
                   <div className="flex flex-row justify-between items-center gap-2">
-                    <Input placeholder="De" />
-                    <Input placeholder="Até" />
+                    <Input
+                      placeholder="De"
+                      type="text"
+                      value={priceGte}
+                      onChange={(e) => setPriceGte(e.target.value)}
+                    />
+                    <Input
+                      placeholder="Até"
+                      type="text"
+                      value={priceLte}
+                      onChange={(e) => setPriceLte(e.target.value)}
+                    />
                   </div>
                 </SideBarItem>
                 <SideBarItem className="flex-col">
@@ -294,13 +362,19 @@ export default function ListVehicles({ filter, searchParams }: FilterProps) {
                   {vehicles?.length} veículos disponíveis
                 </p>
               </div>
-              <div className="w-full px-2 h-full mb-20">
-                <div className="flex flex-row flex-wrap items-stretch justify-center gap-4 w-full place-content-stretch">
-                  {vehicles?.map((car) => (
-                    <VehicleCard key={car.id} data={car} />
-                  ))}
+              {isLoading ? (
+                <div className="w-full h-full flex items-center justify-center">
+                  <LoadingSpinner className="w-10 h-10" />
                 </div>
-              </div>
+              ) : (
+                <div className="w-full px-2 h-full mb-20">
+                  <div className="flex flex-row flex-wrap items-stretch justify-center gap-4 w-full place-content-stretch">
+                    {vehicles?.map((car) => (
+                      <VehicleCard key={car.id} data={car} />
+                    ))}
+                  </div>
+                </div>
+              )}
             </DashboardMain>
           </div>
         </div>

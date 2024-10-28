@@ -1,7 +1,6 @@
 import React from 'react'
 
 import Datail from './details'
-import { notFound } from 'next/navigation'
 import { capitalize } from '@/utils/utils'
 import { addAccess } from '@/lib/actions/access.action'
 import ListVehicles from './list'
@@ -12,7 +11,7 @@ type Props = {
 }
 
 export type FilterProps = {
-  filter: {
+  filter?: {
     type: string
     brand: string
     model: string
@@ -23,26 +22,29 @@ export type FilterProps = {
 
 export async function generateMetadata({ params }: Props) {
   const { slugs } = params
-  if (!slugs || !Array.isArray(slugs)) {
-    notFound()
-  }
+  if (slugs || Array.isArray(slugs)) {
+    const isDetailsRoute = slugs.length === 6 && slugs[4] === 'detalhes'
+    const [tipo, marca, modelo, ano] = slugs
 
-  const isDetailsRoute = slugs.length === 6 && slugs[4] === 'detalhes'
-  const [tipo, marca, modelo, ano] = slugs
+    if (isDetailsRoute) {
+      const title = `${capitalize(marca)} ${capitalize(modelo)} ${ano} - NORTHBENS`
+      const description = `Detalhes do ${capitalize(tipo)} ${capitalize(marca)} ${capitalize(modelo)} ${ano}`
+      return { title, description }
+    }
 
-  if (isDetailsRoute) {
-    const title = `${capitalize(marca)} ${capitalize(modelo)} ${ano} - NORTHBENS`
-    const description = `Detalhes do ${capitalize(tipo)} ${capitalize(marca)} ${capitalize(modelo)} ${ano}`
+    const title = `Comprar ${tipo} ${marca} ${modelo} ${ano}`
+    const description = `Listagem de ${tipo === 'carro' ? 'carros' : 'motos'} ${marca} ${modelo} ${ano}`
     return { title, description }
   }
-
-  const title = `Comprar ${tipo} ${marca} ${modelo} ${ano}`
-  const description = `Listagem de ${tipo === 'carro' ? 'carros' : 'motos'} ${marca} ${modelo} ${ano}`
-  return { title, description }
 }
 
 export default async function Page({ params, searchParams }: Props) {
   const { slugs } = params
+
+  if (!slugs || !slugs.length) {
+    return <ListVehicles searchParams={searchParams} key={'any'} />
+  }
+
   const [type, brand, model, year, , id] = slugs
 
   const isDetailsRoute = slugs.length === 6 && slugs[4] === 'detalhes'

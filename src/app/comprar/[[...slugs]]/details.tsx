@@ -39,9 +39,26 @@ import { getVehicleById } from '@/lib/actions/vehicles.action'
 import { booleanToHuman, capitalize } from '@/utils/utils'
 import { LoadingSpinner } from '@/components/loading-spinner'
 import { HomePageVehicles } from '@/components/homepage-vehicles'
+import { useState } from 'react'
+import { addLead } from '@/lib/actions/lead.action'
 
 export default function Datail({ id }: { id: string }) {
+  const [customerName, setCustomerName] = useState('')
+  const [customerPhone, setCustomerPhone] = useState('')
+  const [customerMessage, setCustomerMessage] = useState(
+    'Olá, tenho interesse no veículo Toyota Corolla. Gostaria de receber mais informações sobre o carro. Poderia entrar em contato?',
+  )
   const { data, isLoading } = useSWR(`vehicle-${id}}`, () => getVehicleById(id))
+
+  const onConfirm = async () => [
+    await addLead({
+      name: customerName,
+      message: customerMessage,
+      phone: customerPhone,
+      interest: 'Comprar',
+      vehicle: data?.id,
+    }),
+  ]
 
   return (
     <Dashboard className="flex justify-center w-screen">
@@ -307,7 +324,7 @@ export default function Datail({ id }: { id: string }) {
                 {/* FORM */}
                 <div>
                   <div className="flex flex-1 p-2 border border-1 bg-white">
-                    <form className="m-2 grid md:w-3/3 ">
+                    <div className="m-2 grid md:w-3/3 ">
                       <div className="mb-4 md:w-full">
                         <h2 className="font-semibold text-xl">
                           Fale com um vendedor
@@ -317,12 +334,22 @@ export default function Datail({ id }: { id: string }) {
                             className="block text-sm font-medium  mt-2"
                             htmlFor="name"
                           ></label>
-                          <Input id="name" placeholder="Nome" />
+                          <Input
+                            id="name"
+                            placeholder="Nome"
+                            value={customerName}
+                            onChange={(e) => setCustomerName(e.target.value)}
+                          />
                           <label
                             className="block text-sm font-medium "
                             htmlFor="telefone"
                           ></label>
-                          <Input id="telefone" placeholder="Telefone" />
+                          <Input
+                            id="telefone"
+                            placeholder="Telefone"
+                            value={customerPhone}
+                            onChange={(e) => setCustomerPhone(e.target.value)}
+                          />
                         </div>
                       </div>
 
@@ -334,14 +361,12 @@ export default function Datail({ id }: { id: string }) {
                           className="mb-4"
                           placeholder="Mensagem pré definida"
                           id="message"
-                          defaultValue={
-                            'Olá, tenho interesse no veículo Toyota Corolla. Gostaria de receber mais informações sobre o carro. Poderia entrar em contato?'
-                          }
+                          defaultValue={customerMessage}
                           rows={6}
                         />
                       </div>
-                      <Button type="submit">Enviar Mensagem</Button>
-                    </form>
+                      <Button onClick={onConfirm}>Enviar Mensagem</Button>
+                    </div>
                   </div>
                 </div>
               </div>
