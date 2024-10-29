@@ -48,14 +48,14 @@ export default function Datail() {
           <Navigation />
           <NavigationMobile />
         </DashboardHeader>
-        <div className="absolute sm:top-[60px] top-[360px] right-0 w-[78vw] sm:w-[40vw] sm:h-[40vh] h-[25vh] lg:h-[58vh] rounded-tl-[250px] rounded-bl-[450px] bg-primary z-[-1]"></div>
+        <div className="absolute  md:top-[60px] top-[360px] right-0 w-[78vw] md:w-[40vw] md:h-[40vh] h-[25vh] lg:h-[58vh] rounded-tl-[250px] rounded-bl-[450px] bg-primary z-[-1]"></div>
 
         <div className="hidden xl:flex absolute z-[-1] top-[400px] left-0 w-[58vw] h-[150px] rounded-tr-[20px] rounded-br-[90px] bg-primary"></div>
 
-        <section className="w-full flex sm:flex-row flex-col sm:justify-center sm:h-[50vh] h-[60vh] sm:mt-20 mt-10 mx-auto max-w-7xl px-6 lg:px-8">
-          <div className="w-full flex items-center sm:items-start text-center sm:text-start flex-col">
+        <section className="w-full flex md:flex-row flex-col md:justify-center md:h-[50vh] h-[60vh] md:mt-20 mt-10 mx-auto max-w-7xl px-6 lg:px-8">
+          <div className="w-full flex items-center md:items-start text-center md:text-start flex-col">
             <h1 className="text-4xl lg:text-5xl font-bold">
-              Seu próximo veículo está na NorthBens Veiculos
+              Seu próximo veículo está na {process.env.NEXT_PUBLIC_ACCOUNT_NAME}
             </h1>
             <span className="text-lg pt-2 text-muted-foreground">
               Carros seminovos incríveis com qualidade certificada
@@ -64,13 +64,13 @@ export default function Datail() {
               className="max-w-52 mt-3 font-bold text-base bg-black"
               size={'lg'}
             >
-              <Link href="/comprar">Ver todos Veículos</Link>
+              <Link href="/comprar/carros">Ver todos Veículos</Link>
             </Button>
           </div>
           <div className="w-full flex justify-end mt-4">
             <Image
-              className="absolute lg:right-[-50px]
-               w-[95vw] sm:w-[55vw] lg:w-[60vw] xl:w-[50vw] 2xl:w-[60vw] mt-4 sm:mt-0 right-[-10px] md:right-0 2xl:right-[-100px] 2xl:top-[-10px]"
+              className="absolute lg:right-[-110px] lg:top-[200px]
+               w-[120vw] lg:w-[90vw] xl:w-[80vw] 2xl:w-[65vw] mt-4 md:mt-0 right-[-10px] md:right-[-100x] xl:right-[-100px] xl:top-[100px] 2xl:right-[-100px] 2xl:top-[-10px]"
               src={'/assets/two-cars.png'}
               width={1612}
               height={861}
@@ -88,7 +88,8 @@ export default function Datail() {
                 Nossa história
               </h2>
               <p className="mt-2 text-3xl font-bold tracking-tight text-white sm:text-4xl">
-                4 motivos para comprar seu novo Veículo com a North Bens
+                4 motivos para comprar seu novo Veículo com a{' '}
+                {process.env.NEXT_PUBLIC_ACCOUNT_NAME}
               </p>
               <p className="mt-6 text-lg leading-8 text-muted">
                 Quis tellus eget adipiscing convallis sit sit eget aliquet quis.

@@ -27,7 +27,7 @@ export async function generateMetadata({ params }: Props) {
     const [tipo, marca, modelo, ano] = slugs
 
     if (isDetailsRoute) {
-      const title = `${capitalize(marca)} ${capitalize(modelo)} ${ano} - NORTHBENS`
+      const title = `${capitalize(marca)} ${capitalize(modelo)} ${ano} - ${process.env.NEXT_PUBLIC_ACCOUNT_NAME}`
       const description = `Detalhes do ${capitalize(tipo)} ${capitalize(marca)} ${capitalize(modelo)} ${ano}`
       return { title, description }
     }

@@ -23,7 +23,7 @@ export default function Datail() {
         <section className="max-w-screen-xl w-full flex justify-start h-[50vh] mt-20 mx-auto">
           <div className="min-w-[600px] w-full flex relative flex-col">
             <h1 className="text-5xl font-bold">
-              Seu próximo veículo está na NorthBens Veiculos
+              Seu próximo veículo está na {process.env.NEXT_PUBLIC_ACCOUNT_NAME}
             </h1>
             <span className="text-lg pt-2">
               Carros seminovos incríveis com qualidade certificada

@@ -18,7 +18,9 @@ export function Navigation() {
     <div className="md:flex hidden pl-4 w-full justify-between items-center">
       <div className="w-[250px]">
         <Link href="/" className="flex items-center gap-2 font-semibold">
-          <span className="font-bold text-xl">NORTH BENS VEÍCULOS</span>
+          <span className="font-bold text-xl">
+            {process.env.NEXT_PUBLIC_ACCOUNT_NAME}
+          </span>
         </Link>
       </div>
       <div className="flex justify-center items-center">

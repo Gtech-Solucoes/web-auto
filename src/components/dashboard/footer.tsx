@@ -5,7 +5,7 @@ export function Footer() {
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 md:gap-8 py-10 max-sm:max-w-sm max-sm:mx-auto gap-y-8">
           <div className="lg:mx-auto text-left ">
             <h4 className="text-lg text-white font-medium mb-7">
-              North Bens Veículos
+              {process.env.NEXT_PUBLIC_ACCOUNT_NAME}
             </h4>
             <ul className="text-sm  transition-all duration-500">
               <li className="mb-6">
@@ -109,8 +109,11 @@ export function Footer() {
         <div className="py-7 border-t border-gray-400">
           <div className="flex items-center justify-center flex-col lg:justify-between lg:flexRow">
             <span className="text-sm text-muted ">
-              ©<a href="https://pagedone.io/">North Bens Veículos</a> 2024, All
-              rights reserved.
+              ©
+              <a href="https://pagedone.io/">
+                {process.env.NEXT_PUBLIC_ACCOUNT_NAME}
+              </a>{' '}
+              2024, All rights reserved.
             </span>
             <div className="flex mt-4 space-x-4 sm:justify-center lg:mt-4 ">
               <a
