@@ -1,3 +1,5 @@
+'use client'
+
 import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card'
 import Image from 'next/image'
 import { Button } from '../ui/button'
@@ -10,6 +12,20 @@ import {
 } from '@/components/ui/carousel'
 import Link from 'next/link'
 import { Vehicle } from '@/lib/actions/vehicles.action'
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from '../ui/dialog'
+import { Label } from '../ui/label'
+import { Input } from '../ui/input'
+import { addLead } from '@/lib/actions/lead.action'
+import { useState } from 'react'
 
 interface VehicleCardProps {
   data?: Partial<Vehicle>
@@ -17,6 +33,19 @@ interface VehicleCardProps {
 
 export function VehicleCard({ data }: VehicleCardProps) {
   const urlType = data?.type === 'CARRO' ? 'carros' : 'motos'
+  const [customerName, setCustomerName] = useState('')
+  const [customerPhone, setCustomerPhone] = useState('')
+
+  const onConfirm = async () => {
+    await addLead({
+      name: customerName,
+      message: 'Tenho interesse.',
+      phone: customerPhone,
+      interest: 'Comprar',
+      vehicle: data?.id,
+    })
+  }
+
   return (
     <>
       <Card className="w-[300px]">
@@ -73,23 +102,66 @@ export function VehicleCard({ data }: VehicleCardProps) {
                     minimumFractionDigits: 0,
                   }).format(data!.price!)}
                 </h3>
-                <Button size={'xs'} variant={'outline'}>
-                  Ver parcelas
-                </Button>
               </div>
               <div className="flex justify-between items-center text-sm">
                 <span className="text-xs text-muted-foreground">{`${data?.year}/${data?.modelYear}`}</span>
                 <span className="text-xs text-muted-foreground">
-                  {data?.km} km
+                  {data?.km?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')}{' '}
+                  km
                 </span>
               </div>
             </div>
           </CardContent>
         </Link>
         <CardFooter className="p-0">
-          <Button className="w-full rounded-none rounded-b-lg ">
-            Enviar Mensagem
-          </Button>
+          <Dialog>
+            <DialogTrigger asChild>
+              <Button className="w-full rounded-none rounded-b-lg ">
+                Enviar Mensagem
+              </Button>
+            </DialogTrigger>
+            <DialogContent className="sm:max-w-[425px]">
+              <DialogHeader>
+                <DialogTitle>Mensagem</DialogTitle>
+                <DialogDescription>
+                  Envie uma mensagem para um de nossos consultores
+                </DialogDescription>
+              </DialogHeader>
+              <form className="grid gap-4 py-4">
+                <div className=" items-center gap-4">
+                  <Label htmlFor="name" className="text-right">
+                    Seu nome
+                  </Label>
+                  <Input
+                    onChange={(e) => setCustomerName(e.target.value)}
+                    value={customerName}
+                    id="name"
+                    placeholder="João da Silva"
+                    className="col-span-3"
+                  />
+                </div>
+                <div className="items-center gap-4">
+                  <Label htmlFor="username" className="text-right">
+                    Telefone
+                  </Label>
+                  <Input
+                    onChange={(e) => setCustomerPhone(e.target.value)}
+                    value={customerPhone}
+                    id="Telefone"
+                    placeholder="17 99999-9999"
+                    className="col-span-3"
+                  />
+                </div>
+              </form>
+              <DialogFooter>
+                <DialogClose asChild>
+                  <Button type="button" onClick={onConfirm}>
+                    Enviar
+                  </Button>
+                </DialogClose>
+              </DialogFooter>
+            </DialogContent>
+          </Dialog>
         </CardFooter>
       </Card>
     </>

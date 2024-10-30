@@ -1,5 +1,6 @@
 'use server'
 
+import { SortOrder } from 'mongoose'
 import vehiclesModel from '../models/vehicles.model'
 import { connectToDB } from '../moongose'
 
@@ -32,7 +33,7 @@ export type Vehicle = {
   wheelbase: string
   occupants: string
   trunk: string
-  accessCount?: string
+  accessCount?: number
   status: string
   homePage?: boolean
   createdAt?: Date
@@ -44,11 +45,10 @@ export const getHomePageVehicles = async (): Promise<Partial<Vehicle>[]> => {
 
   const vehicles = await vehiclesModel
     .find({
-      where: {
-        homePage: true,
-        status: 'ATIVO',
-      },
+      status: 'ATIVO',
+      homePage: true,
     })
+    .limit(4)
     .exec()
 
   const data = vehicles?.map((vehicle) => {
@@ -83,7 +83,17 @@ export type GetVehiclesInput = {
   model?: string
   brand?: string
   year?: number
+  page: number
+  sort?: string
   searchParams?: { [key: string]: string | string[] | undefined }
+}
+
+export type GetVehiclesOutput = {
+  meta: {
+    totalRows: number
+    totalPages: number
+  }
+  records: Partial<Vehicle>[]
 }
 
 export const getVehicles = async ({
@@ -91,11 +101,15 @@ export const getVehicles = async ({
   model,
   brand,
   year,
+  page,
   searchParams,
-}: GetVehiclesInput): Promise<Partial<Vehicle>[]> => {
+  sort,
+}: GetVehiclesInput): Promise<GetVehiclesOutput> => {
   await connectToDB()
+  console.log('sort', sort)
 
-  // Cria um objeto de filtro com base nos parâmetros recebidos
+  const skip = (page - 1) * 15
+
   const filters: any = {
     status: 'ATIVO',
   }
@@ -117,7 +131,6 @@ export const getVehicles = async ({
   }
 
   if (searchParams?.yearGte) {
-    console.log('searchParams', searchParams)
     filters.year = { ...filters.year, $gte: Number(searchParams.yearGte) }
   }
   if (searchParams?.yearLte) {
@@ -139,8 +152,32 @@ export const getVehicles = async ({
     filters.exchange = { $regex: searchParams.exchange, $options: 'i' }
   }
 
-  console.log('filters', filters)
-  const vehicles = await vehiclesModel.find(filters).exec()
+  const sortOptions: Record<string, SortOrder> = {} // Define um objeto de ordenação
+
+  switch (sort) {
+    case 'maiorPreco':
+      sortOptions.price = -1 // Ordem decrescente
+      break
+    case 'menorPreco':
+      sortOptions.price = 1 // Ordem crescente
+      break
+    case 'menorKm':
+      sortOptions.km = 1 // Ordem crescente
+      break
+    case 'anoMaisNovo':
+      sortOptions.year = -1 // Ordem decrescente
+      break
+    default:
+      sortOptions.createdAt = -1 // Ordem padrão, por exemplo, pela data de criação
+  }
+
+  console.log('sortOptions', sortOptions)
+  const vehicles = await vehiclesModel
+    .find(filters)
+    .sort(sortOptions as any)
+    .skip(skip)
+    .limit(15)
+    .exec()
 
   const data = vehicles?.map((vehicle) => {
     return {
@@ -166,7 +203,19 @@ export const getVehicles = async ({
     }
   })
 
-  return data
+  const totalRows = await vehiclesModel.countDocuments({
+    ...filters,
+  })
+
+  const totalPages = Math.ceil(totalRows / 15)
+
+  return {
+    meta: {
+      totalRows,
+      totalPages,
+    },
+    records: data,
+  }
 }
 
 export const getVehicleById = async (id: string): Promise<Vehicle | null> => {

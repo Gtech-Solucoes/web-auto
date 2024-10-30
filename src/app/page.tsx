@@ -18,25 +18,25 @@ const features = [
     name: 'Garantia',
     icon: ShieldCheck,
     description:
-      'Morbi viverra dui mi arcu sed. Tellus semper adipiscing suspendisse semper morbi. Odio urna massa nunc massa.',
+      'Oferecemos garantia em todos os veículos para que você possa comprar com total segurança. Nosso compromisso é garantir a sua tranquilidade e satisfação, com cobertura para possíveis reparos e manutenção.',
   },
   {
     name: 'Financiamento',
     icon: HandCoins,
     description:
-      'Morbi viverra dui mi arcu sed. Tellus semper adipiscing suspendisse semper morbi. Odio urna massa nunc massa.',
+      'Facilitamos o seu financiamento com condições que cabem no seu bolso. Conte com o suporte de nossa equipe para encontrar as melhores taxas e formas de pagamento para a realização do seu sonho de ter um veículo próprio.',
   },
   {
     name: 'Qualidade',
     icon: Star,
     description:
-      'Morbi viverra dui mi arcu sed. Tellus semper adipiscing suspendisse semper morbi. Odio urna massa nunc massa.',
+      'Nossos veículos são rigorosamente avaliados para garantir a melhor qualidade. Aqui, você encontra carros em excelentes condições, prontos para proporcionar uma experiência de direção segura e confortável.',
   },
   {
     name: 'Atendimento',
     icon: Headset,
     description:
-      'Morbi viverra dui mi arcu sed. Tellus semper adipiscing suspendisse semper morbi. Odio urna massa nunc massa.',
+      'Nossa equipe está sempre pronta para te atender com dedicação e profissionalismo. Desde o primeiro contato até a entrega do veículo, garantimos um atendimento completo e personalizado para atender às suas necessidades.',
   },
 ]
 
@@ -137,8 +137,10 @@ export default function Datail() {
                 seu Veículo.
               </h2>
               <p className="mt-6 text-lg leading-8 text-muted-foreground">
-                Ac euismod vel sit maecenas id pellentesque eu sed consectetur.
-                Malesuada adipiscing sagittis vel nulla.
+                Está na hora de atualizar? Aqui, você pode trocar ou vender seu
+                veículo de forma rápida e segura. Nossa equipe oferece uma
+                avaliação justa e transparente, garantindo que você faça o
+                melhor negócio.
               </p>
               <Button
                 className="max-w-72 w-full font-bold mt-8 text-base bg-black xl:flex hidden"
@@ -181,14 +183,15 @@ export default function Datail() {
                 Simule o financiamento do seu novo carro
               </h2>
               <p className="mt-6 text-lg leading-8 text-muted">
-                Ac euismod vel sit maecenas id pellentesque eu sed consectetur.
-                Malesuada adipiscing sagittis vel nulla.
+                Descubra as melhores condições para o seu novo veículo de forma
+                simples e rápida! Fale conosco pelo WhatsApp e faça uma
+                simulação personalizada agora mesmo!
               </p>
               <Button
                 className="max-w-72 w-full mt-10 font-bold text-base bg-primary hidden xl:flex"
                 size={'lg'}
               >
-                <a href="https://api.whatsapp.com/send?phone=5517981667986&text=Ol%C3%A1%20gostaria%20de%20vender%20ou%20trocar%20meu%20carro.%0APode%20me%20ajudar%3F">
+                <a href="https://api.whatsapp.com/send?phone=5517981667986&text=Olá%2C%20tudo%20bem%3F%20Gostaria%20de%20fazer%20uma%20simulação%20de%20financiamento.">
                   Fale com um consultor
                 </a>
               </Button>

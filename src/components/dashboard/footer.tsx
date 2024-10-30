@@ -1,106 +1,91 @@
+import Image from 'next/image'
+import Link from 'next/link'
+import wpIcon from '../../../public/assets/whatsapp.svg'
+import { MapPin } from 'lucide-react'
+
 export function Footer() {
   return (
     <footer className="w-full bg-current">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 md:gap-8 py-10 max-sm:max-w-sm max-sm:mx-auto gap-y-8">
+      <div className="mx-auto max-w-7xl px-4 md:px-6 lg:px-8">
+        <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 md:gap-8 py-10 max-sm:max-w-sm max-sm:mx-auto gap-y-8 ">
           <div className="lg:mx-auto text-left ">
             <h4 className="text-lg text-white font-medium mb-7">
               {process.env.NEXT_PUBLIC_ACCOUNT_NAME}
             </h4>
-            <ul className="text-sm  transition-all duration-500">
+            <ul className="text-base  transition-all duration-500">
               <li className="mb-6">
-                <a href="" className="text-muted hover:text-primary">
+                <Link href="/" className="text-muted hover:text-primary">
                   Início
-                </a>
+                </Link>
               </li>
               <li className="mb-6">
-                <a href="" className=" text-muted hover:text-primary">
+                <Link
+                  href="/comprar"
+                  className=" text-muted hover:text-primary"
+                >
                   Comprar
-                </a>
+                </Link>
               </li>
               <li className="mb-6">
-                <a href="" className=" text-muted hover:text-primary">
+                <Link
+                  href="/#vender"
+                  className=" text-muted hover:text-primary"
+                >
                   Vender
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="" className=" text-muted hover:text-primary">
+                <Link
+                  href="/#financiar"
+                  className=" text-muted hover:text-primary"
+                >
                   Financiamento
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
           <div className="lg:mx-auto text-left ">
-            <h4 className="text-lg text-white font-medium mb-7">Products</h4>
-            <ul className="text-sm  transition-all duration-500">
-              <li className="mb-6">
-                <a href="" className="text-muted hover:text-primary">
-                  Figma UI System
-                </a>
-              </li>
-              <li className="mb-6">
-                <a href="" className=" text-muted hover:text-primary">
-                  Icons Assets
-                </a>
-              </li>
-              <li className="mb-6">
-                <a href="" className=" text-muted hover:text-primary">
-                  Responsive Blocks
-                </a>
-              </li>
-              <li>
-                <a href="" className=" text-muted hover:text-primary">
-                  Components Library
-                </a>
-              </li>
-            </ul>
+            <h4 className="text-lg text-white font-medium mb-7">Localização</h4>
+            <span className="text-muted">
+              {' '}
+              R. Pereira Barreto, 3427 - Eldorado, São José do Rio Preto - SP,
+              15043-150
+            </span>
+
+            <div className="text-primary mt-4 flex gap-2">
+              <MapPin />
+              <a
+                className="font-semibold"
+                href="https://www.google.com/maps/place/NorthBens+Ve%C3%ADculos/@-20.7819354,-49.4017516,17z/data=!3m1!4b1!4m6!3m5!1s0x94bdadd15efccdb3:0xbd0c05fb174378c9!8m2!3d-20.7819404!4d-49.3991767!16s%2Fg%2F11flxm_h4m?entry=ttu&g_ep=EgoyMDI0MTAyNy4wIKXMDSoASAFQAw%3D%3D"
+                target="_blank"
+              >
+                Como chegar?
+              </a>
+            </div>
           </div>
           <div className="lg:mx-auto text-left">
-            <h4 className="text-lg text-white font-medium mb-7">Resources</h4>
-            <ul className="text-sm  transition-all duration-500">
-              <li className="mb-6">
-                <a href="" className="text-muted hover:text-primary">
-                  FAQs
-                </a>
-              </li>
-              <li className="mb-6">
+            <h4 className="text-lg text-white font-medium mb-7">Contatos</h4>
+            <ul className="text-base  transition-all duration-500">
+              <li className="mb-6 flex gap-2">
+                <Image
+                  src={wpIcon}
+                  width={20}
+                  height={20}
+                  alt="WhatsApp Icon"
+                />
                 <a href="" className=" text-muted hover:text-primary">
-                  Quick Start
+                  17 99999-9999
                 </a>
               </li>
-              <li className="mb-6">
+              <li className="mb-6 flex gap-2">
+                <Image
+                  src={wpIcon}
+                  width={20}
+                  height={20}
+                  alt="WhatsApp Icon"
+                />
                 <a href="" className=" text-muted hover:text-primary">
-                  Documentation
-                </a>
-              </li>
-              <li>
-                <a href="" className=" text-muted hover:text-primary">
-                  User Guide
-                </a>
-              </li>
-            </ul>
-          </div>
-          <div className="lg:mx-auto text-left">
-            <h4 className="text-lg text-white font-medium mb-7">Blogs</h4>
-            <ul className="text-sm  transition-all duration-500">
-              <li className="mb-6">
-                <a href="" className="text-muted hover:text-primary">
-                  News
-                </a>
-              </li>
-              <li className="mb-6">
-                <a href="" className=" text-muted hover:text-primary">
-                  Tips & Tricks
-                </a>
-              </li>
-              <li className="mb-6">
-                <a href="" className=" text-muted hover:text-primary">
-                  New Updates
-                </a>
-              </li>
-              <li>
-                <a href="" className=" text-muted hover:text-primary">
-                  Events
+                  17 99999-9999
                 </a>
               </li>
             </ul>
@@ -109,11 +94,8 @@ export function Footer() {
         <div className="py-7 border-t border-gray-400">
           <div className="flex items-center justify-center flex-col lg:justify-between lg:flexRow">
             <span className="text-sm text-muted ">
-              ©
-              <a href="https://pagedone.io/">
-                {process.env.NEXT_PUBLIC_ACCOUNT_NAME}
-              </a>{' '}
-              2024, All rights reserved.
+              <span>{process.env.NEXT_PUBLIC_ACCOUNT_NAME}</span> 2024, Todos os
+              direitos reservados.
             </span>
             <div className="flex mt-4 space-x-4 sm:justify-center lg:mt-4 ">
               <a

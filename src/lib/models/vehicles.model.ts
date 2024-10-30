@@ -113,7 +113,7 @@ const VehiclesSchema = new mongoose.Schema(
       required: true,
     },
     accessCount: {
-      type: String,
+      type: Number,
       required: false,
     },
     status: {

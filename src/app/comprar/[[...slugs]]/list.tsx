@@ -46,9 +46,18 @@ import useSWR from 'swr'
 import { getVehicles } from '@/lib/actions/vehicles.action'
 import { cars } from '@/constants/cars-brands'
 import { FilterProps } from './page'
-import { useRouter, usePathname } from 'next/navigation'
+import { useRouter, usePathname, useSearchParams } from 'next/navigation'
 import { capitalize } from '@/utils/utils'
 import { LoadingSpinner } from '@/components/loading-spinner'
+import {
+  Pagination,
+  PaginationContent,
+  PaginationEllipsis,
+  PaginationItem,
+  PaginationLink,
+  PaginationNext,
+  PaginationPrevious,
+} from '@/components/ui/pagination'
 
 export type DashboardGenericProps<T = unknown> = {
   children: React.ReactNode
@@ -76,34 +85,37 @@ function useDebounce(value: string, delay: number) {
   return debouncedValue
 }
 
-export default function ListVehicles({ filter, searchParams }: FilterProps) {
+export default function ListVehicles({ filter }: FilterProps) {
   const router = useRouter()
   const pathname = usePathname()
+  const searchParams = useSearchParams()
 
   const [models, setModels] = useState<string[]>([])
   const [brand, setBrand] = useState<string>(filter?.brand || '')
   const [model, setModel] = useState<string>(filter?.model || '')
   const [yearGte, setYearGte] = useState<string>(
-    (searchParams?.yearGte as string) || '',
+    (searchParams?.get('yearGte') as string) || '',
   )
   const [yearLte, setYearLte] = useState<string>(
-    (searchParams?.yearLte as string) || '',
+    (searchParams?.get('yearLte') as string) || '',
   )
   const [priceGte, setPriceGte] = useState<string>(
-    (searchParams?.priceGte as string) || '',
+    (searchParams?.get('priceGte') as string) || '',
   )
   const [priceLte, setPriceLte] = useState<string>(
-    (searchParams?.priceLte as string) || '',
+    (searchParams?.get('priceLte') as string) || '',
   )
   const [kmGte, setKmGte] = useState<string>(
-    (searchParams?.kmGte as string) || '',
+    (searchParams?.get('kmGte') as string) || '',
   )
   const [kmLte, setKmLte] = useState<string>(
-    (searchParams?.kmLte as string) || '',
+    (searchParams?.get('kmLte') as string) || '',
   )
   const [exchange, setExchange] = useState<string>(
-    (searchParams?.exchange as string) || '',
+    (searchParams?.get('exchange') as string) || '',
   )
+  const [page, setPage] = useState(Number(searchParams?.get('page')) || 1)
+  const [order, setOrder] = useState(searchParams?.get('order') || '')
 
   // Debounce dos campos de busca
   const debouncedYearGte = useDebounce(yearGte, 1000)
@@ -114,9 +126,32 @@ export default function ListVehicles({ filter, searchParams }: FilterProps) {
   const debouncedKmLte = useDebounce(kmLte, 1000)
   const debouncedExchange = useDebounce(exchange, 1000)
 
-  const swrKey = `${filter?.type || 'vehicles'}?${JSON.stringify(searchParams)}`
+  const swrKey = `${filter?.type || 'vehicles'}?${JSON.stringify({
+    yearGte,
+    yearLte,
+    priceGte,
+    priceLte,
+    kmGte,
+    kmLte,
+    exchange,
+    page,
+    order,
+  })}`
   const { data: vehicles, isLoading } = useSWR(swrKey, () =>
-    getVehicles({ ...filter, searchParams }),
+    getVehicles({
+      ...filter,
+      page,
+      searchParams: {
+        yearGte,
+        yearLte,
+        priceGte,
+        priceLte,
+        kmGte,
+        kmLte,
+        exchange,
+      },
+      sort: order,
+    }),
   )
 
   const handleBrandChange = (value: string) => {
@@ -181,6 +216,7 @@ export default function ListVehicles({ filter, searchParams }: FilterProps) {
 
   useEffect(() => {
     const queryString = createQueryString({
+      page,
       yearGte: debouncedYearGte,
       yearLte: debouncedYearLte,
       priceGte: debouncedPriceGte,
@@ -188,6 +224,7 @@ export default function ListVehicles({ filter, searchParams }: FilterProps) {
       kmGte: debouncedKmGte,
       kmLte: debouncedKmLte,
       exchange: debouncedExchange,
+      order,
     })
 
     if (queryString) {
@@ -204,6 +241,8 @@ export default function ListVehicles({ filter, searchParams }: FilterProps) {
     createQueryString,
     pathname,
     router,
+    page,
+    order,
   ])
   return (
     <Dashboard>
@@ -344,18 +383,18 @@ export default function ListVehicles({ filter, searchParams }: FilterProps) {
               </SideBarBody>
             </SideBarContent>
           </SideBar>
-          <div className="flex-1">
+          <div className="flex-1 bg-muted/40">
             <DashboardTopFilter>
               <div>
-                <Select>
+                <Select onValueChange={(value) => setOrder(value)}>
                   <SelectTrigger className="w-full">
                     <SelectValue placeholder="Ordenar" />
                   </SelectTrigger>
                   <SelectContent>
                     <SelectGroup>
                       {orders.map((order) => (
-                        <SelectItem value={order} key={order}>
-                          {order}
+                        <SelectItem value={order.value} key={order.value}>
+                          {order.label}
                         </SelectItem>
                       ))}
                     </SelectGroup>
@@ -363,7 +402,7 @@ export default function ListVehicles({ filter, searchParams }: FilterProps) {
                 </Select>
               </div>
             </DashboardTopFilter>
-            <DashboardMain className="bg-muted/40 h-[94%]">
+            <DashboardMain className="h-auto">
               <div className="flex items-start flex-col">
                 <Breadcrumb className="mb-2">
                   <BreadcrumbList>
@@ -378,7 +417,7 @@ export default function ListVehicles({ filter, searchParams }: FilterProps) {
                 </Breadcrumb>
                 <h2 className="text-2xl font-semibold">Carros</h2>
                 <p className="text-xs text-muted-foreground">
-                  {vehicles?.length} veículos disponíveis
+                  {vehicles?.records?.length} veículos disponíveis
                 </p>
               </div>
               {isLoading ? (
@@ -386,12 +425,44 @@ export default function ListVehicles({ filter, searchParams }: FilterProps) {
                   <LoadingSpinner className="w-10 h-10" />
                 </div>
               ) : (
-                <div className="w-full px-2 h-full mb-20">
+                <div className="w-full px-2 h-full flex flex-col justify-between">
                   <div className="flex flex-row flex-wrap items-stretch justify-center gap-4 w-full place-content-stretch">
-                    {vehicles?.map((car) => (
+                    {vehicles?.records?.map((car) => (
                       <VehicleCard key={car.id} data={car} />
                     ))}
                   </div>
+                  {!isLoading && vehicles && vehicles.records?.length > 0 && (
+                    <Pagination className="py-10">
+                      <PaginationContent>
+                        <PaginationItem>
+                          <PaginationPrevious href="#" />
+                        </PaginationItem>
+                        {page > 1 && (
+                          <PaginationItem>
+                            <PaginationLink href="#">{page - 1}</PaginationLink>
+                          </PaginationItem>
+                        )}
+                        <PaginationItem>
+                          <PaginationLink isActive>{page}</PaginationLink>
+                        </PaginationItem>
+                        {page + 1 <= vehicles.meta.totalPages && (
+                          <PaginationItem onClick={() => setPage(page + 1)}>
+                            <PaginationLink>{page + 1}</PaginationLink>
+                          </PaginationItem>
+                        )}
+                        {page + 2 <= vehicles.meta.totalPages && (
+                          <PaginationItem>
+                            <PaginationEllipsis />
+                          </PaginationItem>
+                        )}
+                        {page + 1 <= vehicles.meta.totalPages && (
+                          <PaginationItem onClick={() => setPage(page + 1)}>
+                            <PaginationNext />
+                          </PaginationItem>
+                        )}
+                      </PaginationContent>
+                    </Pagination>
+                  )}
                 </div>
               )}
             </DashboardMain>

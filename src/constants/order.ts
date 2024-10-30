@@ -1,6 +1,6 @@
 export const orders = [
-  'Menor preço',
-  'Maior preço',
-  'Menor KM',
-  'Ano mais novo',
+  { label: 'Menor preço', value: 'menorPreco' },
+  { label: 'Maior preço', value: 'maiorPreco' },
+  { label: 'Menor KM', value: 'menorKm' },
+  { label: 'Ano mais novo', value: 'anoMaisNovo' },
 ]

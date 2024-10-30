@@ -12,7 +12,10 @@ export const connectToDB = async () => {
   }
 
   try {
-    await mongoose.connect(process.env.MONGODB_URL)
+    await mongoose.connect(process.env.MONGODB_URL, {
+      socketTimeoutMS: 45000,
+      serverSelectionTimeoutMS: 30000,
+    })
 
     isConnected = true
   } catch (error) {}

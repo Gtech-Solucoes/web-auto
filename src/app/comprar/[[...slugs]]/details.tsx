@@ -50,15 +50,15 @@ export default function Datail({ id }: { id: string }) {
   )
   const { data, isLoading } = useSWR(`vehicle-${id}}`, () => getVehicleById(id))
 
-  const onConfirm = async () => [
+  const onConfirm = async () => {
     await addLead({
       name: customerName,
       message: customerMessage,
       phone: customerPhone,
       interest: 'Comprar',
       vehicle: data?.id,
-    }),
-  ]
+    })
+  }
 
   return (
     <Dashboard className="flex justify-center w-screen">
