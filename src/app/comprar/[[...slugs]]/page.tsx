@@ -4,6 +4,7 @@ import Datail from './details'
 import { capitalize } from '@/utils/utils'
 import { addAccess } from '@/lib/actions/access.action'
 import ListVehicles from './list'
+import { getVehicleById } from '@/lib/actions/vehicles.action'
 
 type Props = {
   params: { slugs: string[] }
@@ -29,11 +30,22 @@ export async function generateMetadata({ params }: Props) {
     if (isDetailsRoute) {
       const title = `${capitalize(marca)} ${capitalize(modelo)} ${ano} - ${process.env.NEXT_PUBLIC_ACCOUNT_NAME}`
       const description = `Detalhes do ${capitalize(tipo)} ${capitalize(marca)} ${capitalize(modelo)} ${ano}`
+
+      const vehicle = await getVehicleById(slugs[5])
+
+      if (vehicle) {
+        const og = {
+          images: vehicle.primaryImage,
+        }
+        return { title, description, openGraph: og }
+      }
+
       return { title, description }
     }
 
-    const title = `Comprar ${tipo} ${marca} ${modelo} ${ano}`
-    const description = `Listagem de ${tipo === 'carro' ? 'carros' : 'motos'} ${marca} ${modelo} ${ano}`
+    const title =
+      'North Bens Veículos | Carros Usados e Seminovos em São José do Rio Preto'
+    const description = `Carros usados e seminovos em São José do Rio Preto e região. Encontre veículos de qualidade e ótimos preços em nossa plataforma. Confira agora!`
     return { title, description }
   }
 }

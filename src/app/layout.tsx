@@ -15,8 +15,14 @@ const poppins = Poppins({
 })
 
 export const metadata: Metadata = {
-  title: 'Webauto | Compre, venda e financie carros usados, novos e motos',
-  description: 'Veículos',
+  title:
+    'North Bens Veículos | Carros Usados e Seminovos em São José do Rio Preto',
+  description:
+    'Carros usados e seminovos em São José do Rio Preto e região. Encontre veículos de qualidade e ótimos preços em nossa plataforma. Confira agora!',
+  openGraph: {
+    images:
+      'https://utfs.io/f/wS9TazsQMP5sVd9hJyQMFktpqf8OLsWCQn5ZR0GU7TYEaPKl',
+  },
 }
 
 export default function RootLayout({
