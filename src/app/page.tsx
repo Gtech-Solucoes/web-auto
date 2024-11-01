@@ -74,6 +74,7 @@ export default function Datail() {
               src={'/assets/two-cars.png'}
               width={1612}
               height={861}
+              priority
               alt="Imagem de um carro"
             ></Image>
           </div>
