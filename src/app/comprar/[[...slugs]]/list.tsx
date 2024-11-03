@@ -47,7 +47,7 @@ import { getVehicles } from '@/lib/actions/vehicles.action'
 import { cars } from '@/constants/cars-brands'
 import { FilterProps } from './page'
 import { useRouter, usePathname, useSearchParams } from 'next/navigation'
-import { capitalize } from '@/utils/utils'
+import { capitalize, slugify, unSlugify } from '@/utils/utils'
 import { LoadingSpinner } from '@/components/loading-spinner'
 import {
   Pagination,
@@ -90,9 +90,12 @@ export default function ListVehicles({ filter }: FilterProps) {
   const pathname = usePathname()
   const searchParams = useSearchParams()
 
+  const currentBrand = unSlugify(filter?.brand)
+  const currentModel = unSlugify(filter?.model)
+
   const [models, setModels] = useState<string[]>([])
-  const [brand, setBrand] = useState<string>(filter?.brand || '')
-  const [model, setModel] = useState<string>(filter?.model || '')
+  const [brand, setBrand] = useState<string>(currentBrand || '')
+  const [model, setModel] = useState<string>(currentModel || '')
   const [yearGte, setYearGte] = useState<string>(
     (searchParams?.get('yearGte') as string) || '',
   )
@@ -159,12 +162,12 @@ export default function ListVehicles({ filter }: FilterProps) {
     if (selectedCar) {
       const models = selectedCar.models.map((model) => model.name)
       setModels(models)
-      setBrand(selectedCar.brand.toLowerCase())
+      setBrand(slugify(selectedCar.brand)!)
       setModel('')
 
       const newUrl = pathname.replace(
         /(\/comprar\/carros)(\/[^/]+)?(\/[^/]*)?/,
-        `$1/${selectedCar.brand.toLowerCase()}`,
+        `$1/${slugify(selectedCar.brand)}`,
       )
 
       router.push(newUrl, { scroll: false })
@@ -172,11 +175,11 @@ export default function ListVehicles({ filter }: FilterProps) {
   }
 
   const handleModelChange = (value: string) => {
-    setModel(value)
+    setModel(slugify(value)!)
 
     const newUrl = pathname.replace(
       /(\/comprar\/carros\/[^/]+)(\/[^/]+)?/,
-      `$1/${value.toLowerCase()}`,
+      `$1/${slugify(value)}`,
     )
     router.push(newUrl, { scroll: false })
   }

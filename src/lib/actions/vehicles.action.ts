@@ -3,6 +3,7 @@
 import { SortOrder } from 'mongoose'
 import vehiclesModel from '../models/vehicles.model'
 import { connectToDB } from '../moongose'
+import { unSlugify } from '@/utils/utils'
 
 export type Vehicle = {
   id: string
@@ -106,7 +107,6 @@ export const getVehicles = async ({
   sort,
 }: GetVehiclesInput): Promise<GetVehiclesOutput> => {
   await connectToDB()
-  console.log('sort', sort)
 
   const skip = (page - 1) * 15
 
@@ -121,10 +121,11 @@ export const getVehicles = async ({
     }
   }
   if (model) {
-    filters.model = { $regex: model, $options: 'i' }
+    filters.model = { $regex: unSlugify(model), $options: 'i' }
   }
   if (brand) {
-    filters.brand = { $regex: brand, $options: 'i' }
+    console.log('brand', brand)
+    filters.brand = { $regex: unSlugify(brand), $options: 'i' }
   }
   if (year) {
     filters.year = year // Para o ano, a busca é case sensitive, mas você pode ajustar conforme necessário.
