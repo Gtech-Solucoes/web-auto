@@ -1,33 +1,35 @@
+export type Model = {
+  name: string
+  versions: string[]
+}
+
 export type CarBrand = {
   brand: string
-  models: {
-    name: string
-    versions: string[]
-  }[]
+  models: Model[]
 }
 
 export const cars: CarBrand[] = [
   {
-    brand: 'aston martin',
+    brand: 'Aston Martin',
     models: [
       {
-        name: 'DB12',
+        name: 'Db12',
         versions: ['Coupe 4.0 V8 670cv', 'Volante 4.0 V8 670cv'],
       },
       {
-        name: 'DB9',
+        name: 'Db9',
         versions: ['Coupe 6.0 V12 510cv', 'Volante 6.0 V12 470cv'],
       },
       {
-        name: 'DBS',
+        name: 'Dbs',
         versions: ['Coupe 5.2 V12 725cv'],
       },
       {
-        name: 'DBX',
+        name: 'Dbx',
         versions: ['4.0 V8 550cv'],
       },
       {
-        name: 'DBX707',
+        name: 'Dbx707',
         versions: ['4.0 V8 707cv'],
       },
       {
@@ -58,7 +60,7 @@ export const cars: CarBrand[] = [
     ],
   },
   {
-    brand: 'audi',
+    brand: 'Audi',
     models: [
       {
         name: '80',
@@ -292,7 +294,7 @@ export const cars: CarBrand[] = [
         versions: ['RS2'],
       },
       {
-        name: 'E-TRON',
+        name: 'E-Tron',
         versions: [
           'GT Aut. (Elétrico)',
           'Performa. Black Aut. (Elétrico)',
@@ -380,7 +382,7 @@ export const cars: CarBrand[] = [
         ],
       },
       {
-        name: 'RS',
+        name: 'Rs',
         versions: [
           'E-TRON GT Quattro Aut. (Elétrico)',
           'Q3 2.5 TFSI Quattro S-tronic 5p',
@@ -389,14 +391,14 @@ export const cars: CarBrand[] = [
         ],
       },
       {
-        name: 'RS3',
+        name: 'Rs3',
         versions: [
           'Sedan 2.5 TFSI Quattro S-tronic',
           'Sportback 2.5 TFSI Quattro S-tronic',
         ],
       },
       {
-        name: 'RS4',
+        name: 'Rs4',
         versions: [
           '2.7 Avant V6 30V BI-TB Quattro 380cv',
           '2.9 Avant V6 TFSI Quattro Tiptronic',
@@ -404,7 +406,7 @@ export const cars: CarBrand[] = [
         ],
       },
       {
-        name: 'RS5',
+        name: 'Rs5',
         versions: [
           '4.2 FSI V8 450cv Quattro S-Tron. 2p',
           'Coupê 2.9 V6 TFSI Quattro Tiptronic',
@@ -414,7 +416,7 @@ export const cars: CarBrand[] = [
         ],
       },
       {
-        name: 'RS6',
+        name: 'Rs6',
         versions: [
           '4.0 Avant TFSI BI-TB Quat.Tip.(Hib.)',
           '4.2 450cv BI-TB Quattro Tiptronic 4p',
@@ -424,7 +426,7 @@ export const cars: CarBrand[] = [
         ],
       },
       {
-        name: 'RS7',
+        name: 'Rs7',
         versions: ['Sportback 4.0 TFSI Quattro Tiptronic'],
       },
       {
@@ -488,11 +490,11 @@ export const cars: CarBrand[] = [
         ],
       },
       {
-        name: 'SQ8',
+        name: 'Sq8',
         versions: ['Sportback E-Tron Quattro (Elétrico)'],
       },
       {
-        name: 'TT',
+        name: 'Tt',
         versions: [
           '1.8 TB 180cv',
           '1.8 TB Quattro 225cv',
@@ -502,14 +504,14 @@ export const cars: CarBrand[] = [
         ],
       },
       {
-        name: 'TTRS',
+        name: 'Ttrs',
         versions: [
           '2.5 TFSI QUATTRO S Tronic',
           'Roadster 2.5 TB FSI Quat. S Tronic',
         ],
       },
       {
-        name: 'TTS',
+        name: 'Tts',
         versions: [
           '2.0 TFSI QUATTRO S Tronic',
           'Roadster 2.0 TB FSI Quattro S Tronic',
@@ -518,14 +520,14 @@ export const cars: CarBrand[] = [
     ],
   },
   {
-    brand: 'bmw',
+    brand: 'Bmw',
     models: [
       {
         name: '316',
         versions: ['(todas)'],
       },
       {
-        name: '116iA',
+        name: '116ia',
         versions: ['1.6 TB 16V 136cv 5p'],
       },
       {
@@ -533,7 +535,7 @@ export const cars: CarBrand[] = [
         versions: ['M Sport 1.5 TB 12V Aut. 5p', 'Sport 1.5 TB 12V Aut. 5p'],
       },
       {
-        name: '118iA',
+        name: '118ia',
         versions: [
           '2.0 16V 136cv 3p',
           '2.0 16V 136cv 5p',
@@ -541,7 +543,7 @@ export const cars: CarBrand[] = [
         ],
       },
       {
-        name: '118iA/',
+        name: '118ia/',
         versions: ['Urban/Sport 1.6 TB 16V 170cv 5p'],
       },
       {
@@ -549,7 +551,7 @@ export const cars: CarBrand[] = [
         versions: ['2.0 16V 150cv/ 156cv 5p'],
       },
       {
-        name: '120iA',
+        name: '120ia',
         versions: [
           '2.0 16V 150cv/ 156cv 5p',
           '2.0 16V 156cv 3p',
@@ -566,11 +568,11 @@ export const cars: CarBrand[] = [
         versions: ['3.0 24V 265cv 5p'],
       },
       {
-        name: '130iA',
+        name: '130ia',
         versions: ['3.0 24V 265cv 3p', '3.0 24V 265cv 5p'],
       },
       {
-        name: '135iA',
+        name: '135ia',
         versions: ['Coupé 3.0 24V 306cv'],
       },
       {
@@ -597,23 +599,23 @@ export const cars: CarBrand[] = [
         versions: ['Cabrio 1.8 16V'],
       },
       {
-        name: '318i/iA',
+        name: '318i/Ia',
         versions: ['1.8 16V', 'Compact 1.8 16V'],
       },
       {
-        name: '318iA',
+        name: '318ia',
         versions: ['2.0 16V 136cv 5p'],
       },
       {
-        name: '318iS/ISA',
+        name: '318is/Isa',
         versions: ['1.9 16V'],
       },
       {
-        name: '318Ti',
+        name: '318ti',
         versions: ['Compact Mec'],
       },
       {
-        name: '318Ti/TiA',
+        name: '318ti/Tia',
         versions: ['Compact 1.9 16V'],
       },
       {
@@ -621,7 +623,7 @@ export const cars: CarBrand[] = [
         versions: [''],
       },
       {
-        name: '320iA',
+        name: '320ia',
         versions: [
           '',
           '2.0 TB M Sport A.Flex/M.Sport 4p',
@@ -631,11 +633,11 @@ export const cars: CarBrand[] = [
         ],
       },
       {
-        name: '323Ci',
+        name: '323ci',
         versions: ['Coupê'],
       },
       {
-        name: '323CiA',
+        name: '323cia',
         versions: ['Coupê'],
       },
       {
@@ -643,11 +645,11 @@ export const cars: CarBrand[] = [
         versions: ['2.5 24V', 'Confort', 'Sport', 'Touring'],
       },
       {
-        name: '323i/iA',
+        name: '323i/Ia',
         versions: ['Exclusive'],
       },
       {
-        name: '323iA',
+        name: '323ia',
         versions: [
           '2.5 24V',
           'Confort',
@@ -658,11 +660,11 @@ export const cars: CarBrand[] = [
         ],
       },
       {
-        name: '323Ti',
+        name: '323ti',
         versions: ['Compact', 'Compact Sport'],
       },
       {
-        name: '323TiA',
+        name: '323tia',
         versions: ['Compact Top'],
       },
       {
@@ -670,11 +672,11 @@ export const cars: CarBrand[] = [
         versions: [''],
       },
       {
-        name: '325i/iA',
+        name: '325i/Ia',
         versions: ['Cabrio'],
       },
       {
-        name: '325iA',
+        name: '325ia',
         versions: ['', '2.5 24V Protection', 'Coupé 2.5 24V 2p', 'Touring'],
       },
       {
@@ -682,11 +684,11 @@ export const cars: CarBrand[] = [
         versions: ['Exclusive 2.8 24V', 'Touring/Sport'],
       },
       {
-        name: '328i/iA',
+        name: '328i/Ia',
         versions: ['(modelo antigo)', '(novo modelo)', 'Cabrio'],
       },
       {
-        name: '328iA',
+        name: '328ia',
         versions: [
           '2.0 TB/2.0 TB Flex 16V 4p',
           'Exclusive 2.8 24V',
@@ -699,11 +701,11 @@ export const cars: CarBrand[] = [
         ],
       },
       {
-        name: '330Ci',
+        name: '330ci',
         versions: ['Cabriolet'],
       },
       {
-        name: '330CiA',
+        name: '330cia',
         versions: ['Cabriolet'],
       },
       {
@@ -719,7 +721,7 @@ export const cars: CarBrand[] = [
         ],
       },
       {
-        name: '330iA',
+        name: '330ia',
         versions: ['Exclusive 3.0 24V 4p', 'MotorSport 4p', 'Top 4p'],
       },
       {
@@ -727,7 +729,7 @@ export const cars: CarBrand[] = [
         versions: ['3.0 Active 3 (Híbrido)'],
       },
       {
-        name: '335iA',
+        name: '335ia',
         versions: [
           '3.0 24V 306cv',
           'Cabriolet 3.0 24V 306cv',
@@ -760,7 +762,7 @@ export const cars: CarBrand[] = [
         ],
       },
       {
-        name: '435iA',
+        name: '435ia',
         versions: ['M Sport Coupe 3.0 24V 306cv 2p'],
       },
       {
@@ -768,15 +770,15 @@ export const cars: CarBrand[] = [
         versions: ['2.0 16V'],
       },
       {
-        name: '525i/iA',
+        name: '525i/Ia',
         versions: ['', 'Touring'],
       },
       {
-        name: '528i/iA',
+        name: '528i/Ia',
         versions: [''],
       },
       {
-        name: '528iA',
+        name: '528ia',
         versions: [
           '2.0 Turbo 16V 245cv 4p',
           'High',
@@ -796,15 +798,15 @@ export const cars: CarBrand[] = [
         versions: ['M Sport 2.0 Turbo 252cv Aut.', 'Security'],
       },
       {
-        name: '530i/iA',
+        name: '530i/Ia',
         versions: ['', 'Touring'],
       },
       {
-        name: '535i/iA',
+        name: '535i/Ia',
         versions: ['3.5 24V'],
       },
       {
-        name: '535iA',
+        name: '535ia',
         versions: [
           '3.0 24V 306cv Bi-Turbo',
           'GT 3.0 306cv Bi-Turbo',
@@ -816,23 +818,23 @@ export const cars: CarBrand[] = [
         versions: ['', 'M Sport 3.0 Turbo 340cv Aut.'],
       },
       {
-        name: '540i/iA',
+        name: '540i/Ia',
         versions: ['Touring'],
       },
       {
-        name: '540iA',
+        name: '540ia',
         versions: ['', 'MotorSport', 'Protection'],
       },
       {
-        name: '540iTA',
+        name: '540ita',
         versions: [''],
       },
       {
-        name: '545iA',
+        name: '545ia',
         versions: ['4.4 32V V8 333cv'],
       },
       {
-        name: '550iA',
+        name: '550ia',
         versions: [
           '4.4 32V 407cv Bi-Turbo',
           '4.8 32V',
@@ -845,15 +847,15 @@ export const cars: CarBrand[] = [
         versions: ['Gran Coupe 3.0 320cv 4p'],
       },
       {
-        name: '645Ci',
+        name: '645ci',
         versions: ['Cabriolet 4.4 V8 32V 333cv'],
       },
       {
-        name: '645iA',
+        name: '645ia',
         versions: ['4.4 V8 32V 333cv'],
       },
       {
-        name: '650Ci',
+        name: '650ci',
         versions: [
           'Cabriolet 4.4 407cv Bi-Turbo',
           'Cabriolet 4.8 V8 32V 360cv',
@@ -864,7 +866,7 @@ export const cars: CarBrand[] = [
         versions: ['Gran Coupe 4.4 V8 450cv 4p'],
       },
       {
-        name: '650iA',
+        name: '650ia',
         versions: [
           '4.4 407cv Bi-Turbo',
           '4.8 V8 32V 360cv',
@@ -876,11 +878,11 @@ export const cars: CarBrand[] = [
         versions: ['3.0 32V'],
       },
       {
-        name: '730iA',
+        name: '730ia',
         versions: ['3.0 32V'],
       },
       {
-        name: '735i/iA',
+        name: '735i/Ia',
         versions: ['3.5 32V'],
       },
       {
@@ -888,23 +890,23 @@ export const cars: CarBrand[] = [
         versions: [''],
       },
       {
-        name: '740iA',
+        name: '740ia',
         versions: [''],
       },
       {
-        name: '740iL/iLA',
+        name: '740il/Ila',
         versions: ['Highline 4.4 32V'],
       },
       {
-        name: '740iLA',
+        name: '740ila',
         versions: ['Protection'],
       },
       {
-        name: '745iA',
+        name: '745ia',
         versions: ['4.4 V8 32V 333cv'],
       },
       {
-        name: '745Le',
+        name: '745le',
         versions: ['M Sport Sedan 3.0 V6 Aut. (Híb.)'],
       },
       {
@@ -912,11 +914,11 @@ export const cars: CarBrand[] = [
         versions: ['', 'M Sport Sedan 4.4 V8 450cv Aut.'],
       },
       {
-        name: '750iA',
+        name: '750ia',
         versions: [''],
       },
       {
-        name: '750iL',
+        name: '750il',
         versions: [
           'Highline 5.4 24V',
           'M Sport Sedan 4.4 V8 450cv Aut.',
@@ -924,27 +926,27 @@ export const cars: CarBrand[] = [
         ],
       },
       {
-        name: '750iLA',
+        name: '750ila',
         versions: ['4.4 Active 7 (Híbrido)'],
       },
       {
-        name: '760iL',
+        name: '760il',
         versions: ['6.0 V12 445cv/544cv'],
       },
       {
-        name: '840Ci',
+        name: '840ci',
         versions: [''],
       },
       {
-        name: '840CiA',
+        name: '840cia',
         versions: [''],
       },
       {
-        name: '850Ci/CiA',
+        name: '850ci/Cia',
         versions: ['5.0 24V', '5.4 24V'],
       },
       {
-        name: '850CSi',
+        name: '850csi',
         versions: ['5.6 24V'],
       },
       {
@@ -952,7 +954,7 @@ export const cars: CarBrand[] = [
         versions: ['5.0 24V'],
       },
       {
-        name: 'i3',
+        name: 'I3',
         versions: [
           'Bev 170cv Aut. (Elétrico)',
           'Bev Connected 170cv Aut. (Elétrico)',
@@ -964,7 +966,7 @@ export const cars: CarBrand[] = [
         ],
       },
       {
-        name: 'i4',
+        name: 'I4',
         versions: [
           'e-Drive 35 M Sport (Elétrico)',
           'e-Drive 40 M Sport (Elétrico)',
@@ -972,22 +974,22 @@ export const cars: CarBrand[] = [
         ],
       },
       {
-        name: 'i5',
+        name: 'I5',
         versions: ['M60 (Elétrico)'],
       },
       {
-        name: 'i7',
+        name: 'I7',
         versions: ['XDrive 60 M Sport Aut. (Elétrico)'],
       },
       {
-        name: 'i8',
+        name: 'I8',
         versions: [
           'e-Drive 1.5 TB 12V  Aut. (Híbrido)',
           'Road. e-Drive 1.5 TB 12V Aut. (Híb.)',
         ],
       },
       {
-        name: 'iX',
+        name: 'Ix',
         versions: [
           '1 eDrive20 X-Line Aut. (Elétrico)',
           '1 xDrive 30 M Sport (Elétrico)',
@@ -1085,7 +1087,7 @@ export const cars: CarBrand[] = [
         ],
       },
       {
-        name: 'M760Li',
+        name: 'M760li',
         versions: ['xDrive 6.6 V12 585cv Aut.'],
       },
       {
@@ -1243,7 +1245,7 @@ export const cars: CarBrand[] = [
     ],
   },
   {
-    brand: 'byd',
+    brand: 'Byd',
     models: [
       {
         name: 'D1',
@@ -1254,7 +1256,7 @@ export const cars: CarBrand[] = [
         versions: ['EV (Elétrico)', 'Mini (Elétrico)', 'Plus (Elétrico)'],
       },
       {
-        name: 'eT3',
+        name: 'Et3',
         versions: [' (Elétrico)'],
       },
       {
@@ -1278,7 +1280,7 @@ export const cars: CarBrand[] = [
         ],
       },
       {
-        name: 'TAN',
+        name: 'Tan',
         versions: ['EV 4x4 (Elétrico)'],
       },
       {
@@ -1288,51 +1290,29 @@ export const cars: CarBrand[] = [
     ],
   },
   {
-    brand: 'caoa chery',
+    brand: 'Caoa Chery',
     models: [
       {
-        name: 'ARRIZO',
-        versions: ['6  PRO 1.5 Turbo Flex Aut.', '6 PRO 1.5 Turbo (Híbrido)'],
-      },
-      {
-        name: 'iCar',
-        versions: ['EQ1 TECH (Elétrico)'],
-      },
-      {
-        name: 'Tiggo',
+        name: 'Arrizo 5',
         versions: [
-          '3X Plus 1.0 Turbo Flex Aut.',
-          '3X Pro 1.0 Turbo Flex Aut.',
-          '5X PRO 1.5 Turbo (Híbrido)',
-          '5X PRO 1.5 Turbo Flex Aut.',
-          '5X PRO Max Drive1.5 TB (Híbrido)',
-          '5X SPORT 1.5 Turbo Flex Aut.',
-          '7 PRO 1.5 Turbo (Híbrido)  ',
-          '7 Pro 1.6 Turbo 16V Aut.  ',
-          '7 Pro Max Drive 1.5 TB (Hibrido)',
-          '7 Pro Max Drive 1.6 Turbo 16V Aut.',
-          '7 SPORT 1.5 Turbo Flex 16V Aut.  ',
-          '8 FOUNDER S EDITION 1.6 TGDi Aut.',
-          '8 Max Drive 1.6 Turbo Aut.',
-          '8 PRO 1.5 Turbo (Híbrido) ',
-          '8 PRO 1.6 TGDi Aut.',
+          'RT 1.5 Turbo Flex Aut.',
+          'RTS 1.5 Turbo Flex Aut.',
+          'RX 1.5 16V Turbo Flex Aut.',
+          'RXS 1.5 Turbo Flex Aut.',
+          'RXT 1.5 16V Turbo Flex Aut.',
+          '5e 53 KW (Elétrico)',
         ],
       },
-    ],
-  },
-  {
-    brand: 'caoa chery/chery',
-    models: [
       {
-        name: 'ARRIZO',
+        name: 'Arrizo 5e',
+        versions: ['53 KW (Elétrico)'],
+      },
+      {
+        name: 'Arrizo 6',
         versions: [
-          '5 RT 1.5 Turbo Flex Aut.',
-          '5 RTS 1.5 Turbo Flex Aut.',
-          '5 RX 1.5 16V Turbo Flex Aut.',
-          '5 RXS 1.5 Turbo Flex Aut.',
-          '5 RXT 1.5 16V Turbo Flex Aut.',
-          '5e (Elétrico)',
-          '6 GSX 1.5 Turbo Flex Aut.',
+          'GSX 1.5 Turbo Flex Aut.',
+          'PRO 1.5 Turbo Flex Aut.',
+          'PRO 1.5 Turbo (Híbrido)',
         ],
       },
       {
@@ -1345,7 +1325,7 @@ export const cars: CarBrand[] = [
         ],
       },
       {
-        name: 'CIELO',
+        name: 'Cielo',
         versions: ['1.6 16V 119cv  5p', 'Sedan 1.6 16V 119cv  4p'],
       },
       {
@@ -1353,7 +1333,11 @@ export const cars: CarBrand[] = [
         versions: ['1.3 16V/1.3 16V Flex.Mec.'],
       },
       {
-        name: 'QQ',
+        name: 'Icar',
+        versions: ['EQ1 TECH (Elétrico)'],
+      },
+      {
+        name: 'Qq',
         versions: [
           '1.0  ACT FL 12V/1.0 12V Flex  5p',
           '1.0 ACT 12V 69cv 5p',
@@ -1367,27 +1351,41 @@ export const cars: CarBrand[] = [
         versions: ['1.3 16V Flex Mec. 5p'],
       },
       {
-        name: 'Tiggo',
+        name: 'Tiggo 3x',
+        versions: ['Plus 1.0 Turbo Flex Aut.', 'Pro 1.0 Turbo Flex Aut.'],
+      },
+      {
+        name: 'Tiggo 5x',
         versions: [
-          '2 ACT 1.5 16V Flex Aut.5p',
-          '2 ACT 1.5 16V Flex Mec. 5p',
-          '2 EX 1.5 16V Flex Aut. 5p',
-          '2 Look 1.5 16V Flex Aut.5p',
-          '2 Look 1.5 16V Flex Mec. 5p',
-          '2 SMILE 1.5 16V Flex Aut.',
-          '2.0 16V Aut. 5p',
-          '2.0 16V Mec. 5p',
-          '5X T 1.5 16V Turbo Flex Aut.',
-          '5X TXS 1.5 16V Turbo Flex Aut.',
-          '7 T 1.5 16V Turbo Flex Aut.',
-          '7 TXS 1.5 16V Turbo Flex Aut.',
-          '8 TXS 1.6 16V TGDi Aut.',
+          'PRO 1.5 Turbo (Híbrido)',
+          'PRO 1.5 Turbo Flex Aut.',
+          'PRO Max Drive1.5 TB (Híbrido)',
+          'SPORT 1.5 Turbo Flex Aut.',
+        ],
+      },
+      {
+        name: 'Tiggo 7',
+        versions: [
+          'PRO 1.5 Turbo (Híbrido)  ',
+          'Pro 1.6 Turbo 16V Aut.  ',
+          'Pro Max Drive 1.5 TB (Hibrido)',
+          'Pro Max Drive 1.6 Turbo 16V Aut.',
+          'SPORT 1.5 Turbo Flex 16V Aut.  ',
+        ],
+      },
+      {
+        name: 'Tiggo 8',
+        versions: [
+          'FOUNDER S EDITION 1.6 TGDi Aut.',
+          'Max Drive 1.6 Turbo Aut.',
+          'PRO 1.5 Turbo (Híbrido) ',
+          'PRO 1.6 TGDi Aut.',
         ],
       },
     ],
   },
   {
-    brand: 'chevrolet',
+    brand: 'Chevrolet',
     models: [
       {
         name: 'A-10',
@@ -1402,7 +1400,7 @@ export const cars: CarBrand[] = [
         ],
       },
       {
-        name: 'AGILE',
+        name: 'Agile',
         versions: [
           'LT 1.4 MPFI 8V FlexPower 5p',
           'LTZ 1.4 MPFI 8V FlexPower 5p',
@@ -1459,7 +1457,7 @@ export const cars: CarBrand[] = [
         versions: ['Jimmy 4.3 V6', 'S-10 4.3 V6', 'SS-10 4.3 V6'],
       },
       {
-        name: 'BOLT',
+        name: 'Bolt',
         versions: [
           'EUV Premier 203cv (Elétrico)',
           'EV Premier 203cv (Elétrico)',
@@ -1496,12 +1494,9 @@ export const cars: CarBrand[] = [
         versions: ['16V'],
       },
       {
-        name: 'CAMARO',
-        versions: ['FIFTY 6.2 V8 16V 461cv'],
-      },
-      {
         name: 'Camaro',
         versions: [
+          'FIFTY 6.2 V8 16V 461cv',
           'RS 5.0 V8',
           'Sport 5.0 Conv.',
           'SS 6.2 V8 16V',
@@ -1515,7 +1510,7 @@ export const cars: CarBrand[] = [
         versions: ['4.3 V8', 'SW 4.3 V8', 'Victoria'],
       },
       {
-        name: 'CAPTIVA',
+        name: 'Captiva',
         versions: [
           'SPORT AWD 3.0 V6 24V 268cv',
           'SPORT AWD 3.6 V6 24V 261cv 4x4',
@@ -1562,7 +1557,23 @@ export const cars: CarBrand[] = [
       },
       {
         name: 'Chevette',
-        versions: ['Junior 1.0', 'L / SL / SL/e / DL / SE 1.6'],
+        versions: [
+          '1.0 JUNIOR 8V GASOLINA 2P MANUAL',
+          '1.4 8V GASOLINA 4P MANUAL',
+          '1.4 GP 8V GASOLINA 2P MANUAL',
+          '1.4 SL 8V GASOLINA 2P MANUAL',
+          '1.6 DL 8V ÁLCOOL 2P MANUAL',
+          '1.6 DL 8V GASOLINA 2P MANUAL',
+          '1.6 HATCH 8V ÁLCOOL 2P MANUAL',
+          '1.6 HATCH 8V GASOLINA 2P MANUAL',
+          '1.6 L 8V GASOLINA 2P MANUAL',
+          '1.6 SE 8V GASOLINA 2P MANUAL',
+          '1.6 SL 8V ÁLCOOL 2P MANUAL',
+          '1.6 SL/E 8V ÁLCOOL 2P MANUAL',
+          '1.6 SL/E 8V GASOLINA 2P MANUAL',
+          '1.6-S L 8V ÁLCOOL 2P MANUAL',
+          '1.6-S L 8V GASOLINA 2P MANUAL',
+        ],
       },
       {
         name: 'Chevy',
@@ -1580,7 +1591,7 @@ export const cars: CarBrand[] = [
         ],
       },
       {
-        name: 'COBALT',
+        name: 'Cobalt',
         versions: [
           '1.8 8V Econo.Flex 4p Aut.',
           'ADVANTAGE 1.4 MPFI 8V F.Power 4p',
@@ -1670,7 +1681,7 @@ export const cars: CarBrand[] = [
         ],
       },
       {
-        name: 'CRUZE',
+        name: 'Cruze',
         versions: [
           'Black Bow Tie 1.4 TB Flex 4p Aut',
           'HB Black Bow Tie 1.4 TB Flex Aut.',
@@ -1707,7 +1718,7 @@ export const cars: CarBrand[] = [
         ],
       },
       {
-        name: 'EQUINOX',
+        name: 'Equinox',
         versions: [
           'LT 1.5 Turbo 172cv Aut.',
           'LT 2.0 Turbo 262cv Aut.',
@@ -1726,7 +1737,7 @@ export const cars: CarBrand[] = [
         ],
       },
       {
-        name: 'JOY',
+        name: 'Joy',
         versions: [
           'Hatch 1.0 8V Black Edition Flex Mec.',
           'Hatch 1.0 8V Flex 5p Mec.',
@@ -1751,7 +1762,7 @@ export const cars: CarBrand[] = [
         versions: [''],
       },
       {
-        name: 'MALIBU',
+        name: 'Malibu',
         versions: ['LTZ 2.4 16V 171cv 4p'],
       },
       {
@@ -1777,7 +1788,7 @@ export const cars: CarBrand[] = [
         ],
       },
       {
-        name: 'MONTANA',
+        name: 'Montana',
         versions: [
           ' Sport 1.8 MPFI FlexPower 8V',
           '1.2 Turbo Flex 12V 4p Mec.',
@@ -1821,7 +1832,7 @@ export const cars: CarBrand[] = [
         ],
       },
       {
-        name: 'ONIX',
+        name: 'Onix',
         versions: [
           ' Lollapalooza 1.0 F.Power 5p Mec.',
           'HATCH 1.0 12V Flex 5p Mec.',
@@ -1864,7 +1875,7 @@ export const cars: CarBrand[] = [
         ],
       },
       {
-        name: 'PRISMA',
+        name: 'Prisma',
         versions: [
           ' Sed. Maxx/ LT 1.4 8V ECONOF. 4p',
           'Sed. ADVANT. 1.0 8V FlexPower 4p',
@@ -2009,7 +2020,7 @@ export const cars: CarBrand[] = [
         ],
       },
       {
-        name: 'SONIC',
+        name: 'Sonic',
         versions: [
           'HB LT 1.6 16V FlexPower 5p Aut.',
           'HB LT 1.6 16V FlexPower 5p Mec.',
@@ -2027,7 +2038,7 @@ export const cars: CarBrand[] = [
         versions: ['CE 4.3 V6'],
       },
       {
-        name: 'SpaceVan',
+        name: 'Spacevan',
         versions: [
           'Furgão 2.1 Diesel',
           'Furgão 2.2',
@@ -2036,7 +2047,7 @@ export const cars: CarBrand[] = [
         ],
       },
       {
-        name: 'SPIN',
+        name: 'Spin',
         versions: [
           'ACTIV 1.8 8V Econo. Flex 5p Aut.',
           'ACTIV 1.8 8V Econo. Flex 5p Mec.',
@@ -2054,7 +2065,7 @@ export const cars: CarBrand[] = [
         ],
       },
       {
-        name: 'SS10',
+        name: 'Ss10',
         versions: ['Pick-Up 4.3 V6'],
       },
       {
@@ -2080,7 +2091,7 @@ export const cars: CarBrand[] = [
         versions: ['1.6 16V', 'Power Tech Coupe 1.6 SFI'],
       },
       {
-        name: 'TRACKER',
+        name: 'Tracker',
         versions: [
           '1.0 Turbo 12V Flex Aut. ',
           '1.0 Turbo 12V Flex Mec.',
@@ -2114,7 +2125,7 @@ export const cars: CarBrand[] = [
         ],
       },
       {
-        name: 'TRAILBLAZER',
+        name: 'Trailblazer',
         versions: [
           'High Country 2.8 TB Die Aut.',
           'LTZ 2.8 CTDI Diesel Aut.',
@@ -2176,10 +2187,10 @@ export const cars: CarBrand[] = [
     ],
   },
   {
-    brand: 'citroën',
+    brand: 'Citroën',
     models: [
       {
-        name: 'AIRCROSS',
+        name: 'Aircross',
         versions: [
           '100 Anos 1.6 Flex 16V Aut.',
           'BUSINESS 1.6 Flex 16V 5p Mec.',
@@ -2212,8 +2223,8 @@ export const cars: CarBrand[] = [
         ],
       },
       {
-        name: 'AX',
-        versions: ['GTi'],
+        name: 'Ax',
+        versions: ['1.4 I GTI 8V GASOLINA 2P MANUAL'],
       },
       {
         name: 'Berlingo',
@@ -2225,19 +2236,13 @@ export const cars: CarBrand[] = [
         ],
       },
       {
-        name: 'BX',
+        name: 'Bx',
         versions: ['1.6S 16V', 'GTi 1.9'],
       },
       {
         name: 'C3',
         versions: [
           '100 Anos 1.6 16V Flex Aut.',
-          'AIRCROSS F. Pack 1.0 Flex TB 200 Aut.',
-          'AIRCROSS Feel 1.0 Flex Turbo 200 Aut.',
-          'AIRCROSS Shine 1.0 Flex TB 200 Aut.',
-          'AIRCROSS7 F. Pack 1.0 Flex TB 200 Aut',
-          'AIRCROSS7 Feel 1.0 Flex TB. 200 Aut.',
-          'AIRCROSS7 Shine 1.0 Flex TB 200 Aut.',
           'Attra/Origine Pack 1.5 Flex 8V 5p Mec',
           'Attraction 1.6 Flex 16V 5p Aut.',
           'Attraction Pure Tech 1.2 Flex 12V Mec',
@@ -2262,16 +2267,6 @@ export const cars: CarBrand[] = [
           'Ocimar Versolato 1.6 16V 110cv 5p',
           'Origine 1.5 Flex 8V 5p Mec.',
           'Origine Pure Tech 1.2 Flex 12V Mec',
-          'Picasso Excl. 1.6 Flex 16V 5p Aut.',
-          'Picasso Exclusive 1.6 Flex 16V 5p Mec',
-          'Picasso GL 1.5 Flex 8V Mec.',
-          'Picasso GL 1.6 Flex 16V 5p Mec.',
-          'Picasso GLX 1.5 Flex 8V 5p Mec.',
-          'Picasso GLX 1.6 Flex 16V 5p Aut.',
-          'Picasso GLX 1.6 Flex 16V 5p Mec.',
-          'Picasso Origine 1.5 Flex 8V Mec.',
-          'Picasso Tendance 1.5 Flex 8V 5p Mec.',
-          'Picasso Tendance 1.6 Flex 16V 5p Aut.',
           'Start 1.2 Flex 12V 5p',
           'Style Ed. Pure Tech 1.2 Flex 12V Mec.',
           'Style Edition 1.6 Flex 16V Aut.',
@@ -2284,6 +2279,29 @@ export const cars: CarBrand[] = [
           'XTR 1.4 Flex 8V 5p',
           'XTR 1.6 Flex 16V 5p',
           'YOU! 1.0 Flex Turbo 200 Aut.',
+        ],
+      },
+      {
+        name: 'C3 Aircross',
+        versions: [
+          'F. Pack 1.0 Flex TB 200 Aut.',
+          'Feel 1.0 Flex Turbo 200 Aut.',
+          'Shine 1.0 Flex TB 200 Aut.',
+        ],
+      },
+      {
+        name: 'C3 Picasso',
+        versions: [
+          'Excl. 1.6 Flex 16V 5p Aut.',
+          'Exclusive 1.6 Flex 16V 5p Mec',
+          'GL 1.5 Flex 8V Mec.',
+          'GL 1.6 Flex 16V 5p Mec.',
+          'GLX 1.5 Flex 8V 5p Mec.',
+          'GLX 1.6 Flex 16V 5p Aut.',
+          'GLX 1.6 Flex 16V 5p Mec.',
+          'Origine 1.5 Flex 8V Mec.',
+          'Tendance 1.5 Flex 8V 5p Mec.',
+          'Tendance 1.6 Flex 16V 5p Aut.',
         ],
       },
       {
@@ -2342,6 +2360,81 @@ export const cars: CarBrand[] = [
         ],
       },
       {
+        name: 'C4',
+        versions: [
+          'Competition 1.6 Flex 16V 5p Mec.',
+          'Competition 2.0 Flex 16V 5p Aut.',
+          'Excl./Excl. Solar. 2.0 Flex 16V Mec.',
+          'Excl.2.0/2.0 Solaris Flex 16V 5p Aut.',
+          'GLX 1.6 Flex 16V 5p Mec.',
+          'GLX 2.0 Flex 16V 5p Aut.',
+          'GLX 2.0 Flex 16V 5p Mec.',
+          'Rock You 1.6 Flex 16V 5p Mec.',
+          'Tendance 1.6 Flex 16V 5p Mec.',
+          'Tendance 2.0 Flex 16V 5p Aut.',
+          'VTR 2.0 16V 143cv',
+        ],
+      },
+      {
+        name: 'C4 Cactus',
+        versions: [
+          '100 Anos 1.6 TB 16V Flex Aut.',
+          'C-SERIES 1.6 16V Flex Aut.',
+          'FEEL 1.6 16V Flex Aut.',
+          'FEEL 1.6 16V Flex Mec.',
+          'FEEL Bus. 1.6 Flex Aut.',
+          'FEEL Pack 1.6 16V Flex Aut.',
+          'LIVE 1.6 16V Flex Aut.',
+          'LIVE 1.6 16V Flex Mec.',
+          'NOIR 1.6 Turbo Flex Aut.',
+          'Rip Curl 1.6 16V Flex Aut.',
+          'SHINE 1.6 16V Flex Aut.',
+          'SHINE 1.6 Turbo Flex Aut.',
+          'SHINE Pack 1.6 Turbo Flex Aut.',
+          'X-Series 1.6 16V Flex Aut.',
+        ],
+      },
+      {
+        name: 'C4 Lounge',
+        versions: [
+          '100 Anos 1.6 16V TB Flex Aut.',
+          'Exclusive 1.6 Turbo 4p Aut.',
+          'Exclusive 1.6 Turbo Flex Aut.',
+          'Exclusive 2.0 Flex 4p Aut.',
+          'Feel 1.6 Turbo Flex Aut.',
+          'Live 1.6 Turbo Flex Aut.',
+          'Live Bus. 1.6 Flex Aut.',
+          'Orig.Business 1.6 TB Flex Aut.',
+          'Origine 1.6 Turbo Flex  Aut.',
+          'Origine 1.6 Turbo Flex Mec.',
+          'Origine 2.0 Flex 4p Aut.',
+          'Origine 2.0 Flex 4p Mec.',
+          'S 1.6 Turbo Flex Aut.',
+          'Shine 1.6 Turbo Flex Aut.',
+          'Tendance 1.6 Turbo 4p Aut',
+          'Tendance 1.6 Turbo Flex Aut.',
+          'Tendance 2.0 Flex 4p Aut.',
+          'Tendance 2.0 Flex 4p Mec.',
+        ],
+      },
+      {
+        name: 'C4 Pallas',
+        versions: [
+          'Exclusive 2.0 Flex Aut',
+          'Exclusive 2.0 Flex 16V Mec',
+          'GLX 2.0 Flex Aut.',
+          'GLX 2.0 Flex 16V Mec.',
+        ],
+      },
+      {
+        name: 'C4 Picasso',
+        versions: [
+          'Intensive 1.6 Turbo 16V Aut.',
+          'Seduction 1.6 Turbo 16V Aut.',
+          'La Luna 2.0 16V  Aut.',
+        ],
+      },
+      {
         name: 'C5',
         versions: [
           '3.0 24V 210cv 4p Aut.',
@@ -2361,11 +2454,11 @@ export const cars: CarBrand[] = [
         versions: ['Exclusive 2.0 16V 138cv 5p Aut.'],
       },
       {
-        name: 'DS3',
+        name: 'Ds3',
         versions: ['1.6 Turbo 16V 3p Mec.', 'Sport Chic 1.6 TB 16V 3p Mec.'],
       },
       {
-        name: 'DS4',
+        name: 'Ds4',
         versions: [
           '1.6 Chic Turbo 16V 5p Aut.',
           '1.6 So Chic Turbo 16V 5p Aut.',
@@ -2373,7 +2466,7 @@ export const cars: CarBrand[] = [
         ],
       },
       {
-        name: 'DS5',
+        name: 'Ds5',
         versions: [
           '1.6 Be Chic Turbo 16V 5p Aut.',
           '1.6 So Chic Turbo 16V 5p Aut.',
@@ -2445,7 +2538,7 @@ export const cars: CarBrand[] = [
         ],
       },
       {
-        name: 'XM',
+        name: 'Xm',
         versions: [
           'Exclusive 12v',
           'Exclusive 24V',
@@ -2489,7 +2582,7 @@ export const cars: CarBrand[] = [
         ],
       },
       {
-        name: 'ZX',
+        name: 'Zx',
         versions: [
           'Cupê 16V',
           'Dakar 2.0 16V',
@@ -2501,7 +2594,7 @@ export const cars: CarBrand[] = [
     ],
   },
   {
-    brand: 'dodge',
+    brand: 'Dodge',
     models: [
       {
         name: 'Avenger',
@@ -2541,7 +2634,7 @@ export const cars: CarBrand[] = [
         versions: ['3.3 V6'],
       },
       {
-        name: 'JOURNEY',
+        name: 'Journey',
         versions: [
           'Crossroad 3.6 V6 Aut.',
           'RT  3.6 V6 Aut.',
@@ -2572,7 +2665,7 @@ export const cars: CarBrand[] = [
     ],
   },
   {
-    brand: 'ferrari',
+    brand: 'Ferrari',
     models: [
       {
         name: '296',
@@ -2634,7 +2727,7 @@ export const cars: CarBrand[] = [
         versions: ['GTS 6.5 V12 800cv', 'SUPERFAST V12 800cv'],
       },
       {
-        name: '575M',
+        name: '575m',
         versions: ['Maranello F1 V12 515cv'],
       },
       {
@@ -2666,19 +2759,19 @@ export const cars: CarBrand[] = [
         versions: ['Spider 3.9 V8 Bi-Turbo 720cv', 'TRIBUTO 3.9 V8 720cv'],
       },
       {
-        name: 'FF',
+        name: 'Ff',
         versions: ['F1 6.3 V12 660cv'],
       },
       {
-        name: 'GTC4',
+        name: 'Gtc4',
         versions: ['LUSSO 6.3 V12 690cv', 'LUSSO T V8 610cv'],
       },
       {
-        name: 'PORTOFINO',
+        name: 'Portofino',
         versions: ['3.9 V8 600cv', 'M 3.9 V8 620cv'],
       },
       {
-        name: 'PUROSANGUE',
+        name: 'Purosangue',
         versions: ['6.5 V12 725cv'],
       },
       {
@@ -2686,7 +2779,7 @@ export const cars: CarBrand[] = [
         versions: ['3.9 V8 620cv'],
       },
       {
-        name: 'SF',
+        name: 'Sf',
         versions: [
           '90 SPIDER 4.0 V8 Bi-Turbo (Híbrido)',
           '90 STRADALE 4.0 V8 Bi-Turbo (Híbrido)',
@@ -2695,7 +2788,7 @@ export const cars: CarBrand[] = [
     ],
   },
   {
-    brand: 'fiat',
+    brand: 'Fiat',
     models: [
       {
         name: '147',
@@ -2724,7 +2817,7 @@ export const cars: CarBrand[] = [
         versions: ['ICON (Elétrico)'],
       },
       {
-        name: 'ARGO',
+        name: 'Argo',
         versions: [
           '1.0 6V Flex.',
           'DRIVE 1.0 6V Flex',
@@ -2740,10 +2833,6 @@ export const cars: CarBrand[] = [
           'TREKKING 1.3 8V Flex Aut.',
           'TREKKING 1.8 16V Flex Aut.',
         ],
-      },
-      {
-        name: 'Brava',
-        versions: ['ELX  1.6 16V 4p', 'HGT 1.8 mpi 16V  4p', 'SX 1.6 16V 4p'],
       },
       {
         name: 'Bravo',
@@ -2767,11 +2856,7 @@ export const cars: CarBrand[] = [
         versions: ['0.7'],
       },
       {
-        name: 'Coupe',
-        versions: ['16V'],
-      },
-      {
-        name: 'CRONOS',
+        name: 'Cronos',
         versions: [
           '1.0 6V Flex',
           '1.3 8V Flex',
@@ -2790,8 +2875,8 @@ export const cars: CarBrand[] = [
       {
         name: 'Doblo',
         versions: [
-          ' 1.4 mpi Fire Flex  8V 4p',
-          ' Cargo 1.4 mpi Fire Flex 8V 3p',
+          '1.4 mpi Fire Flex  8V 4p',
+          'Cargo 1.4 mpi Fire Flex 8V 3p',
           'Adv. XINGU 1.8 Flex 16V 5p',
           'Adv. XINGU LOCKER 1.8 Flex 16V 5p',
           'Adv.Ext./Adv.Ext.Loc. 1.8 16V Flex',
@@ -2866,19 +2951,6 @@ export const cars: CarBrand[] = [
         versions: ['1.6ie'],
       },
       {
-        name: 'Elba',
-        versions: [
-          '1.6i.e/Top/CSL/ 1.6i.e/1.5 2p e 4p',
-          'CS 1.6 / 1.5 /1.3',
-          'S 1.6/ 1.5ie / 1.5 / 1.3',
-          'Weekend 1.5 i.e. 2p e 4p',
-        ],
-      },
-      {
-        name: 'E-Scudo',
-        versions: ['(Elétrico)'],
-      },
-      {
         name: 'Fastback',
         versions: [
           '1.0 200 Turbo Flex Aut',
@@ -2907,23 +2979,23 @@ export const cars: CarBrand[] = [
         ],
       },
       {
-        name: 'FREEMONT',
+        name: 'Freemont',
         versions: ['EMOT./PRECISION 2.4 16V 5p Aut.'],
       },
       {
-        name: 'Grand',
+        name: 'Grand Siena',
         versions: [
-          'Siena 1.0 EVO Flex 8V 4p',
-          'Siena 1.4 EVO Flex 8V 4p',
-          'Siena ATTRAC. 1.4 EVO F.Flex 8V',
-          'Siena ATTRACTIVE 1.0 Flex 8V 4p',
-          'Siena ESSEN. ITALIA Dual. 1.6 Flex',
-          'Siena ESSEN.SUBLIME 1.6 Flex',
-          'Siena ESSEN.SUBLIME Dual. 1.6 Flex',
-          'Siena ESSENCE 1.6 Flex 16V',
-          'Siena ESSENCE Dual. 1.6 Flex 16V',
-          'Siena ESSENCE ITALIA 1.6 Flex 16V',
-          'Siena TETRAFUEL 1.4 Evo F. Flex 8V',
+          '1.0 EVO Flex 8V 4p',
+          '1.4 EVO Flex 8V 4p',
+          'ATTRAC. 1.4 EVO F.Flex 8V',
+          'ATTRACTIVE 1.0 Flex 8V 4p',
+          'ESSEN. ITALIA Dual. 1.6 Flex',
+          'ESSEN.SUBLIME 1.6 Flex',
+          'ESSEN.SUBLIME Dual. 1.6 Flex',
+          'ESSENCE 1.6 Flex 16V',
+          'ESSENCE Dual. 1.6 Flex 16V',
+          'ESSENCE ITALIA 1.6 Flex 16V',
+          'TETRAFUEL 1.4 Evo F. Flex 8V',
         ],
       },
       {
@@ -2946,7 +3018,7 @@ export const cars: CarBrand[] = [
         ],
       },
       {
-        name: 'LINEA',
+        name: 'Linea',
         versions: [
           '1.9/ HLX 1.9/ 1.8 Flex 16V 4p',
           '1.9/ HLX 1.9/1.8 Flex  Dualogic 4p',
@@ -2988,7 +3060,7 @@ export const cars: CarBrand[] = [
         ],
       },
       {
-        name: 'MOBI',
+        name: 'Mobi',
         versions: [
           'DRIVE 1.0 Flex 6V 5p',
           'DRIVE GSR 1.0 Flex 6V 5p',
@@ -3001,10 +3073,6 @@ export const cars: CarBrand[] = [
           'WAY 1.0 Fire Flex 5p.',
           'WAY on 1.0 Fire Flex 5p.',
         ],
-      },
-      {
-        name: 'Oggi',
-        versions: [''],
       },
       {
         name: 'Palio',
@@ -3112,21 +3180,7 @@ export const cars: CarBrand[] = [
         ],
       },
       {
-        name: 'Panorama',
-        versions: ['C/CL'],
-      },
-      {
-        name: 'Premio',
-        versions: [
-          'CS 1.5 i.e. 2p/ SL 1.6/1.5/1.3 4p',
-          'CS 1.6/ 1.5/ 1.3 2p',
-          'CSL 1.6 i.e./ 1.5 4p',
-          'CSL 1.6/ 1.5',
-          'S 1.5 i.e./ 1.5 / 1.3',
-        ],
-      },
-      {
-        name: 'PULSE',
+        name: 'Pulse',
         versions: [
           'ABARTH 1.3 Turbo 16V Flex Aut.',
           'AUDACE 1.0 Turbo 200 Flex Aut.',
@@ -3287,11 +3341,6 @@ export const cars: CarBrand[] = [
           'Working HARD 1.4 Fire Flex 8V CE',
           'Working HARD 1.4 Fire Flex 8V CS',
           'Working Plus 1.4 8V Flex CS',
-        ],
-      },
-      {
-        name: 'Strada/',
-        versions: [
           'Strada Working 1.5 mpi 8V CE',
           'Strada Working 1.5 mpi 8V CS',
         ],
@@ -3386,11 +3435,6 @@ export const cars: CarBrand[] = [
           'Mille/ Mille EX/ Smart 4p',
           'S 1.5 i.e. / 1.5 / 1.3/ SX 1.3',
           'Turbo 1.4 i.e. 2p',
-        ],
-      },
-      {
-        name: 'UNO',
-        versions: [
           'ATTRACTI. Celeb.1.4 EVO F.Flex 8V 2p',
           'ATTRACTI. Celeb.1.4 EVO F.Flex 8V 4p',
           'ATTRACTIVE 1.0 Fire Flex 8V 5p',
@@ -3440,7 +3484,7 @@ export const cars: CarBrand[] = [
     ],
   },
   {
-    brand: 'ford',
+    brand: 'Ford',
     models: [
       {
         name: 'Aerostar',
@@ -3457,14 +3501,6 @@ export const cars: CarBrand[] = [
       {
         name: 'Bronco',
         versions: ['Sport Wildtrak 2.0 Tb 16V AWD Aut'],
-      },
-      {
-        name: 'Club',
-        versions: ['Wagon V8', 'Wagon XLT 4.9 V6'],
-      },
-      {
-        name: 'Contour',
-        versions: ['SE/ GL/ LX  2.0 16V', 'SE/GL/ LX 2.5 24V'],
       },
       {
         name: 'Corcel',
@@ -3487,21 +3523,21 @@ export const cars: CarBrand[] = [
         versions: ['Victoria LX 4.6'],
       },
       {
-        name: 'Del',
+        name: 'Del Rey',
         versions: [
-          'Rey Belina Ghia',
-          'Rey Belina GL',
-          'Rey Belina GLX',
-          'Rey Belina L',
-          'Rey Ghia 1.8 / 1.6 2p e 4p',
-          'Rey GLX 1.6/1.8 / GL 1.6/1.8 2p e 4p',
-          'Rey L 1.8 / 1.6 2p e 4p',
+          'Belina Ghia',
+          'Belina GL',
+          'Belina GLX',
+          'Belina L',
+          'Ghia 1.8 / 1.6 2p e 4p',
+          'GLX 1.6/1.8 / GL 1.6/1.8 2p e 4p',
+          'L 1.8 / 1.6 2p e 4p',
         ],
       },
       {
-        name: 'EcoSport',
+        name: 'Ecosport',
         versions: [
-          ' 100 Anos 1.5 Flex 5p Aut.',
+          '100 Anos 1.5 Flex 5p Aut.',
           '4WD 2.0/ 2.0 Flex 16V 5p',
           'FREESTYLE 1.5 12V Flex 5p Aut.',
           'FREESTYLE 1.5 12V Flex 5p Mec.',
@@ -3537,7 +3573,7 @@ export const cars: CarBrand[] = [
         ],
       },
       {
-        name: 'EDGE',
+        name: 'Edge',
         versions: [
           'LIMITED 3.5 V6 24V AWD Aut.',
           'LIMITED 3.5 V6 24V FWD Aut.',
@@ -3550,7 +3586,7 @@ export const cars: CarBrand[] = [
       {
         name: 'Escort',
         versions: [
-          ' Racer 2.0i',
+          'Racer 2.0i',
           'Ghia 1.8i / 1.8 / 1.6',
           'Ghia 2.0i / 2.0',
           'GL 1.6 MPI',
@@ -3576,10 +3612,6 @@ export const cars: CarBrand[] = [
           'XR3 2.0i',
           'XR3 2.0i Conversível',
         ],
-      },
-      {
-        name: 'Expedition',
-        versions: ['5.4 V8'],
       },
       {
         name: 'Explorer',
@@ -3768,10 +3800,6 @@ export const cars: CarBrand[] = [
         ],
       },
       {
-        name: 'Furglaine',
-        versions: ['3.6', '3.9 Diesel', 'Chateaux/Exec. 3.9 Diesel'],
-      },
-      {
         name: 'Fusion',
         versions: [
           '2.5 16V 193cv Aut. (Híbrido)',
@@ -3786,10 +3814,6 @@ export const cars: CarBrand[] = [
           'Titanium 2.0 GTDI Eco. Awd Aut.',
           'Titanium 2.0 GTDI Eco. Fwd Aut.',
         ],
-      },
-      {
-        name: 'Ibiza',
-        versions: ['3.9 Furgão Diesel', 'Chat./Exec. 3.9 Diesel'],
       },
       {
         name: 'Ka',
@@ -3839,7 +3863,7 @@ export const cars: CarBrand[] = [
         ],
       },
       {
-        name: 'Ka+',
+        name: 'Ka +',
         versions: [
           'Sedan 1.0 SE/SE PLUS TiVCT Flex 4p',
           'Sedan 1.0 SEL TiCVT Flex 4p',
@@ -3851,24 +3875,6 @@ export const cars: CarBrand[] = [
       {
         name: 'Maverick',
         versions: ['Lariat FX4 2.0 EcoBoost Aut.', 'Lariat Hybrid 2.5 Aut.'],
-      },
-      {
-        name: 'Mondeo',
-        versions: [
-          'CLX 1.8 4p e 5p',
-          'CLX 1.8i SW',
-          'CLX 2.0i 4p Aut',
-          'CLX 2.0i 4p Mec',
-          'CLX 2.0i SW Aut',
-          'CLX 2.0i SW Mec',
-          'Ghia 2.0 16V 143cv 4p Aut',
-          'Ghia 2.0 16V 143cv 4p Mec',
-          'Ghia 2.5 V6 Aut',
-          'Ghia 2.5 V6 Mec',
-          'GLX 2.0 16V 4p Aut',
-          'GLX 2.0 4p e 5p',
-          'GLX 2.0i SW Mec./ Aut.',
-        ],
       },
       {
         name: 'Mustang',
@@ -4023,7 +4029,7 @@ export const cars: CarBrand[] = [
         ],
       },
       {
-        name: 'TERRITORY',
+        name: 'Territory',
         versions: [
           'SEL 1.5 GTDi EcoBoost Aut.',
           'Titanium 1.5 GTDi EcoBo. Aut.',
@@ -4034,7 +4040,7 @@ export const cars: CarBrand[] = [
         versions: ['SC 3.8 V6'],
       },
       {
-        name: 'TRANSIT',
+        name: 'Transit',
         versions: [
           'Chassi 2.2 TDCI Diesel',
           'Chassi 2.4 TDCI Diesel',
@@ -4086,7 +4092,7 @@ export const cars: CarBrand[] = [
     ],
   },
   {
-    brand: 'gwm',
+    brand: 'Gwm',
     models: [
       {
         name: 'Haval',
@@ -4106,7 +4112,7 @@ export const cars: CarBrand[] = [
     ],
   },
   {
-    brand: 'honda',
+    brand: 'Honda',
     models: [
       {
         name: 'Accord',
@@ -4126,7 +4132,7 @@ export const cars: CarBrand[] = [
         ],
       },
       {
-        name: 'CITY',
+        name: 'City',
         versions: [
           'Hatchback EX 1.5 Flex 16V Aut.',
           'Hatchback EXL 1.5 Flex 16V Aut.',
@@ -4192,7 +4198,7 @@ export const cars: CarBrand[] = [
         ],
       },
       {
-        name: 'CR-V',
+        name: 'Cr-V',
         versions: [
           '2.0 16V Aut.',
           '2.0 16V Mec.',
@@ -4230,7 +4236,7 @@ export const cars: CarBrand[] = [
         ],
       },
       {
-        name: 'HR-V',
+        name: 'Hr-V',
         versions: [
           'Advance 1.5  Flex TB 16V 5p Aut.',
           'EX 1.5 Flex Sensing 16V 5p Aut.',
@@ -4244,19 +4250,7 @@ export const cars: CarBrand[] = [
         ],
       },
       {
-        name: 'Odyssey',
-        versions: ['EX Van Aut (6 lug.)', 'Van LX Aut (6 lug.)'],
-      },
-      {
-        name: 'Passport',
-        versions: ['EX', 'LX', 'PIck-Up 4x2'],
-      },
-      {
-        name: 'Prelude',
-        versions: ['Coupê S 2.2', 'Si'],
-      },
-      {
-        name: 'WR-V',
+        name: 'Wr-V',
         versions: [
           'EX 1.5 Flexone 16V 5p Aut.',
           'EXL 1.5 Flexone 16V 5p Aut.',
@@ -4264,13 +4258,13 @@ export const cars: CarBrand[] = [
         ],
       },
       {
-        name: 'ZR-V',
+        name: 'Zr-V',
         versions: ['Touring 2.0 16V 5p Aut.'],
       },
     ],
   },
   {
-    brand: 'hyundai',
+    brand: 'Hyundai',
     models: [
       {
         name: 'Accent',
@@ -4292,17 +4286,8 @@ export const cars: CarBrand[] = [
         ],
       },
       {
-        name: 'AZERA',
+        name: 'Azera',
         versions: ['3.0 V6 24V 4p Aut.', 'GLS 3.3 V6 24V 4p Aut.'],
-      },
-      {
-        name: 'Coupe',
-        versions: [
-          'FX 2.0 Aut.',
-          'FX 2.0 Mec.',
-          'FX 2.7 V6 24V 180cv Aut.',
-          'FX 2.7 V6 24V 180cv Mec.',
-        ],
       },
       {
         name: 'Creta',
@@ -4334,10 +4319,6 @@ export const cars: CarBrand[] = [
         ],
       },
       {
-        name: 'Cupê',
-        versions: ['2.0'],
-      },
-      {
         name: 'Elantra',
         versions: [
           '2.0 16V Flex Aut.',
@@ -4354,14 +4335,6 @@ export const cars: CarBrand[] = [
         ],
       },
       {
-        name: 'EQUUS',
-        versions: ['4.6 V8 32V 366cv 4p Aut.'],
-      },
-      {
-        name: 'Excel',
-        versions: ['GLS', 'GS', 'L', 'LS/ GL'],
-      },
-      {
         name: 'Galloper',
         versions: [
           '2.5 Luxo Turbo Diesel',
@@ -4372,12 +4345,12 @@ export const cars: CarBrand[] = [
         ],
       },
       {
-        name: 'GENESIS',
+        name: 'Genesis',
         versions: ['3.8 V6 24V 290cv 4p Aut.'],
       },
       {
-        name: 'Grand',
-        versions: ['Santa Fé  3.3 V6 4X4 Tiptronic'],
+        name: 'Grand Santa Fé',
+        versions: ['3.3 V6 4X4 Tiptronic'],
       },
       {
         name: 'H1',
@@ -4405,7 +4378,7 @@ export const cars: CarBrand[] = [
         ],
       },
       {
-        name: 'HB20',
+        name: 'Hb20',
         versions: [
           '1 Million 1.6 Flex 16V Aut.',
           '5 Anos 1.0 Flex 12V Mec.',
@@ -4467,7 +4440,7 @@ export const cars: CarBrand[] = [
         ],
       },
       {
-        name: 'HB20S',
+        name: 'Hb20s',
         versions: [
           ' Impress 1.6 Flex 16V Aut.',
           ' Impress 1.6 Flex 16v Mec.',
@@ -4519,7 +4492,7 @@ export const cars: CarBrand[] = [
         ],
       },
       {
-        name: 'HB20X',
+        name: 'Hb20x',
         versions: [
           'Diamond 1.6 Flex 16V Aut.',
           'Diamond Plus 1.6 Flex 16V Aut.',
@@ -4534,11 +4507,11 @@ export const cars: CarBrand[] = [
         ],
       },
       {
-        name: 'HR',
+        name: 'Hr',
         versions: ['2.5 4WD Diesel ', '2.5 TCI Diesel (RS/RD)'],
       },
       {
-        name: 'i30',
+        name: 'I30',
         versions: [
           '1.6 16V Flex 5p Aut.',
           '1.8 16V Aut. 5p',
@@ -4548,15 +4521,15 @@ export const cars: CarBrand[] = [
         ],
       },
       {
-        name: 'i30cw',
+        name: 'I30cw',
         versions: ['2.0 16V 145cv Aut. 5p', '2.0 16V 145cv Mec. 5p'],
       },
       {
-        name: 'IONIQ',
+        name: 'Ioniq',
         versions: ['1.6 16V Aut. (Híbrido)'],
       },
       {
-        name: 'ix35',
+        name: 'Ix35',
         versions: [
           '2.0 16V 170cv 2WD/4WD Aut.',
           '2.0 16V 170cv 2WD/4WD Mec.',
@@ -4568,7 +4541,7 @@ export const cars: CarBrand[] = [
         ],
       },
       {
-        name: 'KONA',
+        name: 'Kona',
         versions: ['1.6 16V Aut. (Hibrido)', 'EV (Elétrico)'],
       },
       {
@@ -4576,7 +4549,7 @@ export const cars: CarBrand[] = [
         versions: ['GLS 1.8 16V 123cv Aut.', 'GLS 1.8 16V 123cv Mec.'],
       },
       {
-        name: 'PALISADE',
+        name: 'Palisade',
         versions: ['Signature 3.8 GDI AWD Aut.'],
       },
       {
@@ -4584,18 +4557,14 @@ export const cars: CarBrand[] = [
         versions: ['GL 4x2 Curto/Longo Diesel', 'GLS CD 4x2 2.6 8V Diesel'],
       },
       {
-        name: 'Santa',
+        name: 'Santa Fé',
         versions: [
-          'Fe 3.5 V6 4X4 Aut.',
-          'Fe GLS 2.4 Tiptronic',
-          'Fe GLS 2.7 V6 4x4TipTronic',
-          'Fe GLS 3.5 V6 4x4 Tiptronic',
-          'Fe/GLS 3.3 V6 4X4 Tiptronic',
+          '3.5 V6 4X4 Aut.',
+          'GLS 2.4 Tiptronic',
+          'GLS 2.7 V6 4x4TipTronic',
+          'GLS 3.5 V6 4x4 Tiptronic',
+          'GLS 3.3 V6 4X4 Tiptronic',
         ],
-      },
-      {
-        name: 'Scoupe',
-        versions: [''],
       },
       {
         name: 'Sonata',
@@ -4641,13 +4610,13 @@ export const cars: CarBrand[] = [
         versions: ['1.6 16V  140cv Aut.'],
       },
       {
-        name: 'VERACRUZ',
+        name: 'Veracruz',
         versions: ['GLS 3.8 4WD Aut.'],
       },
     ],
   },
   {
-    brand: 'iveco',
+    brand: 'Iveco',
     models: [
       {
         name: 'Daily',
@@ -4658,7 +4627,7 @@ export const cars: CarBrand[] = [
         ],
       },
       {
-        name: 'DAILY',
+        name: 'Daily',
         versions: [
           'CH. 65-170 CD Curto 3.0 (Diesel)',
           'CH. 65-170 CD Longo 3.0 (Diesel)',
@@ -4720,45 +4689,45 @@ export const cars: CarBrand[] = [
     ],
   },
   {
-    brand: 'jac',
+    brand: 'Jac',
     models: [
       {
         name: 'E-J7',
         versions: ['193cv 5p Aut. (Elétrico)'],
       },
       {
-        name: 'e-JS1',
+        name: 'E-Js1',
         versions: [
           '62cv 5p Aut. (Elétrico)',
           'Extreme 62cv 5p Aut. (Elétrico)',
         ],
       },
       {
-        name: 'E-JS1',
+        name: 'E-Js1',
         versions: ['City Cargo Aut. (Elétrico)'],
       },
       {
-        name: 'e-JS4',
+        name: 'E-Js4',
         versions: ['150CV 5p Aut. (Elétrico)'],
       },
       {
-        name: 'E-JV',
+        name: 'E-Jv',
         versions: ['CC Aut. (Elétrico)'],
       },
       {
-        name: 'E-JV12',
+        name: 'E-Jv12',
         versions: ['Aut. (Elétrico)'],
       },
       {
-        name: 'E-JV5.5',
+        name: 'E-Jv5.5',
         versions: ['Aut. (Elétrico)'],
       },
       {
-        name: 'E-JV7L',
+        name: 'E-Jv7l',
         versions: ['Aut. (Elétrico)'],
       },
       {
-        name: 'iEV',
+        name: 'Iev',
         versions: [
           '20 68cv 5p Aut. (Elétrico)',
           '330P CD 150cv Aut. (Elétrico)',
@@ -4834,7 +4803,7 @@ export const cars: CarBrand[] = [
     ],
   },
   {
-    brand: 'jaguar',
+    brand: 'Jaguar',
     models: [
       {
         name: 'Daimler',
@@ -4871,7 +4840,7 @@ export const cars: CarBrand[] = [
         ],
       },
       {
-        name: 'F-PACE',
+        name: 'F-Pace',
         versions: ['SVR Supercharged 5.0 V8'],
       },
       {
@@ -4910,7 +4879,7 @@ export const cars: CarBrand[] = [
         ],
       },
       {
-        name: 'XE',
+        name: 'Xe',
         versions: [
           '2.0 R-Dynamic S 250cv Aut.',
           '2.0 Turbocharged Edition Aut.',
@@ -4920,7 +4889,7 @@ export const cars: CarBrand[] = [
         ],
       },
       {
-        name: 'XF',
+        name: 'Xf',
         versions: [
           '2.0 GTDi Prestige 16V Aut.',
           '2.0 GTDI SPORT LUXURY 240cv Aut.',
@@ -4937,15 +4906,15 @@ export const cars: CarBrand[] = [
         ],
       },
       {
-        name: 'XFR',
+        name: 'Xfr',
         versions: ['Supercharged 5.0 V8 510cv Aut.'],
       },
       {
-        name: 'XFR-S',
+        name: 'Xfr-S',
         versions: ['Supercharged 5.0 V8 550cv Aut.'],
       },
       {
-        name: 'XJ',
+        name: 'Xj',
         versions: [
           '2.0 Turbo 16V 240cv Aut.',
           '3.0 Portfolio Supercharged V6 Aut.',
@@ -4955,15 +4924,15 @@ export const cars: CarBrand[] = [
         ],
       },
       {
-        name: 'XJ-12',
+        name: 'Xj-12',
         versions: ['', 'Conv.'],
       },
       {
-        name: 'XJ-6',
+        name: 'Xj-6',
         versions: [''],
       },
       {
-        name: 'XJ-8',
+        name: 'Xj-8',
         versions: [
           'Daimler',
           'Executive/ Centenary 4.0',
@@ -4972,27 +4941,27 @@ export const cars: CarBrand[] = [
         ],
       },
       {
-        name: 'XJR',
+        name: 'Xjr',
         versions: ['4.2 V8 32V 400cv 4p'],
       },
       {
-        name: 'XJS',
+        name: 'Xjs',
         versions: ['4.0 24V'],
       },
       {
-        name: 'XJS-C',
+        name: 'Xjs-C',
         versions: ['6.0 V12'],
       },
       {
-        name: 'XK-8',
+        name: 'Xk-8',
         versions: ['BR Conversível / XK-8 Conversível', 'BR Coupe/ XK-8 Coupe'],
       },
       {
-        name: 'XKR',
+        name: 'Xkr',
         versions: ['Conversível 4.2/5.0 32V', 'Coupe  4.2/5.0 32V'],
       },
       {
-        name: 'XKR-S',
+        name: 'Xkr-S',
         versions: ['Coupe Supercharged 5.0 32V'],
       },
       {
@@ -5006,7 +4975,7 @@ export const cars: CarBrand[] = [
     ],
   },
   {
-    brand: 'jeep',
+    brand: 'Jeep',
     models: [
       {
         name: 'Cherokee',
@@ -5036,7 +5005,7 @@ export const cars: CarBrand[] = [
         ],
       },
       {
-        name: 'COMPASS',
+        name: 'Compass',
         versions: [
           'Black Hurricane 2.0 4x4 TB Aut.',
           'LIMITED 2.0 4x2 Flex 16V Aut.',
@@ -5121,11 +5090,8 @@ export const cars: CarBrand[] = [
           'Trailhawk T270 1.3 TB Flex Aut.',
           'Willys 2.0 4x4 TB Diesel Aut.',
           'Willys T270 1.3 TB 4x4 Flex Aut',
+          '1.8 4x2 Flex 16V Aut.',
         ],
-      },
-      {
-        name: 'Renegade1.8',
-        versions: ['4x2 Flex 16V Aut.'],
       },
       {
         name: 'Wrangler',
@@ -5149,7 +5115,7 @@ export const cars: CarBrand[] = [
     ],
   },
   {
-    brand: 'kia motors',
+    brand: 'Kia Motors',
     models: [
       {
         name: 'Besta',
@@ -5178,7 +5144,7 @@ export const cars: CarBrand[] = [
         ],
       },
       {
-        name: 'CADENZA',
+        name: 'Cadenza',
         versions: ['EX 3.5 V6 24V Aut.'],
       },
       {
@@ -5225,7 +5191,7 @@ export const cars: CarBrand[] = [
         ],
       },
       {
-        name: 'EV5',
+        name: 'Ev5',
         versions: ['Land (Elétrico)'],
       },
       {
@@ -5237,7 +5203,7 @@ export const cars: CarBrand[] = [
         versions: ['EX 2.0 16V Aut.', 'LX 2.0 16V Aut'],
       },
       {
-        name: 'MOHAVE',
+        name: 'Mohave',
         versions: [
           'EX 3.0 V6 24V 256cv TB Dies. Aut.',
           'EX 3.8 V6 24V 275cv 4x4 Aut.',
@@ -5257,7 +5223,7 @@ export const cars: CarBrand[] = [
         versions: ['GL 3.5 V6 24V 202cv Aut.', 'GL 3.8 V6 24V 267cv Aut.'],
       },
       {
-        name: 'OPTIMA',
+        name: 'Optima',
         versions: ['2.0 16V 165cv Aut.', '2.4 16V 180cv Aut.'],
       },
       {
@@ -5269,11 +5235,11 @@ export const cars: CarBrand[] = [
         ],
       },
       {
-        name: 'QUORIS',
+        name: 'Quoris',
         versions: ['EX 3.8 V6 24V 294cv Aut.'],
       },
       {
-        name: 'RIO',
+        name: 'Rio',
         versions: ['EX 1.6 Flex Aut.', 'LX 1.6 Flex Aut.'],
       },
       {
@@ -5307,7 +5273,7 @@ export const cars: CarBrand[] = [
         ],
       },
       {
-        name: 'SOUL',
+        name: 'Soul',
         versions: ['1.6/ 1.6 16V FLEX Aut.', '1.6/ 1.6 16V FLEX Mec.'],
       },
       {
@@ -5338,16 +5304,16 @@ export const cars: CarBrand[] = [
         versions: ['GT 3.3 V6 Bi-Turbo 370cv Aut.'],
       },
       {
-        name: 'STONIC',
+        name: 'Stonic',
         versions: ['SX 1.0 TB Aut. (Híbrido)'],
       },
     ],
   },
   {
-    brand: 'lamborghini',
+    brand: 'Lamborghini',
     models: [
       {
-        name: 'AVENTADOR',
+        name: 'Aventador',
         versions: [
           '770-4 SVJ ROADSTER V12',
           'LP 700-4',
@@ -5370,7 +5336,7 @@ export const cars: CarBrand[] = [
         ],
       },
       {
-        name: 'HURACAN',
+        name: 'Huracan',
         versions: [
           'Coupe LP 610-4',
           'Coupe Performante LP 640-4',
@@ -5383,27 +5349,22 @@ export const cars: CarBrand[] = [
         ],
       },
       {
-        name: 'URUS',
+        name: 'Urus',
         versions: ['LP-650-4', 'Performante LP-650-4', 'S LP-650-4'],
       },
     ],
   },
   {
-    brand: 'land rover',
+    brand: 'Land Rover',
     models: [
       {
-        name: 'Defe.',
+        name: 'Defender',
         versions: [
           '110 X-DY HSE P400e Aut. (Hib.)',
           '110 X-DY SE D300 Die Aut. (Hib.)',
           '110 X-DY.HSE D300  Die Aut. (Híb.)',
           '130 Outbound D300 Die. Aut. (Hib.)',
           '130 X-DY S 3.0 I6 Die.Aut.(Hib.)',
-        ],
-      },
-      {
-        name: 'Defender',
-        versions: [
           '110 2.0 Turbo HSE Si4 Aut.',
           '110 2.0 Turbo S Si4 Aut.',
           '110 2.0 Turbo SE Si4 Aut.',
@@ -5443,22 +5404,12 @@ export const cars: CarBrand[] = [
         ],
       },
       {
-        name: 'Disc.',
+        name: 'Discovery',
         versions: [
           'Sp. S 2.0 4x4 Dies. Aut. (Híb.)',
           'Sp. SE Dyn 2.0 D200 Die.Aut.(Híb.)',
-        ],
-      },
-      {
-        name: 'Discov.',
-        versions: [
           'Metrop. Edt. 3.0 4x4 Die. (Híb.)',
           'Sp. HSE 2.0 TB 240cv Die. Aut',
-        ],
-      },
-      {
-        name: 'Discovery',
-        versions: [
           'ES 3.9 V8',
           'ES 4.0 V8 Aut.',
           'ES TD5 2.5 4x4 4p Diesel Aut.',
@@ -5496,7 +5447,7 @@ export const cars: CarBrand[] = [
         ],
       },
       {
-        name: 'Discovery3',
+        name: 'Discovery 3',
         versions: [
           'HSE 2.7 4x4 TDI Diesel Aut.',
           'HSE 4.4 V8 4x4 299cv Aut.',
@@ -5507,7 +5458,7 @@ export const cars: CarBrand[] = [
         ],
       },
       {
-        name: 'Discovery4',
+        name: 'Discovery 4',
         versions: [
           'B&W 3.0 4x4 TDV6 Diesel Aut.',
           'BLACK 3.0 4x4 SDV6 Dies. Aut.',
@@ -5532,7 +5483,7 @@ export const cars: CarBrand[] = [
         ],
       },
       {
-        name: 'Freelander2',
+        name: 'Freelander 2',
         versions: [
           'Dynamique 2.2 SD4 T. Diesel',
           'HSE 2.2 SD4 190cv T.Diesel',
@@ -5550,12 +5501,9 @@ export const cars: CarBrand[] = [
         ],
       },
       {
-        name: 'New',
-        versions: ['Range/Range Rover Vogue 3.9 V8'],
-      },
-      {
         name: 'Range',
         versions: [
+          'Vogue 3.9 V8',
           'R. Autobio. 3.0 I6 TB Die. (Híb.)',
           'R. EVO HSE Si4 R-Dyn.2.0 300cv Aut',
           'R. EVO SE Si4 R-Dyn. 2.0 Flex Aut.',
@@ -5682,42 +5630,42 @@ export const cars: CarBrand[] = [
     ],
   },
   {
-    brand: 'lexus',
+    brand: 'Lexus',
     models: [
       {
-        name: 'CT200h',
+        name: 'Ct200h',
         versions: [' 1.8 16V Aut. (Híbrido)', 'F-Sport 1.8 16V Aut. (Híbrido)'],
       },
       {
-        name: 'ES-300',
+        name: 'Es-300',
         versions: ['3.0'],
       },
       {
-        name: 'ES300h',
+        name: 'Es300h',
         versions: ['2.5 16V Aut. (Híbrido)'],
       },
       {
-        name: 'ES-330',
+        name: 'Es-330',
         versions: ['3.3 24V 228cv'],
       },
       {
-        name: 'ES-350',
+        name: 'Es-350',
         versions: ['3.5 24V 284cv'],
       },
       {
-        name: 'GS',
+        name: 'Gs',
         versions: ['300 3.0 V6 24V'],
       },
       {
-        name: 'IS-250',
+        name: 'Is-250',
         versions: ['2.5 24V 208cv Aut.', 'F Sport 2.5 24V 208cv Aut.'],
       },
       {
-        name: 'IS-300',
+        name: 'Is-300',
         versions: ['3.0 24V 231cv Aut.'],
       },
       {
-        name: 'LS',
+        name: 'Ls',
         versions: [
           '400 4.0',
           '430 4.3 32V 281cv',
@@ -5726,15 +5674,15 @@ export const cars: CarBrand[] = [
         ],
       },
       {
-        name: 'LS-460L',
+        name: 'Ls-460l',
         versions: ['4.6 V8 32v 347cv Aut.'],
       },
       {
-        name: 'NX-200t',
+        name: 'Nx-200t',
         versions: ['F-Sport 2.0 16v 238cv Aut.', 'Luxury 2.0 16V 238cv Aut.'],
       },
       {
-        name: 'NX-300',
+        name: 'Nx-300',
         versions: [
           'Dynamic 2.0 16V 238cv Aut.',
           'F-Sport 2.0 16V 238cv Aut.',
@@ -5742,7 +5690,7 @@ export const cars: CarBrand[] = [
         ],
       },
       {
-        name: 'NX-300h',
+        name: 'Nx-300h',
         versions: [
           'Dynamic 2.5 16V Aut. (Híbrido)',
           'F-Sport 2.5 16V Aut. (Híbrido)',
@@ -5750,7 +5698,7 @@ export const cars: CarBrand[] = [
         ],
       },
       {
-        name: 'NX-350h',
+        name: 'Nx-350h',
         versions: [
           'Dynamic 2.5 16V Aut. (Híbrido)',
           'F-Sport 2.5 16V Aut. (Híbrido)',
@@ -5758,34 +5706,34 @@ export const cars: CarBrand[] = [
         ],
       },
       {
-        name: 'RX',
+        name: 'Rx',
         versions: ['300 3.0 V6 24V'],
       },
       {
-        name: 'RX-350',
+        name: 'Rx-350',
         versions: ['3.5 24V  Aut.', 'F-Sport 3.5 24V Aut.'],
       },
       {
-        name: 'RX-450h',
+        name: 'Rx-450h',
         versions: [
           'F-Sport 3.5 24V V6 Aut.(Híbrido)',
           'Luxury 3.5 24V V6 Aut. (Híbrido)',
         ],
       },
       {
-        name: 'RX-450h+',
+        name: 'Rx-450h+',
         versions: ['2.5 16V Aut. (Híbrido)'],
       },
       {
-        name: 'RX-500h',
+        name: 'Rx-500h',
         versions: ['F-Sport 2.4 16V Aut. (Híbrido)'],
       },
       {
-        name: 'SC',
+        name: 'Sc',
         versions: ['400 4.0 V8'],
       },
       {
-        name: 'UX-250h',
+        name: 'Ux-250h',
         versions: [
           'Dynamic 2.0 16V Aut. (Híbrido)',
           'F-Sport 2.0 16V Aut. (Híbrido)',
@@ -5795,7 +5743,7 @@ export const cars: CarBrand[] = [
     ],
   },
   {
-    brand: 'lotus',
+    brand: 'Lotus',
     models: [
       {
         name: 'Elan',
@@ -5808,7 +5756,7 @@ export const cars: CarBrand[] = [
     ],
   },
   {
-    brand: 'maserati',
+    brand: 'Maserati',
     models: [
       {
         name: '222',
@@ -5844,15 +5792,15 @@ export const cars: CarBrand[] = [
         versions: ['Turismo Sport 4.7 V8 32V 460cv'],
       },
       {
-        name: 'GranCabrio',
+        name: 'Grancabrio',
         versions: ['4.7 V8 32V 440cv'],
       },
       {
-        name: 'GranSport',
+        name: 'Gransport',
         versions: ['4.2 V8 32V 400cv', 'Spyder 4.2 V8 32V 400cv'],
       },
       {
-        name: 'GranTurismo',
+        name: 'Granturismo',
         versions: [
           '4.2 V8 32V 405cv',
           'MC Stradale 4.7 V8 32V 450cv',
@@ -5892,7 +5840,7 @@ export const cars: CarBrand[] = [
     ],
   },
   {
-    brand: 'mazda',
+    brand: 'Mazda',
     models: [
       {
         name: '323',
@@ -5932,15 +5880,15 @@ export const cars: CarBrand[] = [
         versions: ['3.0 V6 24V'],
       },
       {
-        name: 'MPV',
+        name: 'Mpv',
         versions: ['Minivan Aut'],
       },
       {
-        name: 'MX-3',
+        name: 'Mx-3',
         versions: ['1.6 16V', 'GS 1.8 V6 24V'],
       },
       {
-        name: 'MX-5',
+        name: 'Mx-5',
         versions: ['Mec'],
       },
       {
@@ -5952,20 +5900,20 @@ export const cars: CarBrand[] = [
         versions: ['Aut.', 'High', 'Mec.'],
       },
       {
-        name: 'RX',
+        name: 'Rx',
         versions: ['7 2.6 Turbo'],
       },
     ],
   },
   {
-    brand: 'mclaren',
+    brand: 'Mclaren',
     models: [
       {
-        name: '540C',
+        name: '540c',
         versions: ['Coupe 3.8 Bi-Turbo V8'],
       },
       {
-        name: '570S',
+        name: '570s',
         versions: [
           'Coupé 3.8 Bi-Turbo V8',
           'GT Coupé 3.8 Bi-Turbo V8',
@@ -5973,19 +5921,19 @@ export const cars: CarBrand[] = [
         ],
       },
       {
-        name: '600LT',
+        name: '600lt',
         versions: ['Coupe 3.8 Bi-Turbo V8', 'Spider 3.8 Bi-Turbo V8'],
       },
       {
-        name: '720S',
+        name: '720s',
         versions: ['Coupe 4.0 Bi-Turbo V8 2p', 'Spider 4.0 Bi-Turbo V8 2p'],
       },
       {
-        name: '750S',
+        name: '750s',
         versions: ['Coupe 4.0 Bi-Turbo V8', 'Spider 4.0 Bi-Turbo V8 2p'],
       },
       {
-        name: '765LT',
+        name: '765lt',
         versions: ['Coupe 4.0 Bi-Turbo V8', 'Spider 4.0 Bi-Turbo V8'],
       },
       {
@@ -5993,13 +5941,13 @@ export const cars: CarBrand[] = [
         versions: ['Coupe 3.0 V6 2p (Híbrido)', 'Spider 3.0 V6 2p (Híbrido)'],
       },
       {
-        name: 'GT',
+        name: 'Gt',
         versions: ['Coupé 4.0 Bi-Turbo V8 2p'],
       },
     ],
   },
   {
-    brand: 'mercedes-benz',
+    brand: 'Mercedes-Benz',
     models: [
       {
         name: '180-D',
@@ -6026,15 +5974,15 @@ export const cars: CarBrand[] = [
         versions: ['3.0'],
       },
       {
-        name: '300-SE',
+        name: '300-Se',
         versions: ['3.0/3.2'],
       },
       {
-        name: '300-SL',
+        name: '300-Sl',
         versions: ['3.0'],
       },
       {
-        name: '300-TE',
+        name: '300-Te',
         versions: ['Wagon 3.0'],
       },
       {
@@ -6042,15 +5990,15 @@ export const cars: CarBrand[] = [
         versions: ['5.0'],
       },
       {
-        name: '500-SEC/',
+        name: '500-Sec/',
         versions: ['SL'],
       },
       {
-        name: '500-SEL',
+        name: '500-Sel',
         versions: ['5.0/ 5.6'],
       },
       {
-        name: '560-SEL',
+        name: '560-Sel',
         versions: ['5.6'],
       },
       {
@@ -6225,27 +6173,27 @@ export const cars: CarBrand[] = [
         ],
       },
       {
-        name: 'CL-500',
+        name: 'Cl-500',
         versions: ['5.0/ 5.5'],
       },
       {
-        name: 'CL-600',
+        name: 'Cl-600',
         versions: ['6.0/ 5.5'],
       },
       {
-        name: 'CL-63',
+        name: 'Cl-63',
         versions: ['AMG 6.2 V8 32V 525cv'],
       },
       {
-        name: 'CL-65',
+        name: 'Cl-65',
         versions: ['AMG 6.0 V12 Aut.'],
       },
       {
-        name: 'CLA-180',
+        name: 'Cla-180',
         versions: ['1.6 16V 122cv Aut.'],
       },
       {
-        name: 'CLA-200',
+        name: 'Cla-200',
         versions: [
           '1.6 TB 16V Flex Aut.',
           'AMG Line 1.3 TB 16V Aut. (Híb.)',
@@ -6256,11 +6204,11 @@ export const cars: CarBrand[] = [
         ],
       },
       {
-        name: 'CLA-250',
+        name: 'Cla-250',
         versions: ['2.0 16V TB Aut.', 'Sport 4MATIC 2.0 16V 211cv Aut.'],
       },
       {
-        name: 'CLA-35',
+        name: 'Cla-35',
         versions: [
           'AMG 4MATIC 2.0 TB Aut.',
           'AMG 4MATIC 2.0 TB Aut. (Híbrido)',
@@ -6268,7 +6216,7 @@ export const cars: CarBrand[] = [
         ],
       },
       {
-        name: 'CLA-45',
+        name: 'Cla-45',
         versions: [
           'AMG 4MATIC CGI 2.0 TB Aut.',
           'S AMG 4MATIC CGI 2.0 TB Aut.',
@@ -6309,15 +6257,15 @@ export const cars: CarBrand[] = [
         versions: ['6.0'],
       },
       {
-        name: 'CLC',
+        name: 'Clc',
         versions: ['200 Kompressor 1.8 184cv Aut.'],
       },
       {
-        name: 'CLK-230',
+        name: 'Clk-230',
         versions: ['Cabriolet Kompressor', 'Kompressor'],
       },
       {
-        name: 'CLK-320',
+        name: 'Clk-320',
         versions: [
           'AvantGarde',
           'AvantGarde Cabriolet',
@@ -6328,14 +6276,14 @@ export const cars: CarBrand[] = [
         ],
       },
       {
-        name: 'CLK-350',
+        name: 'Clk-350',
         versions: [
           'Avant./ Elegance 3.5 24V 272cv',
           'Avant./Eleg. Cabriolet 3.5 272cv',
         ],
       },
       {
-        name: 'CLK-430',
+        name: 'Clk-430',
         versions: [
           'Avantgard Cabriolet 4.3 V8 24v',
           'AvantGarde 4.3',
@@ -6345,42 +6293,42 @@ export const cars: CarBrand[] = [
         ],
       },
       {
-        name: 'CLK-500',
+        name: 'Clk-500',
         versions: ['Cabriolet V8 24V 306cv', 'Elegance/ Avant. 5.0 V8 24V Aut'],
       },
       {
-        name: 'CLK-55',
+        name: 'Clk-55',
         versions: ['AMG Cabriolet V8 24v 367cv', 'AMG V8 24V 367cv'],
       },
       {
-        name: 'CLS-350',
+        name: 'Cls-350',
         versions: ['CGI 3.5 306cv Aut.', 'V6 24V 272cv'],
       },
       {
-        name: 'CLS-400',
+        name: 'Cls-400',
         versions: ['3.5 V6 Bi-Turbo 333cv Aut.'],
       },
       {
-        name: 'CLS-450',
+        name: 'Cls-450',
         versions: [
           '3.0 TB 4MATIC  (Híb.)         ',
           '3.0 TB 4MATIC SPORT (Híbrido)',
         ],
       },
       {
-        name: 'CLS-500',
+        name: 'Cls-500',
         versions: ['V8 24V'],
       },
       {
-        name: 'CLS-53',
+        name: 'Cls-53',
         versions: ['AMG 3.0 TB 4MATIC+ (Híbrido)'],
       },
       {
-        name: 'CLS-55',
+        name: 'Cls-55',
         versions: ['Kompressor AMG 5.5 V8 24V 476cv'],
       },
       {
-        name: 'CLS-63',
+        name: 'Cls-63',
         versions: ['AMG 5.5 V8 557cv Aut.', 'AMG 6.2 V8 32V 514cv'],
       },
       {
@@ -6512,22 +6460,22 @@ export const cars: CarBrand[] = [
         ],
       },
       {
-        name: 'EQA',
+        name: 'Eqa',
         versions: ['250 (Elétrico)'],
       },
       {
-        name: 'EQB',
+        name: 'Eqb',
         versions: ['250 (Elétrico)', '350 (Elétrico)'],
       },
       {
-        name: 'EQC',
+        name: 'Eqc',
         versions: [
           '400 4MATIC 408CV (Elétrico)',
           '400 4MATIC AMG Line (Elétrico)',
         ],
       },
       {
-        name: 'EQE',
+        name: 'Eqe',
         versions: [
           '300 Edition One (Elétrico) ',
           '300 SUV AMG Line (Elétrico) ',
@@ -6536,7 +6484,7 @@ export const cars: CarBrand[] = [
         ],
       },
       {
-        name: 'EQS',
+        name: 'Eqs',
         versions: [
           '450 SUV 4MATIC ( Elétrico)',
           '450+ SUV AMG Line ( Elétrico)',
@@ -6557,19 +6505,19 @@ export const cars: CarBrand[] = [
         ],
       },
       {
-        name: 'GL-350',
+        name: 'Gl-350',
         versions: ['Sport 3.0 V6 258cv 4x4 Diesel'],
       },
       {
-        name: 'GL-500',
+        name: 'Gl-500',
         versions: ['4.7 Bi-Turbo V8 4x4 Aut.', '5.5 V8 32V 4x4 388cv Aut.'],
       },
       {
-        name: 'GL-63',
+        name: 'Gl-63',
         versions: ['AMG 5.5 Bi-Turbo 32V 4x4 Aut.'],
       },
       {
-        name: 'GLA',
+        name: 'Gla',
         versions: [
           '200 Advance 1.6/1.6 TB 16V Flex Aut.',
           '200 AMG Line 1.3 16V TB Aut.',
@@ -6590,7 +6538,7 @@ export const cars: CarBrand[] = [
         ],
       },
       {
-        name: 'GLB',
+        name: 'Glb',
         versions: [
           '200 Advance 1.3 TB 16V Aut.',
           '200 Launch Edition 1.3 TB 16V Aut.',
@@ -6603,7 +6551,7 @@ export const cars: CarBrand[] = [
         ],
       },
       {
-        name: 'GLC',
+        name: 'Glc',
         versions: [
           '220D 2.0 TB 4M Enduro Diesel',
           '220D 2.0 TB 4M Off-Road Diesel',
@@ -6616,7 +6564,7 @@ export const cars: CarBrand[] = [
         ],
       },
       {
-        name: 'GLC-300',
+        name: 'Glc-300',
         versions: [
           '4MATIC 2.0 TB Aut. (Híb)',
           'AMG L. Cou. 4M 2.0 TB Aut. (Híb)',
@@ -6624,7 +6572,7 @@ export const cars: CarBrand[] = [
         ],
       },
       {
-        name: 'GLC-43',
+        name: 'Glc-43',
         versions: [
           'AMG 4M Coupe 2.0 Turbo Aut.(Híb).',
           'AMG 4MATIC 2.0 Turbo Aut. (Híb).',
@@ -6633,14 +6581,14 @@ export const cars: CarBrand[] = [
         ],
       },
       {
-        name: 'GLC-63',
+        name: 'Glc-63',
         versions: [
           'AMG 4MATIC 4.0 Bi-TB V8',
           'S AMG 4MATIC Coupe 4.0 Bi-TB V8',
         ],
       },
       {
-        name: 'GLE-350',
+        name: 'Gle-350',
         versions: [
           '3.0 V6 258cv 4x4 Diesel',
           'Family 3.0 V6 258cv 4x4 Diesel',
@@ -6649,7 +6597,7 @@ export const cars: CarBrand[] = [
         ],
       },
       {
-        name: 'GLE-400',
+        name: 'Gle-400',
         versions: [
           '3.0 TB 4MATIC Coupe Diesel Aut.',
           '3.0 TB 4MATIC Diesel Aut.',
@@ -6659,14 +6607,14 @@ export const cars: CarBrand[] = [
         ],
       },
       {
-        name: 'GLE-43',
+        name: 'Gle-43',
         versions: [
           'AMG 4MATIC 3.0 V6 Bi-TB Aut.',
           'AMG 4MATIC Coupe 3.0 V6 Bi-TB Aut',
         ],
       },
       {
-        name: 'GLE-450',
+        name: 'Gle-450',
         versions: [
           '4MATIC 3.0 V6 Diesel (Híb)',
           'AMG 3.0 V6 367cv Aut.',
@@ -6674,11 +6622,11 @@ export const cars: CarBrand[] = [
         ],
       },
       {
-        name: 'GLE-53',
+        name: 'Gle-53',
         versions: ['AMG 3.0 TB 4MATIC+ (Híbrido)'],
       },
       {
-        name: 'GLE-63',
+        name: 'Gle-63',
         versions: [
           'AMG 4MATIC Coupe 5.5 V8 Aut.',
           'AMG 5.5 V8 557cv Aut.',
@@ -6686,7 +6634,7 @@ export const cars: CarBrand[] = [
         ],
       },
       {
-        name: 'GLK',
+        name: 'Glk',
         versions: [
           '220 CDI 2.2 TB 4X4 170cv Aut. Diesel',
           '220 Sport CDI 2.2 TB 4X4 Aut. Diesel',
@@ -6696,23 +6644,23 @@ export const cars: CarBrand[] = [
         ],
       },
       {
-        name: 'GLS',
+        name: 'Gls',
         versions: ['450 4M 3.0 Bi-TB Aut. (Híbrido)'],
       },
       {
-        name: 'GLS-350',
+        name: 'Gls-350',
         versions: ['V6 258cv 4x4 Diesel'],
       },
       {
-        name: 'GLS-500',
+        name: 'Gls-500',
         versions: ['4MATIC 4.7 Bi-Turbo V8 455cv'],
       },
       {
-        name: 'GLS-63',
+        name: 'Gls-63',
         versions: ['AMG 4MATIC 5.5 V8 Bi-TB Aut.'],
       },
       {
-        name: 'GT',
+        name: 'Gt',
         versions: [
           '43 AMG 3.0 Bi-Turbo Aut. (Híbrido)',
           '63 S AMG 4.0 V8 Bi-Turbo',
@@ -6724,15 +6672,15 @@ export const cars: CarBrand[] = [
         ],
       },
       {
-        name: 'ML-230',
+        name: 'Ml-230',
         versions: ['4x4'],
       },
       {
-        name: 'ML-320',
+        name: 'Ml-320',
         versions: ['3.0 V6 224cv 4x4 diesel', '4x4'],
       },
       {
-        name: 'ML-350',
+        name: 'Ml-350',
         versions: [
           '3.0 V6  4x4 Diesel',
           '3.5  4x4',
@@ -6741,19 +6689,19 @@ export const cars: CarBrand[] = [
         ],
       },
       {
-        name: 'ML-430',
+        name: 'Ml-430',
         versions: [''],
       },
       {
-        name: 'ML-500',
+        name: 'Ml-500',
         versions: ['V8 24V'],
       },
       {
-        name: 'ML-55',
+        name: 'Ml-55',
         versions: ['AMG 5.5 24v'],
       },
       {
-        name: 'ML-63',
+        name: 'Ml-63',
         versions: ['AMG 5.5 V8 Bi-Turbo Aut.', 'AMG 6.2 V8 32V 510cv'],
       },
       {
@@ -6778,7 +6726,7 @@ export const cars: CarBrand[] = [
         ],
       },
       {
-        name: 'S-500L',
+        name: 'S-500l',
         versions: ['4.7 Bi-Turbo V8 455cv Aut.', '5.0'],
       },
       {
@@ -6786,7 +6734,7 @@ export const cars: CarBrand[] = [
         versions: ['AMG V8 24V 364cv/ 500cv'],
       },
       {
-        name: 'S-560L',
+        name: 'S-560l',
         versions: ['4.0 Bi-Turbo V8 469cv Aut.'],
       },
       {
@@ -6817,83 +6765,83 @@ export const cars: CarBrand[] = [
         ],
       },
       {
-        name: 'SE-500',
+        name: 'Se-500',
         versions: [''],
       },
       {
-        name: 'SL-280',
+        name: 'Sl-280',
         versions: ['Classic 2.8'],
       },
       {
-        name: 'SL-320',
+        name: 'Sl-320',
         versions: ['3.2/Classic 3.2'],
       },
       {
-        name: 'SL-350',
+        name: 'Sl-350',
         versions: ['3.5 V6 2p', 'Sport 3.5 V6 316cv'],
       },
       {
-        name: 'SL-400',
+        name: 'Sl-400',
         versions: ['3.0 Bi-Turbo V6 2p'],
       },
       {
-        name: 'SL-500',
+        name: 'Sl-500',
         versions: ['5.0 e 5.5/ Classic 5.0'],
       },
       {
-        name: 'SL-55',
+        name: 'Sl-55',
         versions: ['AMG V8 24V 500cv'],
       },
       {
-        name: 'SL-600',
+        name: 'Sl-600',
         versions: [''],
       },
       {
-        name: 'SL-63',
+        name: 'Sl-63',
         versions: ['AMG 5.5 Bi-Turbo V8 Aut.', 'AMG 6.2 V8 525cv Aut'],
       },
       {
-        name: 'SL-65',
+        name: 'Sl-65',
         versions: ['AMG 6.0 V12 612cv Aut'],
       },
       {
-        name: 'SLC-300',
+        name: 'Slc-300',
         versions: ['2.0 Turbo 245cv Aut.'],
       },
       {
-        name: 'SLC-43',
+        name: 'Slc-43',
         versions: ['AMG 3.0 V6 Aut.'],
       },
       {
-        name: 'SLK-200',
+        name: 'Slk-200',
         versions: ['Kompressor 16V/ 200 CGI 16V'],
       },
       {
-        name: 'SLK-230',
+        name: 'Slk-230',
         versions: ['Kompressor', 'Plus'],
       },
       {
-        name: 'SLK-250',
+        name: 'Slk-250',
         versions: ['CGI 1.8 16V 204cv Aut.'],
       },
       {
-        name: 'SLK-300',
+        name: 'Slk-300',
         versions: ['2.0 Turbo 245cv Aut.'],
       },
       {
-        name: 'SLK-320',
+        name: 'Slk-320',
         versions: ['3.2 218cv'],
       },
       {
-        name: 'SLK-350',
+        name: 'Slk-350',
         versions: ['3.5 V6/SLK-350 CGI'],
       },
       {
-        name: 'SLK-55',
+        name: 'Slk-55',
         versions: ['AMG V8 24V'],
       },
       {
-        name: 'SLS-63',
+        name: 'Sls-63',
         versions: [
           'AMG 6.2 8V Black Series Aut.',
           'AMG 6.2 V8 Aut.',
@@ -7028,7 +6976,7 @@ export const cars: CarBrand[] = [
         ],
       },
       {
-        name: 'VITO',
+        name: 'Vito',
         versions: [
           '111 CDI Furgão 1.6 TB Diesel 4p Mec',
           'TOURER 119 Comf.2.0 Flex 9Lug. Mec.',
@@ -7038,23 +6986,23 @@ export const cars: CarBrand[] = [
     ],
   },
   {
-    brand: 'mg',
+    brand: 'Mg',
     models: [
       {
         name: '550',
         versions: ['1.8 16V Turbo 170cv Aut.'],
       },
       {
-        name: 'MG6',
+        name: 'Mg6',
         versions: ['1.8 16V Turbo 170cv Aut.'],
       },
     ],
   },
   {
-    brand: 'mini',
+    brand: 'Mini',
     models: [
       {
-        name: 'COOPER',
+        name: 'Cooper',
         versions: [
           '1.5 Turbo 12V 3p Aut.',
           '1.5 Turbo 12V 5p Aut.',
@@ -7115,27 +7063,16 @@ export const cars: CarBrand[] = [
         ],
       },
       {
-        name: 'ONE',
+        name: 'One',
         versions: ['1.2 12V Turbo 2p Mec.', '1.6  Mec.', '1.6 Aut.'],
       },
     ],
   },
   {
-    brand: 'mitsubishi',
+    brand: 'Mitsubishi',
     models: [
       {
-        name: '3000',
-        versions: ['GT SL 3.0', 'GT VR-4'],
-      },
-      {
-        name: 'Airtrek',
-        versions: [
-          '2.0 16V TB-IC 202cv 4x4 5p',
-          '2.4 16V 163cv/ 136cv 4x4 5p Aut.',
-        ],
-      },
-      {
-        name: 'ASX',
+        name: 'Asx',
         versions: [
           '2.0 16V  4x4 Aut.(By Armura-Blind.)',
           '2.0 16V 160cv Aut.',
@@ -7154,7 +7091,7 @@ export const cars: CarBrand[] = [
         ],
       },
       {
-        name: 'ASX-S',
+        name: 'Asx-S',
         versions: ['2.0 16V 160cv Aut.'],
       },
       {
@@ -7192,7 +7129,7 @@ export const cars: CarBrand[] = [
         versions: ['2.0', '2.5 V6', 'ES', 'GS 2.0 V6'],
       },
       {
-        name: 'GRANDIS',
+        name: 'Grandis',
         versions: ['2.4 16V 163cv 5p Aut.'],
       },
       {
@@ -7291,7 +7228,7 @@ export const cars: CarBrand[] = [
         versions: ['2.8 Diesel'],
       },
       {
-        name: 'OUTLANDER',
+        name: 'Outlander',
         versions: [
           '2.0 16V 160cv Aut.',
           '2.0 16V 4x4 Aut. (Híbrido)',
@@ -7390,10 +7327,10 @@ export const cars: CarBrand[] = [
     ],
   },
   {
-    brand: 'nissan',
+    brand: 'Nissan',
     models: [
       {
-        name: '350Z',
+        name: '350z',
         versions: ['3.5 V6 280cv/ 312cv 2p'],
       },
       {
@@ -7401,11 +7338,11 @@ export const cars: CarBrand[] = [
         versions: ['GXE 2.4 16V', 'SE 2.4 16V'],
       },
       {
-        name: 'ALTIMA',
+        name: 'Altima',
         versions: ['SL 2.5 16V 4p Aut.'],
       },
       {
-        name: 'AX',
+        name: 'Ax',
         versions: ['6.5D Turbo Diesel'],
       },
       {
@@ -7459,7 +7396,7 @@ export const cars: CarBrand[] = [
         ],
       },
       {
-        name: 'GT-R',
+        name: 'Gt-R',
         versions: ['3.8 V6 BiTurbo Aut.'],
       },
       {
@@ -7467,7 +7404,7 @@ export const cars: CarBrand[] = [
         versions: ['3.0'],
       },
       {
-        name: 'KICKS',
+        name: 'Kicks',
         versions: [
           'Active 1.6 16V Flex Aut.',
           'Active S 1.6 16V Flex Aut.',
@@ -7493,11 +7430,11 @@ export const cars: CarBrand[] = [
         versions: ['SE 4x4 3.0 V6'],
       },
       {
-        name: 'LEAF',
+        name: 'Leaf',
         versions: ['Aut. (Elétrico)'],
       },
       {
-        name: 'LIVINA',
+        name: 'Livina',
         versions: [
           '1.6 16V Flex Fuel 5p',
           '1.8 16V Flex Fuel Aut.',
@@ -7519,7 +7456,7 @@ export const cars: CarBrand[] = [
         ],
       },
       {
-        name: 'MARCH',
+        name: 'March',
         versions: [
           '1.0 12V Flex 5p',
           '1.0 12V FlexStart 5p',
@@ -7557,11 +7494,11 @@ export const cars: CarBrand[] = [
         versions: ['1.0'],
       },
       {
-        name: 'MURANO',
+        name: 'Murano',
         versions: ['SE 3.5 V6 24V 231cv Aut'],
       },
       {
-        name: 'NX',
+        name: 'Nx',
         versions: ['2000', '2000 Targa 2.0'],
       },
       {
@@ -7624,7 +7561,7 @@ export const cars: CarBrand[] = [
         versions: ['XE 2.4 12V'],
       },
       {
-        name: 'SX',
+        name: 'Sx',
         versions: ['240 2.4'],
       },
       {
@@ -7632,7 +7569,7 @@ export const cars: CarBrand[] = [
         versions: ['II SE 2.7 Diesel', 'II SLX 2.7 Diesel'],
       },
       {
-        name: 'TIIDA',
+        name: 'Tiida',
         versions: [
           'S 1.8/1.8 Flex 16V  Mec.',
           'S 1.8/1.8 Flex 16V Aut.',
@@ -7643,7 +7580,7 @@ export const cars: CarBrand[] = [
         ],
       },
       {
-        name: 'VERSA',
+        name: 'Versa',
         versions: [
           '1.0 12V FlexStart 4p Mec.',
           'Advance 1.6 16V Flex Aut.',
@@ -7672,7 +7609,7 @@ export const cars: CarBrand[] = [
         ],
       },
       {
-        name: 'XTerra',
+        name: 'Xterra',
         versions: [
           'ECOTRIP 4x4 140cv 2.8 TB Int.Dies',
           'SE 4x4 2.8 132/140cv TB Int.Dies.',
@@ -7680,7 +7617,7 @@ export const cars: CarBrand[] = [
         ],
       },
       {
-        name: 'X-TRAIL',
+        name: 'X-Trail',
         versions: [
           'GX 2.5 16V 180cv 5p',
           'LE 2.0 16V 138cv Aut.',
@@ -7688,13 +7625,13 @@ export const cars: CarBrand[] = [
         ],
       },
       {
-        name: 'ZX',
+        name: 'Zx',
         versions: ['300 3.0 BI-Turbo'],
       },
     ],
   },
   {
-    brand: 'peugeot',
+    brand: 'Peugeot',
     models: [
       {
         name: '106',
@@ -8043,11 +7980,11 @@ export const cars: CarBrand[] = [
         ],
       },
       {
-        name: 'e-2008',
+        name: 'E-2008',
         versions: ['GT 5p Aut. ( Elétrico)'],
       },
       {
-        name: 'e-208',
+        name: 'E-208',
         versions: ['GT 5p Aut. (Elétrico)'],
       },
       {
@@ -8066,7 +8003,7 @@ export const cars: CarBrand[] = [
         ],
       },
       {
-        name: 'HOGGAR',
+        name: 'Hoggar',
         versions: [
           'Active 1.4 Flex 8V 2p',
           'Allure 1.4 Flex 8V 2p',
@@ -8087,13 +8024,13 @@ export const cars: CarBrand[] = [
         ],
       },
       {
-        name: 'RCZ',
+        name: 'Rcz',
         versions: ['1.6 Turbo 16V 2p Aut.'],
       },
     ],
   },
   {
-    brand: 'porsche',
+    brand: 'Porsche',
     models: [
       {
         name: '718',
@@ -8305,7 +8242,7 @@ export const cars: CarBrand[] = [
     ],
   },
   {
-    brand: 'ram',
+    brand: 'Ram',
     models: [
       {
         name: '1500',
@@ -8335,7 +8272,7 @@ export const cars: CarBrand[] = [
         ],
       },
       {
-        name: 'CLASSIC',
+        name: 'Classic',
         versions: [
           'LARAMIE 5.7 CD V8 4X4 Aut.',
           'LARAMIE NIGHT ED. 5.7 4X4 Aut.',
@@ -8343,7 +8280,7 @@ export const cars: CarBrand[] = [
         ],
       },
       {
-        name: 'RAMPAGE',
+        name: 'Rampage',
         versions: [
           'LAR. HURR. 4 2.0 TB CD 4X4  Aut.',
           'LARAMIE 2.0 TB CD 4X4 Die. Aut.',
@@ -8355,23 +8292,10 @@ export const cars: CarBrand[] = [
     ],
   },
   {
-    brand: 'renault',
+    brand: 'Renault',
     models: [
       {
-        name: '19',
-        versions: ['16S/ RT 16V', 'RN', 'RT 1.8/ 1.8i', 'RT 1.8/ 1.8i Conv.'],
-      },
-      {
-        name: '21',
-        versions: [
-          'GTX 2.0',
-          'Nevada GTX 2.2',
-          'Nevada TXE 2.2',
-          'TXE/ TXi 2.2',
-        ],
-      },
-      {
-        name: 'CAPTUR',
+        name: 'Captur',
         versions: [
           'Iconic 1.3 TB 16V Flex 5p Aut.',
           'Intense 1.3 TB 16V Flex 5p Aut.',
@@ -8443,7 +8367,7 @@ export const cars: CarBrand[] = [
         ],
       },
       {
-        name: 'DUSTER',
+        name: 'Duster',
         versions: [
           '1.6 Hi-Flex 16V Mec.',
           'Authent. 1.6 Flex 16V Aut.',
@@ -8482,11 +8406,17 @@ export const cars: CarBrand[] = [
         ],
       },
       {
-        name: 'Express',
-        versions: ['1.6/ RL 1.6'],
+        name: 'Duster Oroch',
+        versions: [
+          'Dyna. 1.6 Flex 16V Mec.',
+          'Dyna. 2.0 Flex 16V Aut.',
+          'Dyna. 2.0 Flex 16V Mec.',
+          'Express 1.6 Flex 16V Mec.',
+          'Expression 1.6 Flex 16V Mec',
+        ],
       },
       {
-        name: 'FLUENCE',
+        name: 'Fluence',
         versions: [
           'Sed. Dyn. Plus 2.0 16V FLEX Aut.',
           'Sed. Dynamique 2.0 16V FLEX Aut.',
@@ -8530,11 +8460,8 @@ export const cars: CarBrand[] = [
       },
       {
         name: 'Kwid',
-        versions: ['ConnecTV 1.0 Flex 12V Mec.'],
-      },
-      {
-        name: 'KWID',
         versions: [
+          '1.0 Flex 12V Mec.',
           'Intense (Elétrico) ',
           'Intense 1.0 Flex 12V 5p Mec.',
           'Life 1.0 Flex 12V 5p Mec.',
@@ -8554,7 +8481,7 @@ export const cars: CarBrand[] = [
         ],
       },
       {
-        name: 'LOGAN',
+        name: 'Logan',
         versions: [
           'Authentique Flex 1.0 12V 4p',
           'Authentique Hi-Flex 1.0 16V 4p',
@@ -8655,7 +8582,7 @@ export const cars: CarBrand[] = [
         ],
       },
       {
-        name: 'OROCH',
+        name: 'Oroch',
         versions: [
           'Iconic 1.6 Flex 16V Mec.',
           'Intense 1.6 Flex 16V Mec.',
@@ -8668,7 +8595,7 @@ export const cars: CarBrand[] = [
         versions: ['RXE'],
       },
       {
-        name: 'SANDERO',
+        name: 'Sandero',
         versions: [
           'Auth. Plus Hi-Power 1.0 16V 5p',
           'Authentique Flex 1.0 12V 5p',
@@ -8749,7 +8676,7 @@ export const cars: CarBrand[] = [
         ],
       },
       {
-        name: 'STEPWAY',
+        name: 'Stepway',
         versions: [
           'Iconic Flex 1.6 16V Aut.',
           'Intense Flex 1.6 16V  Aut.',
@@ -8758,7 +8685,7 @@ export const cars: CarBrand[] = [
         ],
       },
       {
-        name: 'SYMBOL',
+        name: 'Symbol',
         versions: [
           'CONNECTION Hi-Flex 1.6 8V 4p',
           'Expression Hi-Flex 1.6 16V 4p',
@@ -8787,7 +8714,7 @@ export const cars: CarBrand[] = [
         ],
       },
       {
-        name: 'ZOE',
+        name: 'Zoe',
         versions: [
           'Intense (Elétrico)',
           'Life 92cv (Elétrico)',
@@ -8798,7 +8725,7 @@ export const cars: CarBrand[] = [
     ],
   },
   {
-    brand: 'rolls-royce',
+    brand: 'Rolls-Royce',
     models: [
       {
         name: 'Cullinan',
@@ -8823,18 +8750,18 @@ export const cars: CarBrand[] = [
     ],
   },
   {
-    brand: 'shineray',
+    brand: 'Shineray',
     models: [
       {
-        name: 'SY1020',
+        name: 'Sy1020',
         versions: ['T 20 TRUCKS BAU', 'T 22 TRUCKS CD', 'T20 TRUCKS'],
       },
       {
-        name: 'SY6370',
+        name: 'Sy6370',
         versions: ['A7 PVAN'],
       },
       {
-        name: 'SY6390',
+        name: 'Sy6390',
         versions: ['A9 CARGOV', 'A9 PVANS'],
       },
       {
@@ -8844,7 +8771,7 @@ export const cars: CarBrand[] = [
     ],
   },
   {
-    brand: 'subaru',
+    brand: 'Subaru',
     models: [
       {
         name: 'Forester',
@@ -8927,11 +8854,11 @@ export const cars: CarBrand[] = [
         ],
       },
       {
-        name: 'SVX',
+        name: 'Svx',
         versions: ['Cupê 3.3 4x4 Aut'],
       },
       {
-        name: 'TRIBECA',
+        name: 'Tribeca',
         versions: ['3.6 24V 270cv 5p Aut.'],
       },
       {
@@ -8939,7 +8866,7 @@ export const cars: CarBrand[] = [
         versions: ['SD GLI 3p Mec.'],
       },
       {
-        name: 'XV',
+        name: 'Xv',
         versions: [
           '2.0 L 16V 4x4 Aut.',
           '2.0 S e-Boxer 16V 4x4 Aut.',
@@ -8949,7 +8876,7 @@ export const cars: CarBrand[] = [
     ],
   },
   {
-    brand: 'suzuki',
+    brand: 'Suzuki',
     models: [
       {
         name: 'Baleno',
@@ -9016,7 +8943,7 @@ export const cars: CarBrand[] = [
         versions: ['JX Canvas 1.3', 'JX Metal 1.3'],
       },
       {
-        name: 'S-CROSS',
+        name: 'S-Cross',
         versions: [
           '4STYLE 1.4 TB 16V Aut.',
           '4STYLE ALLGRIP 1.4 TB 16V Aut.',
@@ -9046,7 +8973,7 @@ export const cars: CarBrand[] = [
         ],
       },
       {
-        name: 'SX4',
+        name: 'Sx4',
         versions: [
           '2.0 16V 145cv 4WD 5p Aut.',
           '2.0 16V 145cv 4WD 5p Mec.',
@@ -9080,7 +9007,7 @@ export const cars: CarBrand[] = [
     ],
   },
   {
-    brand: 'toyota',
+    brand: 'Toyota',
     models: [
       {
         name: 'Avalon',
@@ -9128,13 +9055,6 @@ export const cars: CarBrand[] = [
           'Altis 1.8 16V Aut. (Híbrido)',
           'Altis Prem. 1.8 Aut. (Híbrido)',
           'ALTIS/A.Premiu. 2.0 Flex 16V Aut',
-          'Cross GR-S 2.0 16V Flex Aut.',
-          'Cross SE 1.8 16V Aut. (Híbrido)',
-          'Cross XR 2.0 16V Flex Aut.',
-          'Cross XRE 2.0 16V Flex Aut.',
-          'Cross XRV 1.8 16V Aut. (Híbrido)',
-          'Cross XRX 1.8 16V Aut. (Híbrido)',
-          'Cross XRX 2.0 16V Flex Aut.',
           'DX/ SW DX 1.6 16V',
           'Dynamic 2.0 Flex 16V Aut.',
           'Fielder SW 1.8/1.8 XEi Flex Aut.',
@@ -9170,11 +9090,23 @@ export const cars: CarBrand[] = [
         ],
       },
       {
+        name: 'Corolla Cross',
+        versions: [
+          'GR-S 2.0 16V Flex Aut.',
+          'SE 1.8 16V Aut. (Híbrido)',
+          'XR 2.0 16V Flex Aut.',
+          'XRE 2.0 16V Flex Aut.',
+          'XRV 1.8 16V Aut. (Híbrido)',
+          'XRX 1.8 16V Aut. (Híbrido)',
+          'XRX 2.0 16V Flex Aut.',
+        ],
+      },
+      {
         name: 'Corona',
         versions: ['Aut.', 'GLi Mec', 'Mec.'],
       },
       {
-        name: 'ETIOS',
+        name: 'Etios',
         versions: [
           '1.3 Flex 16V 5p Mec.',
           'CROSS 1.5 Flex 16V 5p Aut.',
@@ -9202,6 +9134,10 @@ export const cars: CarBrand[] = [
           'XS Sedan 1.5 Flex 16V 4p Aut.',
           'XS Sedan1.5 Flex 16V 4p Mec.',
         ],
+      },
+      {
+        name: 'Etios Cross',
+        versions: ['1.5 Flex 16V 5p Aut.', '1.5 Flex 16V 5p Mec.'],
       },
       {
         name: 'Hilux',
@@ -9284,6 +9220,31 @@ export const cars: CarBrand[] = [
         ],
       },
       {
+        name: 'Hilux SW4',
+        versions: [
+          '2.7 16V',
+          '3.4 V6',
+          '4x4 2.4 8V',
+          '4x4 2.8 Diesel',
+          '4x4 3.0 12V V6',
+          '4x4 3.0 24V V6',
+          '4x4 3.0 8V TB Diesel',
+          'Diamond 2.8 TB 4x4 Die. Aut.',
+          'GRS 2.8 TB 4x4 Diesel Aut.',
+          'SR 4x2 2.7/ 2.7 Flex 16V Aut.',
+          'SR 4x2 2.7/2.7 Flex 16V Mec.',
+          'SR D4-D 4x4 3.0 TDI Dies. Aut',
+          'SRV 4x2 2.7 Flex 16V Aut.',
+          'SRV 4x4 4.0 V6 24V Aut.',
+          'SRV D4-D 4x4 3.0 TDI Dies. Aut',
+          'SRV D4-D 4x4 3.0 TDI Dies. Mec',
+          'SRX 4x4 2.8 TDI 16V Dies. Aut.',
+          'SRX 4x4 4.0 V6 24V Aut.',
+          'SRX Diamo. 4x4 2.8 TB Die Aut.',
+          'SRX Plat. 4x4 2.8 TB Die. Aut.',
+        ],
+      },
+      {
         name: 'Land',
         versions: [
           'Cruiser 4WD 4.5 24V',
@@ -9292,7 +9253,7 @@ export const cars: CarBrand[] = [
         ],
       },
       {
-        name: 'MR-2',
+        name: 'Mr-2',
         versions: ['Turbo 2.0'],
       },
       {
@@ -9304,11 +9265,11 @@ export const cars: CarBrand[] = [
         versions: ['LE 2.4 16V', 'LX 2.5'],
       },
       {
-        name: 'PRIUS',
+        name: 'Prius',
         versions: ['1.8 16V 5p Aut. (Híbrido)'],
       },
       {
-        name: 'RAV4',
+        name: 'Rav4',
         versions: [
           '2.0 4x2 16V Aut.',
           '2.0 4x4 16V Aut.',
@@ -9334,7 +9295,7 @@ export const cars: CarBrand[] = [
         versions: ['3.4 V6'],
       },
       {
-        name: 'YARIS',
+        name: 'Yaris',
         versions: [
           'S 1.5 Flex 16V 5p Aut.',
           'XL 1.3 Flex 16V 5p Aut.',
@@ -9365,7 +9326,7 @@ export const cars: CarBrand[] = [
     ],
   },
   {
-    brand: 'volvo',
+    brand: 'Volvo',
     models: [
       {
         name: '440',
@@ -9419,7 +9380,7 @@ export const cars: CarBrand[] = [
         versions: ['Cabriolet', 'Cupê'],
       },
       {
-        name: 'EX30',
+        name: 'Ex30',
         versions: [
           'E40 Core (Elétrico)',
           'E60 Core (Elétrico)',
@@ -9542,7 +9503,7 @@ export const cars: CarBrand[] = [
         ],
       },
       {
-        name: 'XC',
+        name: 'Xc',
         versions: [
           '40 Pure (Elétrico)',
           '40 Recharge Plus (Elétrico)',
@@ -9606,10 +9567,10 @@ export const cars: CarBrand[] = [
     ],
   },
   {
-    brand: 'volkswagen',
+    brand: 'Volkswagen',
     models: [
       {
-        name: 'AMAROK',
+        name: 'Amarok',
         versions: [
           'CD2.0 16V/S CD2.0 16V TDI 4x2 Die',
           'CD2.0 16V/S CD2.0 16V TDI 4x4 Die',
@@ -9651,7 +9612,7 @@ export const cars: CarBrand[] = [
         versions: ['2.0 Turbo', 'G-60 2.8'],
       },
       {
-        name: 'CROSSFOX',
+        name: 'Crossfox',
         versions: [
           ' 1.6 T. Flex 16V 5p',
           ' I MOTION 1.6 T. Flex 16V 5p',
@@ -9664,7 +9625,7 @@ export const cars: CarBrand[] = [
         versions: ['Express Turbo Diesel (E6)', 'Express+ Turbo Diesel'],
       },
       {
-        name: 'EOS',
+        name: 'Eos',
         versions: ['Cab. 2.0 Turbo FSI Tiptronic'],
       },
       {
@@ -9725,7 +9686,6 @@ export const cars: CarBrand[] = [
       {
         name: 'Fusca',
         versions: [
-          '',
           '2.0 R-Line TSI 16V Aut.',
           '2.0 TSI 16V Aut.',
           '2.0 TSI 16V Mec.',
@@ -9734,11 +9694,11 @@ export const cars: CarBrand[] = [
       {
         name: 'Gol',
         versions: [
-          '(novo) 1.0 Mi Total Flex 8V 2p',
-          '(novo) 1.0 Mi Total Flex 8V 4p',
-          '(novo) 1.6 Mi Total Flex 8V 2p',
-          '(novo) 1.6 Mi Total Flex 8V 4p',
-          '(novo) 1.6 Power/Highi T.Flex 8v 4P',
+          '1.0 Mi Total Flex 8V 2p',
+          '1.0 Mi Total Flex 8V 4p',
+          '1.6 Mi Total Flex 8V 2p',
+          '1.6 Mi Total Flex 8V 4p',
+          '1.6 Power/Highi T.Flex 8v 4P',
           '1.0 Flex 12V 5p',
           '1.0 Mi FUN/ Highway/ Sport 16V  2/4p',
           '1.0 Plus 16v 2p',
@@ -9846,8 +9806,8 @@ export const cars: CarBrand[] = [
       {
         name: 'Golf',
         versions: [
-          ' BLACK EDITON 2.0 Mi T. Flex 8V Tip',
-          ' TECH 1.6 Mi Total Flex 8V 4p',
+          'BLACK EDITON 2.0 Mi T. Flex 8V Tip',
+          'TECH 1.6 Mi Total Flex 8V 4p',
           '1.6 Mi Total Flex 8V 4p',
           '1.6 Mi Trip/ Sport 101cv 8V',
           '1.6Mi/ 1.6Mi Gener./Black & Silver',
@@ -9903,7 +9863,7 @@ export const cars: CarBrand[] = [
         versions: ['Saveiro Xtreme/Street  1.6/1.8/2.0'],
       },
       {
-        name: 'JETTA',
+        name: 'Jetta',
         versions: [
           ' GLX III 2.8 VR6',
           '2.5 20V 150/170cv Tiptronic',
@@ -9951,8 +9911,8 @@ export const cars: CarBrand[] = [
         ],
       },
       {
-        name: 'New',
-        versions: ['Beetle 2.0 Mi Mec./Aut.'],
+        name: 'New Beetle',
+        versions: ['2.0 Mi Mec./Aut.'],
       },
       {
         name: 'Nivus',
@@ -10161,7 +10121,7 @@ export const cars: CarBrand[] = [
         ],
       },
       {
-        name: 'SpaceCross',
+        name: 'Spacecross',
         versions: [
           '1.6 Mi Total Flex 16V',
           '1.6 Mi Total Flex 8V',
@@ -10170,7 +10130,7 @@ export const cars: CarBrand[] = [
         ],
       },
       {
-        name: 'SPACEFOX',
+        name: 'Spacefox',
         versions: [
           ' SPORTLINE/HIGHLINE 1.6 T.Flex',
           ' TREND I MOTION 1.6 T. Flex 8V',
@@ -10186,7 +10146,7 @@ export const cars: CarBrand[] = [
         ],
       },
       {
-        name: 'TAOS',
+        name: 'Taos',
         versions: [
           'Comfortline 1.4 250 TSI Flex Aut.',
           'Highline 1.4 250 TSI Flex Aut.',
@@ -10204,7 +10164,7 @@ export const cars: CarBrand[] = [
         ],
       },
       {
-        name: 'TIGUAN',
+        name: 'Tiguan',
         versions: [
           '1.4 TSI 16V 150cv 5p',
           '2.0 TSI 16V 200cv Tiptronic 5p',
@@ -10215,7 +10175,7 @@ export const cars: CarBrand[] = [
         ],
       },
       {
-        name: 'TOUAREG',
+        name: 'Touareg',
         versions: [
           '3.2 24V V6 Tiptronic 5p',
           '3.6 24V V6 280cv Tiptronic 5p',
@@ -10224,7 +10184,7 @@ export const cars: CarBrand[] = [
         ],
       },
       {
-        name: 'up!',
+        name: 'Up!',
         versions: [
           '1.0 Total Flex 12V 5p',
           'black/white/red 1.0 T. Flex 12V 5p',
@@ -10257,7 +10217,7 @@ export const cars: CarBrand[] = [
         versions: ['1.6 Mi (furgão)'],
       },
       {
-        name: 'VIRTUS',
+        name: 'Virtus',
         versions: [
           '1.6 MSI Flex 16V 4p Aut.',
           '1.6 MSI Flex 16V 5p Mec.',
@@ -10271,7 +10231,7 @@ export const cars: CarBrand[] = [
         ],
       },
       {
-        name: 'VOYAGE',
+        name: 'Voyage',
         versions: [
           ' Trendline 1.0 T.Flex 8V 4p',
           '1.0 Flex 12V 4p',
