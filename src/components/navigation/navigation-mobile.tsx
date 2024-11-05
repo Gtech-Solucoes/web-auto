@@ -29,25 +29,17 @@ export function NavigationMobile() {
         <SheetContent side="right" className="flex flex-col">
           <nav className="grid gap-2 text-lg font-medium">
             <Link
-              href="#"
+              href="/"
               className="flex items-center gap-2 text-lg font-semibold"
             >
-              <Car className="h-6 w-6" />
-              Logo Veículos
+              {process.env.NEXT_PUBLIC_ACCOUNT_NAME}
             </Link>
             <Link
-              href="/"
+              href="/comprar/carros"
               className="mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground hover:text-foreground"
             >
               <Car className="h-5 w-5" />
-              Carros
-            </Link>
-            <Link
-              href="/"
-              className="mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground hover:text-foreground"
-            >
-              <Bike className="h-5 w-5" />
-              Carros
+              Comprar
             </Link>
             <Link
               href="/#vender"
@@ -62,13 +54,6 @@ export function NavigationMobile() {
             >
               <CircleDollarSign className="h-5 w-5" />
               Financiamento
-            </Link>
-            <Link
-              href="/"
-              className="mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground hover:text-foreground"
-            >
-              <Phone className="h-5 w-5" />
-              Contato
             </Link>
           </nav>
         </SheetContent>

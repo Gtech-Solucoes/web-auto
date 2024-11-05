@@ -123,7 +123,7 @@ export default function Datail() {
                 className="max-w-72 w-full mt-10 font-bold text-base bg-primary"
                 size={'lg'}
               >
-                <Link href="/comprar">Ver todos Veículos</Link>
+                <Link href="/comprar/carros">Ver todos Veículos</Link>
               </Button>
             </div>
           </div>

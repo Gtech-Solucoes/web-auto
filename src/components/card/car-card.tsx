@@ -68,7 +68,7 @@ export function VehicleCard({ data }: VehicleCardProps) {
                     style={{
                       aspectRatio: '300/200',
                       objectFit: 'cover',
-                      objectPosition: 'top',
+                      objectPosition: 'center',
                     }}
                     width={300}
                   />

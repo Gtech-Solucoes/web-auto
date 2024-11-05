@@ -27,7 +27,7 @@ export function Navigation() {
         <NavigationMenu>
           <NavigationMenuList>
             <NavigationMenuItem>
-              <Link href="/comprar" legacyBehavior passHref>
+              <Link href="/comprar/carros" legacyBehavior passHref>
                 <NavigationMenuLink className={navigationMenuTriggerStyle()}>
                   Comprar
                 </NavigationMenuLink>

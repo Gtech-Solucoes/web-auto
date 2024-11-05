@@ -20,7 +20,7 @@ export function Footer() {
               </li>
               <li className="mb-6">
                 <Link
-                  href="/comprar"
+                  href="/comprar/carros"
                   className=" text-muted hover:text-primary"
                 >
                   Comprar

@@ -41,6 +41,16 @@ import { LoadingSpinner } from '@/components/loading-spinner'
 import { HomePageVehicles } from '@/components/homepage-vehicles'
 import { useState } from 'react'
 import { addLead } from '@/lib/actions/lead.action'
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from '@/components/ui/dialog'
 
 export default function Datail({ id }: { id: string }) {
   const [customerName, setCustomerName] = useState('')
@@ -80,7 +90,7 @@ export default function Datail({ id }: { id: string }) {
                 </BreadcrumbItem>
                 <BreadcrumbSeparator />
                 <BreadcrumbItem>
-                  <BreadcrumbLink href="/comprar/123">
+                  <BreadcrumbLink href="/comprar/carros">
                     {`${data?.brand} ${data?.model} ${data?.year}`}
                   </BreadcrumbLink>
                 </BreadcrumbItem>
@@ -104,7 +114,7 @@ export default function Datail({ id }: { id: string }) {
                     {data?.images.map((image, index) => (
                       <CarouselItem
                         key={index}
-                        className="pl-1 md:basis-1/2 lg:basis-1/3"
+                        className="pl-1 md:basis-1/2 lg:basis-1/3 max-h-96"
                       >
                         <Image
                           className="object-cover h-full"
@@ -112,6 +122,10 @@ export default function Datail({ id }: { id: string }) {
                           alt={`${data?.brand} ${data?.model} ${data?.year}`}
                           width={800}
                           height={400}
+                          style={{
+                            objectFit: 'cover',
+                            objectPosition: 'center',
+                          }}
                         />
                       </CarouselItem>
                     ))}
@@ -120,9 +134,9 @@ export default function Datail({ id }: { id: string }) {
                   <CarouselNext />
                 </Carousel>
               </div>
-              <div className="flex justify-center gap-x-8 mt-5">
+              <div className="flex justify-center px-10 lg:px-0 gap-x-8 mt-5 w-full">
                 {/*  CONTENT */}
-                <div className="w-2/3 max-w-[700px]">
+                <div className="lg:w-2/3 max-w-[700px]">
                   <div className="flex justify-between">
                     <div>
                       <h2 className="text-3xl font-bold uppercase">
@@ -146,6 +160,70 @@ export default function Datail({ id }: { id: string }) {
                         }).format(data!.price!)}
                       </p>
                     </div>
+                  </div>
+                  <div className="gap-y-4 mt-5 lg:hidden">
+                    <Dialog>
+                      <DialogTrigger asChild>
+                        <Button className="w-full">Fale com um vendedor</Button>
+                      </DialogTrigger>
+                      <DialogContent className="sm:max-w-[425px]">
+                        <DialogHeader>
+                          <DialogTitle>Mensagem</DialogTitle>
+                          <DialogDescription>
+                            Envie uma mensagem para um de nossos consultores
+                          </DialogDescription>
+                        </DialogHeader>
+                        <form className="grid gap-4 py-4">
+                          <div className=" items-center gap-4">
+                            <Label htmlFor="name" className="text-right">
+                              Seu nome
+                            </Label>
+                            <Input
+                              onChange={(e) => setCustomerName(e.target.value)}
+                              value={customerName}
+                              id="name"
+                              placeholder="João da Silva"
+                              className="col-span-3"
+                            />
+                          </div>
+                          <div className="items-center gap-4">
+                            <Label htmlFor="username" className="text-right">
+                              Telefone
+                            </Label>
+                            <Input
+                              onChange={(e) => setCustomerPhone(e.target.value)}
+                              value={customerPhone}
+                              id="Telefone"
+                              placeholder="17 99999-9999"
+                              className="col-span-3"
+                            />
+                          </div>
+                          <div className="flex flex-col w-full">
+                            <Label className="text-xs mb-2" htmlFor="message">
+                              Mensagem pré definida
+                            </Label>
+                            <Textarea
+                              className="mb-4"
+                              placeholder="Mensagem pré definida"
+                              id="message"
+                              defaultValue={customerMessage}
+                              rows={6}
+                            />
+                          </div>
+                        </form>
+                        <DialogFooter>
+                          <DialogClose asChild>
+                            <Button
+                              className="w-full"
+                              type="button"
+                              onClick={onConfirm}
+                            >
+                              Enviar
+                            </Button>
+                          </DialogClose>
+                        </DialogFooter>
+                      </DialogContent>
+                    </Dialog>
                   </div>
 
                   {/* Principal Infos  */}
@@ -322,7 +400,7 @@ export default function Datail({ id }: { id: string }) {
                 </div>
 
                 {/* FORM */}
-                <div>
+                <div className="hidden lg:block">
                   <div className="flex flex-1 p-2 border border-1 bg-white">
                     <div className="m-2 grid md:w-3/3 ">
                       <div className="mb-4 md:w-full">
