@@ -108,7 +108,7 @@ export const getVehicles = async ({
 }: GetVehiclesInput): Promise<GetVehiclesOutput> => {
   await connectToDB()
 
-  const skip = (page - 1) * 15
+  const skip = (page - 1) * 16
 
   const filters: any = {
     status: 'ATIVO',
@@ -177,7 +177,7 @@ export const getVehicles = async ({
     .find(filters)
     .sort(sortOptions as any)
     .skip(skip)
-    .limit(15)
+    .limit(16)
     .exec()
 
   const data = vehicles?.map((vehicle) => {
@@ -208,7 +208,7 @@ export const getVehicles = async ({
     ...filters,
   })
 
-  const totalPages = Math.ceil(totalRows / 15)
+  const totalPages = Math.ceil(totalRows / 16)
 
   return {
     meta: {

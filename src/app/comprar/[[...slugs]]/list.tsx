@@ -437,12 +437,12 @@ export default function ListVehicles({ filter }: FilterProps) {
                   {!isLoading && vehicles && vehicles.records?.length > 0 && (
                     <Pagination className="py-10">
                       <PaginationContent>
-                        <PaginationItem>
-                          <PaginationPrevious href="#" />
+                        <PaginationItem onClick={() => setPage(page - 1)}>
+                          <PaginationPrevious />
                         </PaginationItem>
                         {page > 1 && (
-                          <PaginationItem>
-                            <PaginationLink href="#">{page - 1}</PaginationLink>
+                          <PaginationItem onClick={() => setPage(page - 1)}>
+                            <PaginationLink>{page - 1}</PaginationLink>
                           </PaginationItem>
                         )}
                         <PaginationItem>

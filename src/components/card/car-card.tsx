@@ -64,6 +64,7 @@ export function VehicleCard({ data }: VehicleCardProps) {
                     className="w-full rounded-t-lg"
                     height="200"
                     priority
+                    quality={70}
                     src={image}
                     style={{
                       aspectRatio: '300/200',
