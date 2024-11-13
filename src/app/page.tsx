@@ -155,7 +155,7 @@ export default function Datail() {
             <div className="mt-16 h-full lg:mt-36 w-full">
               <Image
                 alt="App screenshot"
-                src="https://fastback.fiat.com.br/images//Versions/fastback-turbo-at/249.webp"
+                src={'/assets/car.webp'}
                 width={1824}
                 height={1080}
                 className="max-w-screen lg:max-w-[50vw] xl:max-w-[45vw]"
@@ -200,7 +200,7 @@ export default function Datail() {
             <div className="relative mt-16 h-full lg:mt-36">
               <Image
                 alt="App screenshot"
-                src="https://fastback.fiat.com.br/images//Versions/fastback-turbo-at/249.webp"
+                src={'/assets/car.webp'}
                 width={1824}
                 height={1080}
                 className="max-w-screen lg:max-w-[50vw] xl:max-w-[45vw]"
