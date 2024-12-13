@@ -32,6 +32,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <script
+        defer
+        data-domain="northbensveiculos.com.br"
+        src="https://analytics.gtechsoftwares.com.br/js/script.js"
+      ></script>
       <body
         className={cn(
           'min-h-screen bg-background antialiased overflow-x-hidden',
