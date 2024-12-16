@@ -50,7 +50,12 @@ export default function RootLayout({
             href="https://api.whatsapp.com/send?phone=5517988034098&text=Ol%C3%A1%20gostaria%20de%20vender%20ou%20trocar%20meu%20carro.%0APode%20me%20ajudar%3F"
             target="_blank"
           >
-            <img src={wpIcon} width={28} height={28} alt="WhatsApp Icon" />
+            <img
+              src="https://northbensveiculos.com.br/assets/whatsapp.svg"
+              width={28}
+              height={28}
+              alt="WhatsApp Icon"
+            />
           </a>
         </div>
       </body>
