@@ -59,12 +59,10 @@ export function VehicleCard({ data }: VehicleCardProps) {
             <CarouselContent>
               {data?.images?.map((image, index) => (
                 <CarouselItem key={index}>
-                  <Image
+                  <img
                     alt="Car image"
                     className="w-full rounded-t-lg"
                     height="200"
-                    priority
-                    quality={70}
                     src={image}
                     style={{
                       aspectRatio: '300/200',

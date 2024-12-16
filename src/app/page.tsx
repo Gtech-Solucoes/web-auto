@@ -68,15 +68,14 @@ export default function Datail() {
             </Button>
           </div>
           <div className="w-full flex justify-end mt-4">
-            <Image
+            <img
               className="absolute lg:right-[-110px] lg:top-[200px]
                w-[120vw] lg:w-[90vw] xl:w-[80vw] 2xl:w-[65vw] mt-4 md:mt-0 right-[-10px] md:right-[-100x] xl:right-[-100px] xl:top-[100px] 2xl:right-[-100px] 2xl:top-[-10px]"
               src={'/assets/two-cars.png'}
               width={1612}
               height={861}
-              priority
               alt="Imagem de um carro"
-            ></Image>
+            ></img>
           </div>
         </section>
 
@@ -153,7 +152,7 @@ export default function Datail() {
               </Button>
             </div>
             <div className="mt-16 h-full lg:mt-36 w-full">
-              <Image
+              <img
                 alt="App screenshot"
                 src={'/assets/car.webp'}
                 width={1824}
@@ -198,7 +197,7 @@ export default function Datail() {
               </Button>
             </div>
             <div className="relative mt-16 h-full lg:mt-36">
-              <Image
+              <img
                 alt="App screenshot"
                 src={'/assets/car.webp'}
                 width={1824}

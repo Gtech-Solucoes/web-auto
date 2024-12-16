@@ -67,12 +67,7 @@ export function Footer() {
             <h4 className="text-lg text-white font-medium mb-7">Contatos</h4>
             <ul className="text-base  transition-all duration-500">
               <li className="mb-6 flex gap-2">
-                <Image
-                  src={wpIcon}
-                  width={20}
-                  height={20}
-                  alt="WhatsApp Icon"
-                />
+                <img src={wpIcon} width={20} height={20} alt="WhatsApp Icon" />
                 <a
                   href="https://api.whatsapp.com/send?phone=5517988034098&text=Ol%C3%A1%20gostaria%20de%20vender%20ou%20trocar%20meu%20carro.%0APode%20me%20ajudar%3F"
                   target="_blank"
