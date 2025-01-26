@@ -254,7 +254,7 @@ export default function ListVehicles({ filter }: FilterProps) {
           <Navigation />
           <NavigationMobile />
         </DashboardHeader>
-        <div className="flex h-full">
+        <div className="flex flex-col md:flex-row h-full">
           <SideBar>
             <SideBarContent className="w-full">
               <SideBarBody>
@@ -276,9 +276,9 @@ export default function ListVehicles({ filter }: FilterProps) {
                     <Link href="/comprar/motos">Motos</Link>
                   </Button>
                 </SideBarItem>
-                <SideBarItem className="flex-col items-start">
+                <SideBarItem className="flex-col items-start ">
                   <SideBarItemTitle title="Marcas" />
-                  <div className="flex flex-col gap-4 w-full">
+                  <div className="flex flex-row md:flex-col gap-4 w-full">
                     <Select onValueChange={handleBrandChange} value={brand}>
                       <SelectTrigger className="w-full">
                         <SelectValue placeholder="Marca" />
@@ -386,6 +386,7 @@ export default function ListVehicles({ filter }: FilterProps) {
               </SideBarBody>
             </SideBarContent>
           </SideBar>
+
           <div className="flex-1 bg-muted/40">
             <DashboardTopFilter>
               <div>

@@ -9,7 +9,7 @@ export function SideBar({ className, children }: ComponentGenericProps) {
   return (
     <aside
       className={cn([
-        'w-[350px] hidden md:block sticky top-0 h-screen',
+        'md:w-[350px] block md:sticky top-0 md:h-screen',
         className,
       ])}
     >
