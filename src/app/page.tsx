@@ -1,46 +1,46 @@
-import { AutoplayCarousel } from '@/components/autoplay-carousel/carousel'
+import { AutoplayCarousel } from "@/components/autoplay-carousel/carousel";
 import {
   Dashboard,
   DashboardContent,
   DashboardHeader,
-} from '@/components/dashboard/dashboard'
-import { HomePageVehicles } from '@/components/homepage-vehicles'
-import { Navigation } from '@/components/navigation/navigation'
-import { NavigationMobile } from '@/components/navigation/navigation-mobile'
-import { Button } from '@/components/ui/button'
-import { HomeHeroSearch } from '@/components/home-hero-search'
-import { siteConfig, siteLinks } from '@/lib/site-config'
+} from "@/components/dashboard/dashboard";
+import { HomePageVehicles } from "@/components/homepage-vehicles";
+import { Navigation } from "@/components/navigation/navigation";
+import { NavigationMobile } from "@/components/navigation/navigation-mobile";
+import { Button } from "@/components/ui/button";
+import { HomeHeroSearch } from "@/components/home-hero-search";
+import { siteConfig, siteLinks } from "@/lib/site-config";
 
-import { HandCoins, Headset, ShieldCheck, Star } from 'lucide-react'
-import Image from 'next/image'
-import Link from 'next/link'
+import { HandCoins, Headset, ShieldCheck, Star } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
 
 const features = [
   {
-    name: 'Garantia',
+    name: "Garantia",
     icon: ShieldCheck,
     description:
-      'Oferecemos garantia em todos os veículos para que você possa comprar com total segurança. Nosso compromisso é garantir a sua tranquilidade e satisfação, com cobertura para possíveis reparos e manutenção.',
+      "Oferecemos garantia em todos os veículos para que você possa comprar com total segurança. Nosso compromisso é garantir a sua tranquilidade e satisfação, com cobertura para possíveis reparos e manutenção.",
   },
   {
-    name: 'Financiamento',
+    name: "Financiamento",
     icon: HandCoins,
     description:
-      'Facilitamos o seu financiamento com condições que cabem no seu bolso. Conte com o suporte de nossa equipe para encontrar as melhores taxas e formas de pagamento para a realização do seu sonho de ter um veículo próprio.',
+      "Facilitamos o seu financiamento com condições que cabem no seu bolso. Conte com o suporte de nossa equipe para encontrar as melhores taxas e formas de pagamento para a realização do seu sonho de ter um veículo próprio.",
   },
   {
-    name: 'Qualidade',
+    name: "Qualidade",
     icon: Star,
     description:
-      'Nossos veículos são rigorosamente avaliados para garantir a melhor qualidade. Aqui, você encontra carros em excelentes condições, prontos para proporcionar uma experiência de direção segura e confortável.',
+      "Nossos veículos são rigorosamente avaliados para garantir a melhor qualidade. Aqui, você encontra carros em excelentes condições, prontos para proporcionar uma experiência de direção segura e confortável.",
   },
   {
-    name: 'Atendimento',
+    name: "Atendimento",
     icon: Headset,
     description:
-      'Nossa equipe está sempre pronta para te atender com dedicação e profissionalismo. Desde o primeiro contato até a entrega do veículo, garantimos um atendimento completo e personalizado para atender às suas necessidades.',
+      "Nossa equipe está sempre pronta para te atender com dedicação e profissionalismo. Desde o primeiro contato até a entrega do veículo, garantimos um atendimento completo e personalizado para atender às suas necessidades.",
   },
-]
+];
 
 export default function Datail() {
   return (
@@ -54,8 +54,8 @@ export default function Datail() {
 
         <div className="hidden xl:flex absolute z-[-1] top-[400px] left-0 w-[58vw] h-[150px] rounded-tr-[20px] rounded-br-[90px] bg-primary"></div>
 
-        <section className="w-full flex md:flex-row flex-col md:justify-center md:h-[50vh] h-[60vh] md:mt-20 mt-10 mx-auto max-w-7xl px-6 lg:px-8">
-          <div className="relative z-10 w-full flex items-center md:items-start text-center md:text-start flex-col">
+        <section className="w-full flex md:flex-row flex-col md:h-[50vh] h-[60vh] md:mt-20 mt-10 mx-auto max-w-7xl px-6 lg:px-8">
+          <div className="relative z-10 w-full md:w-1/2 flex items-center md:items-start text-center md:text-start flex-col">
             <h1 className="text-4xl lg:text-5xl font-bold">
               Seu próximo veículo está na {siteConfig.accountName}
             </h1>
@@ -64,11 +64,11 @@ export default function Datail() {
             </span>
             <HomeHeroSearch className="mt-6" />
           </div>
-          <div className="relative z-0 w-full flex justify-end mt-4">
+          <div className="md:absolute relative z-0 w-full flex justify-end mt-4">
             <img
               className="absolute pointer-events-none lg:right-[-110px] lg:top-[200px]
                w-[120vw] lg:w-[90vw] xl:w-[80vw] 2xl:w-[65vw] mt-4 md:mt-0 right-[-10px] md:right-[-100x] xl:right-[-100px] xl:top-[100px] 2xl:right-[-100px] 2xl:top-[-10px]"
-              src={'/assets/two-cars.png'}
+              src={"/assets/two-cars.png"}
               width={1612}
               height={861}
               alt="Imagem de um carro"
@@ -85,7 +85,7 @@ export default function Datail() {
                 Nossa história
               </h2>
               <p className="mt-2 text-3xl font-bold tracking-tight text-white sm:text-4xl">
-                4 motivos para comprar seu novo Veículo com a{' '}
+                4 motivos para comprar seu novo Veículo com a{" "}
                 {siteConfig.accountName}
               </p>
               <p className="mt-6 text-lg leading-8 text-muted">
@@ -117,7 +117,7 @@ export default function Datail() {
             <div className="flex w-full justify-center">
               <Button
                 className="max-w-72 w-full mt-10 font-bold text-base bg-primary"
-                size={'lg'}
+                size={"lg"}
               >
                 <Link href="/comprar/carros">Ver todos Veículos</Link>
               </Button>
@@ -141,17 +141,15 @@ export default function Datail() {
               </p>
               <Button
                 className="max-w-72 w-full font-bold mt-8 text-base bg-black xl:flex hidden"
-                size={'lg'}
+                size={"lg"}
               >
-                <a href={siteLinks.whatsappDefault}>
-                  Quero vender ou trocar
-                </a>
+                <a href={siteLinks.whatsappDefault}>Quero vender ou trocar</a>
               </Button>
             </div>
             <div className="mt-16 h-full lg:mt-36 w-full">
               <img
                 alt="App screenshot"
-                src={'/assets/car.webp'}
+                src={"/assets/car.webp"}
                 width={1824}
                 height={1080}
                 className="max-w-screen lg:max-w-[50vw] xl:max-w-[45vw]"
@@ -161,11 +159,9 @@ export default function Datail() {
           <div className="flex justify-center xl:hidden">
             <Button
               className="max-w-72 w-full font-bold mt-8 text-base bg-black"
-              size={'lg'}
+              size={"lg"}
             >
-              <a href={siteLinks.whatsappDefault}>
-                Quero vender ou trocar
-              </a>
+              <a href={siteLinks.whatsappDefault}>Quero vender ou trocar</a>
             </Button>
           </div>
         </section>
@@ -186,17 +182,15 @@ export default function Datail() {
               </p>
               <Button
                 className="max-w-72 w-full mt-10 font-bold text-base bg-primary hidden xl:flex"
-                size={'lg'}
+                size={"lg"}
               >
-                <a href={siteLinks.whatsappFinance}>
-                  Fale com um consultor
-                </a>
+                <a href={siteLinks.whatsappFinance}>Fale com um consultor</a>
               </Button>
             </div>
             <div className="relative mt-16 h-full lg:mt-36">
               <img
                 alt="App screenshot"
-                src={'/assets/car.webp'}
+                src={"/assets/car.webp"}
                 width={1824}
                 height={1080}
                 className="max-w-screen lg:max-w-[50vw] xl:max-w-[45vw]"
@@ -206,11 +200,9 @@ export default function Datail() {
           <div className="flex justify-center xl:hidden">
             <Button
               className="max-w-72 w-full mt-10 font-bold text-base bg-primary "
-              size={'lg'}
+              size={"lg"}
             >
-              <a href={siteLinks.whatsappFinance}>
-                Fale com um consultor
-              </a>
+              <a href={siteLinks.whatsappFinance}>Fale com um consultor</a>
             </Button>
           </div>
         </section>
@@ -230,5 +222,5 @@ export default function Datail() {
         </section>
       </DashboardContent>
     </Dashboard>
-  )
+  );
 }
