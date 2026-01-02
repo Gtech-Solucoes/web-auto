@@ -14,7 +14,7 @@ import {
 } from '@/components/ui/select'
 import { Input } from '@/components/ui/input'
 import { VehicleCard } from '@/components/card/car-card'
-import React, { useCallback, useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { Navigation } from '@/components/navigation/navigation'
 import { NavigationMobile } from '@/components/navigation/navigation-mobile'
 import { Checkbox } from '@/components/ui/checkbox'
@@ -48,7 +48,7 @@ import { cars } from '@/constants/cars-brands'
 import { FilterProps } from './page'
 import { useRouter, usePathname, useSearchParams } from 'next/navigation'
 import { capitalize, slugify, unSlugify } from '@/utils/utils'
-import { LoadingSpinner } from '@/components/loading-spinner'
+import { X } from 'lucide-react'
 import { siteConfig } from '@/lib/site-config'
 import {
   Pagination,
@@ -64,6 +64,12 @@ export type DashboardGenericProps<T = unknown> = {
   children: React.ReactNode
   className?: string
 } & T
+
+type AppliedFilter = {
+  key: string
+  label: string
+  onRemove: () => void
+}
 
 export const metadata: Metadata = {
   title: siteConfig.listingTitle || siteConfig.siteTitle,
@@ -182,6 +188,139 @@ export default function ListVehicles({ filter }: FilterProps) {
     }
   }, [page, totalPages, vehicles])
 
+  const basePath = filter?.type ? `/comprar/${filter.type}` : '/comprar'
+  const orderLabel = useMemo(() => {
+    if (!order) return ''
+    return orders.find((item) => item.value === order)?.label || order
+  }, [order])
+  const didMountRef = useRef(false)
+
+  const handleRemoveBrand = () => {
+    setBrand('')
+    setModel('')
+    setPage(1)
+    router.push(basePath, { scroll: false })
+  }
+
+  const handleRemoveModel = () => {
+    if (!filter?.brand) return
+    setModel('')
+    setPage(1)
+    router.push(`${basePath}/${filter.brand}`, { scroll: false })
+  }
+
+  const handleClearFilters = () => {
+    setBrand('')
+    setModel('')
+    setYearGte('')
+    setYearLte('')
+    setPriceGte('')
+    setPriceLte('')
+    setKmGte('')
+    setKmLte('')
+    setExchange('')
+    setOrder('')
+    setPage(1)
+    router.push(basePath, { scroll: false })
+  }
+
+  const appliedFilters = useMemo<AppliedFilter[]>(
+    () =>
+      [
+        filter?.brand
+          ? {
+              key: 'brand',
+              label: `Marca: ${currentBrand}`,
+              onRemove: handleRemoveBrand,
+            }
+          : null,
+        filter?.model
+          ? {
+              key: 'model',
+              label: `Modelo: ${currentModel}`,
+              onRemove: handleRemoveModel,
+            }
+          : null,
+        yearGte
+          ? {
+              key: 'yearGte',
+              label: `Ano ≥ ${yearGte}`,
+              onRemove: () => setYearGte(''),
+            }
+          : null,
+        yearLte
+          ? {
+              key: 'yearLte',
+              label: `Ano ≤ ${yearLte}`,
+              onRemove: () => setYearLte(''),
+            }
+          : null,
+        priceGte
+          ? {
+              key: 'priceGte',
+              label: `Preço ≥ ${priceGte}`,
+              onRemove: () => setPriceGte(''),
+            }
+          : null,
+        priceLte
+          ? {
+              key: 'priceLte',
+              label: `Preço ≤ ${priceLte}`,
+              onRemove: () => setPriceLte(''),
+            }
+          : null,
+        kmGte
+          ? {
+              key: 'kmGte',
+              label: `KM ≥ ${kmGte}`,
+              onRemove: () => setKmGte(''),
+            }
+          : null,
+        kmLte
+          ? {
+              key: 'kmLte',
+              label: `KM ≤ ${kmLte}`,
+              onRemove: () => setKmLte(''),
+            }
+          : null,
+        exchange
+          ? {
+              key: 'exchange',
+              label: `Câmbio: ${capitalize(exchange)}`,
+              onRemove: () => setExchange(''),
+            }
+          : null,
+        order
+          ? {
+              key: 'order',
+              label: `Ordenar: ${orderLabel}`,
+              onRemove: () => setOrder(''),
+            }
+          : null,
+      ].filter((item): item is AppliedFilter => Boolean(item)),
+    [
+      currentBrand,
+      currentModel,
+      exchange,
+      filter?.brand,
+      filter?.model,
+      handleRemoveBrand,
+      handleRemoveModel,
+      kmGte,
+      kmLte,
+      order,
+      orderLabel,
+      priceGte,
+      priceLte,
+      yearGte,
+      yearLte,
+    ],
+  )
+  const hasFilters = appliedFilters.length > 0
+  const totalRows = vehicles?.meta?.totalRows ?? 0
+  const hasRecords = (vehicles?.records?.length ?? 0) > 0
+  const showEmptyState = !isLoading && vehicles && !hasRecords
+
   const handleBrandChange = (value: string) => {
     const selectedCar = cars.find((car) => car.brand === value)
     if (selectedCar) {
@@ -243,8 +382,29 @@ export default function ListVehicles({ filter }: FilterProps) {
   )
 
   useEffect(() => {
+    if (!didMountRef.current) {
+      didMountRef.current = true
+      return
+    }
+
+    setPage(1)
+  }, [
+    debouncedYearGte,
+    debouncedYearLte,
+    debouncedPriceGte,
+    debouncedPriceLte,
+    debouncedKmGte,
+    debouncedKmLte,
+    debouncedExchange,
+    order,
+    filter?.brand,
+    filter?.model,
+    filter?.type,
+  ])
+
+  useEffect(() => {
     const queryString = createQueryString({
-      page,
+      page: page > 1 ? page : null,
       yearGte: debouncedYearGte,
       yearLte: debouncedYearLte,
       priceGte: debouncedPriceGte,
@@ -255,9 +415,8 @@ export default function ListVehicles({ filter }: FilterProps) {
       order,
     })
 
-    if (queryString) {
-      router.push(`${pathname}?${queryString}`, { scroll: false })
-    }
+    const nextUrl = queryString ? `${pathname}?${queryString}` : pathname
+    router.push(nextUrl, { scroll: false })
   }, [
     debouncedYearGte,
     debouncedYearLte,
@@ -413,10 +572,40 @@ export default function ListVehicles({ filter }: FilterProps) {
           </SideBar>
 
           <div className="flex-1 bg-muted/40">
-            <DashboardTopFilter>
-              <div>
+            <DashboardTopFilter
+              className={
+                hasFilters
+                  ? 'h-auto flex-wrap justify-between gap-3 py-3'
+                  : undefined
+              }
+            >
+              {hasFilters && (
+                <div className="flex flex-wrap items-center gap-2">
+                  {appliedFilters.map((filter) => (
+                    <Button
+                      key={filter.key}
+                      variant="secondary"
+                      size="xs"
+                      className="rounded-full gap-1"
+                      onClick={filter.onRemove}
+                      aria-label={`Remover filtro ${filter.label}`}
+                    >
+                      <span>{filter.label}</span>
+                      <X className="h-3 w-3" />
+                    </Button>
+                  ))}
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    onClick={handleClearFilters}
+                  >
+                    Limpar filtros
+                  </Button>
+                </div>
+              )}
+              <div className="w-full sm:w-auto">
                 <Select onValueChange={(value) => setOrder(value)}>
-                  <SelectTrigger className="w-full">
+                  <SelectTrigger className="w-full sm:w-[220px]">
                     <SelectValue placeholder="Ordenar" />
                   </SelectTrigger>
                   <SelectContent>
@@ -446,21 +635,61 @@ export default function ListVehicles({ filter }: FilterProps) {
                 </Breadcrumb>
                 <h2 className="text-2xl font-semibold">Carros</h2>
                 <p className="text-xs text-muted-foreground">
-                  {vehicles?.records?.length} veículos disponíveis
+                  {totalRows} veículos disponíveis
                 </p>
               </div>
               {isLoading ? (
-                <div className="w-full h-full flex items-center justify-center">
-                  <LoadingSpinner className="w-10 h-10" />
+                <div className="w-full px-2 h-full flex flex-col justify-between">
+                  <div className="flex flex-row flex-wrap items-stretch justify-center gap-4 w-full place-content-stretch">
+                    {Array.from({ length: 8 }).map((_, index) => (
+                      <div
+                        key={`skeleton-${index}`}
+                        className="w-[300px] overflow-hidden rounded-lg border bg-white"
+                      >
+                        <div className="h-[200px] w-full animate-pulse bg-muted" />
+                        <div className="space-y-3 p-4">
+                          <div className="h-4 w-3/4 animate-pulse rounded bg-muted" />
+                          <div className="h-3 w-full animate-pulse rounded bg-muted" />
+                          <div className="h-3 w-2/3 animate-pulse rounded bg-muted" />
+                          <div className="h-6 w-1/2 animate-pulse rounded bg-muted" />
+                          <div className="flex justify-between">
+                            <div className="h-3 w-16 animate-pulse rounded bg-muted" />
+                            <div className="h-3 w-16 animate-pulse rounded bg-muted" />
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
                 </div>
               ) : (
                 <div className="w-full px-2 h-full flex flex-col justify-between">
-                  <div className="flex flex-row flex-wrap items-stretch justify-center gap-4 w-full place-content-stretch">
-                    {vehicles?.records?.map((car) => (
-                      <VehicleCard key={car.id} data={car} />
-                    ))}
-                  </div>
-                  {!isLoading && vehicles && vehicles.records?.length > 0 && (
+                  {hasRecords && (
+                    <div className="flex flex-row flex-wrap items-stretch justify-center gap-4 w-full place-content-stretch">
+                      {vehicles?.records?.map((car) => (
+                        <VehicleCard key={car.id} data={car} />
+                      ))}
+                    </div>
+                  )}
+                  {showEmptyState && (
+                    <div className="flex flex-col items-center justify-center py-16 text-center">
+                      <h3 className="text-lg font-semibold">
+                        Nenhum veículo encontrado
+                      </h3>
+                      <p className="mt-2 text-sm text-muted-foreground">
+                        Tente ajustar os filtros para ver mais resultados.
+                      </p>
+                      {hasFilters && (
+                        <Button
+                          variant="outline"
+                          className="mt-4"
+                          onClick={handleClearFilters}
+                        >
+                          Limpar filtros
+                        </Button>
+                      )}
+                    </div>
+                  )}
+                  {hasRecords && (
                     <Pagination className="py-10">
                       <PaginationContent>
                         <PaginationItem
@@ -471,7 +700,9 @@ export default function ListVehicles({ filter }: FilterProps) {
                           <PaginationPrevious />
                         </PaginationItem>
                         {page > 1 && (
-                          <PaginationItem onClick={() => handlePageChange(page - 1)}>
+                          <PaginationItem
+                            onClick={() => handlePageChange(page - 1)}
+                          >
                             <PaginationLink>{page - 1}</PaginationLink>
                           </PaginationItem>
                         )}
@@ -479,7 +710,9 @@ export default function ListVehicles({ filter }: FilterProps) {
                           <PaginationLink isActive>{page}</PaginationLink>
                         </PaginationItem>
                         {page + 1 <= totalPages && (
-                          <PaginationItem onClick={() => handlePageChange(page + 1)}>
+                          <PaginationItem
+                            onClick={() => handlePageChange(page + 1)}
+                          >
                             <PaginationLink>{page + 1}</PaginationLink>
                           </PaginationItem>
                         )}

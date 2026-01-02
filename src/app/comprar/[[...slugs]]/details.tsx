@@ -33,14 +33,14 @@ import {
 import { Label } from '@/components/ui/label'
 import { Textarea } from '@/components/ui/textarea'
 import { Button } from '@/components/ui/button'
-import Image from 'next/image'
 import useSWR from 'swr'
-import { getVehicleById } from '@/lib/actions/vehicles.action'
+import { getVehicleById, getVehicles } from '@/lib/actions/vehicles.action'
 import { booleanToHuman, capitalize } from '@/utils/utils'
 import { LoadingSpinner } from '@/components/loading-spinner'
 import { HomePageVehicles } from '@/components/homepage-vehicles'
 import { useState } from 'react'
 import { addLead } from '@/lib/actions/lead.action'
+import { VehicleCard } from '@/components/card/car-card'
 import {
   Dialog,
   DialogClose,
@@ -58,7 +58,27 @@ export default function Datail({ id }: { id: string }) {
   const [customerMessage, setCustomerMessage] = useState(
     'Olá, tenho interesse no veículo Toyota Corolla. Gostaria de receber mais informações sobre o carro. Poderia entrar em contato?',
   )
+  const [isGalleryOpen, setIsGalleryOpen] = useState(false)
   const { data, isLoading } = useSWR(`vehicle-${id}}`, () => getVehicleById(id))
+  const similarKey = data?.id ? `similar-${data.id}` : null
+  const { data: similarVehicles } = useSWR(similarKey, () =>
+    getVehicles({
+      type: data?.type === 'CARRO' ? 'carros' : 'motos',
+      brand: data?.brand,
+      page: 1,
+    }),
+  )
+
+  const similarRecords =
+    similarVehicles?.records?.filter((vehicle) => vehicle.id !== data?.id) ?? []
+  const formattedPrice = data
+    ? new Intl.NumberFormat('pt-BR', {
+        style: 'currency',
+        currency: 'BRL',
+        maximumFractionDigits: 0,
+        minimumFractionDigits: 0,
+      }).format(data.price || 0)
+    : ''
 
   const onConfirm = async () => {
     await addLead({
@@ -77,7 +97,7 @@ export default function Datail({ id }: { id: string }) {
           <Navigation />
           <NavigationMobile />
         </DashboardHeader>
-        <DashboardMain>
+        <DashboardMain className="pb-24 lg:pb-6">
           <div>
             <Breadcrumb className="mb-2">
               <BreadcrumbList>
@@ -104,35 +124,81 @@ export default function Datail({ id }: { id: string }) {
           ) : (
             <>
               <div className="w-full">
-                <Carousel
-                  opts={{
-                    loop: true,
-                    align: 'center',
-                  }}
-                >
-                  <CarouselContent>
-                    {data?.images.map((image, index) => (
-                      <CarouselItem
-                        key={index}
-                        className="pl-1 md:basis-1/2 lg:basis-1/3 max-h-96"
-                      >
+                <Dialog open={isGalleryOpen} onOpenChange={setIsGalleryOpen}>
+                  <div className="relative">
+                    <Carousel
+                      opts={{
+                        loop: true,
+                        align: 'center',
+                      }}
+                    >
+                      <CarouselContent>
+                        {data?.images.map((image, index) => (
+                          <CarouselItem
+                            key={index}
+                            className="pl-1 md:basis-1/2 lg:basis-1/3 max-h-96"
+                          >
                         <img
-                          className="object-cover h-full"
-                          src={image}
-                          alt={`${data?.brand} ${data?.model} ${data?.year}`}
-                          width={800}
-                          height={400}
-                          style={{
-                            objectFit: 'cover',
-                            objectPosition: 'center',
-                          }}
-                        />
-                      </CarouselItem>
-                    ))}
-                  </CarouselContent>
-                  <CarouselPrevious />
-                  <CarouselNext />
-                </Carousel>
+                              className="object-cover h-full cursor-pointer"
+                              src={image}
+                              alt={`${data?.brand} ${data?.model} ${data?.year}`}
+                              width={800}
+                              height={400}
+                              onClick={() => setIsGalleryOpen(true)}
+                              style={{
+                                objectFit: 'cover',
+                                objectPosition: 'center',
+                              }}
+                            />
+                          </CarouselItem>
+                        ))}
+                      </CarouselContent>
+                      <CarouselPrevious />
+                      <CarouselNext />
+                    </Carousel>
+                    {!!data?.images?.length && (
+                      <DialogTrigger asChild>
+                        <Button
+                          size="sm"
+                          variant="secondary"
+                          className="absolute right-4 top-4"
+                        >
+                          Ver fotos ({data.images.length})
+                        </Button>
+                      </DialogTrigger>
+                    )}
+                  </div>
+                  <DialogContent
+                    overlayClassName="bg-black/90"
+                    closeClassName="text-white hover:text-white data-[state=open]:text-white bg-black/40 hover:bg-black/60 data-[state=open]:bg-black/60"
+                    className="h-[90vh] max-w-[95vw] border-0 bg-black/90 p-0 flex items-center justify-center"
+                  >
+                    <Carousel
+                      opts={{
+                        loop: true,
+                        align: 'center',
+                      }}
+                      className="h-full w-full"
+                    >
+                      <CarouselContent className="h-full items-center">
+                        {data?.images.map((image, index) => (
+                          <CarouselItem
+                            key={index}
+                            className="flex h-full items-center justify-center"
+                          >
+                            <img
+                              className="max-h-[80vh] w-auto object-contain"
+                              src={image}
+                              alt={`${data?.brand} ${data?.model} ${data?.year}`}
+                            />
+                          </CarouselItem>
+                        ))}
+                      </CarouselContent>
+                      <CarouselPrevious className="left-4" />
+                      <CarouselNext className="right-4" />
+                    </Carousel>
+                  </DialogContent>
+                </Dialog>
               </div>
               <div className="flex justify-center px-10 lg:px-0 gap-x-8 mt-5 w-full">
                 {/*  CONTENT */}
@@ -152,80 +218,10 @@ export default function Datail({ id }: { id: string }) {
                     </div>
                     <div>
                       <p className="text-4xl font-bold text-primary">
-                        {new Intl.NumberFormat('pt-BR', {
-                          style: 'currency',
-                          currency: 'BRL',
-                          maximumFractionDigits: 0,
-                          minimumFractionDigits: 0,
-                        }).format(data!.price!)}
+                        {formattedPrice}
                       </p>
                     </div>
                   </div>
-                  <div className="gap-y-4 mt-5 lg:hidden">
-                    <Dialog>
-                      <DialogTrigger asChild>
-                        <Button className="w-full">Fale com um vendedor</Button>
-                      </DialogTrigger>
-                      <DialogContent className="sm:max-w-[425px]">
-                        <DialogHeader>
-                          <DialogTitle>Mensagem</DialogTitle>
-                          <DialogDescription>
-                            Envie uma mensagem para um de nossos consultores
-                          </DialogDescription>
-                        </DialogHeader>
-                        <form className="grid gap-4 py-4">
-                          <div className=" items-center gap-4">
-                            <Label htmlFor="name" className="text-right">
-                              Seu nome
-                            </Label>
-                            <Input
-                              onChange={(e) => setCustomerName(e.target.value)}
-                              value={customerName}
-                              id="name"
-                              placeholder="João da Silva"
-                              className="col-span-3"
-                            />
-                          </div>
-                          <div className="items-center gap-4">
-                            <Label htmlFor="username" className="text-right">
-                              Telefone
-                            </Label>
-                            <Input
-                              onChange={(e) => setCustomerPhone(e.target.value)}
-                              value={customerPhone}
-                              id="Telefone"
-                              placeholder="17 99999-9999"
-                              className="col-span-3"
-                            />
-                          </div>
-                          <div className="flex flex-col w-full">
-                            <Label className="text-xs mb-2" htmlFor="message">
-                              Mensagem pré definida
-                            </Label>
-                            <Textarea
-                              className="mb-4"
-                              placeholder="Mensagem pré definida"
-                              id="message"
-                              defaultValue={customerMessage}
-                              rows={6}
-                            />
-                          </div>
-                        </form>
-                        <DialogFooter>
-                          <DialogClose asChild>
-                            <Button
-                              className="w-full"
-                              type="button"
-                              onClick={onConfirm}
-                            >
-                              Enviar
-                            </Button>
-                          </DialogClose>
-                        </DialogFooter>
-                      </DialogContent>
-                    </Dialog>
-                  </div>
-
                   {/* Principal Infos  */}
                   <div className="grid grid-cols-3 gap-y-4 mt-8">
                     <div>
@@ -449,8 +445,98 @@ export default function Datail({ id }: { id: string }) {
                 </div>
               </div>
 
+              {similarRecords.length > 0 && (
+                <section className="w-full py-8">
+                  <div className="flex items-center justify-between pb-4">
+                    <h3 className="text-xl font-semibold">
+                      Veículos similares
+                    </h3>
+                  </div>
+                  <div className="flex flex-wrap items-stretch justify-center gap-4">
+                    {similarRecords.slice(0, 4).map((vehicle) => (
+                      <VehicleCard key={vehicle.id} data={vehicle} />
+                    ))}
+                  </div>
+                </section>
+              )}
               <div className="w-full h-full py-8">
                 <HomePageVehicles />
+              </div>
+              <div className="fixed bottom-0 left-0 right-0 z-40 border-t bg-background/95 backdrop-blur lg:hidden">
+                <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-3">
+                  <div>
+                    <span className="text-xs text-muted-foreground">
+                      Preço
+                    </span>
+                    <p className="text-base font-semibold">
+                      {formattedPrice}
+                    </p>
+                  </div>
+                  <Dialog>
+                    <DialogTrigger asChild>
+                      <Button className="shrink-0">
+                        Fale com um vendedor
+                      </Button>
+                    </DialogTrigger>
+                    <DialogContent className="sm:max-w-[425px]">
+                      <DialogHeader>
+                        <DialogTitle>Mensagem</DialogTitle>
+                        <DialogDescription>
+                          Envie uma mensagem para um de nossos consultores
+                        </DialogDescription>
+                      </DialogHeader>
+                      <form className="grid gap-4 py-4">
+                        <div className=" items-center gap-4">
+                          <Label htmlFor="name" className="text-right">
+                            Seu nome
+                          </Label>
+                          <Input
+                            onChange={(e) => setCustomerName(e.target.value)}
+                            value={customerName}
+                            id="name"
+                            placeholder="João da Silva"
+                            className="col-span-3"
+                          />
+                        </div>
+                        <div className="items-center gap-4">
+                          <Label htmlFor="username" className="text-right">
+                            Telefone
+                          </Label>
+                          <Input
+                            onChange={(e) => setCustomerPhone(e.target.value)}
+                            value={customerPhone}
+                            id="Telefone"
+                            placeholder="17 99999-9999"
+                            className="col-span-3"
+                          />
+                        </div>
+                        <div className="flex flex-col w-full">
+                          <Label className="text-xs mb-2" htmlFor="message">
+                            Mensagem pré definida
+                          </Label>
+                          <Textarea
+                            className="mb-4"
+                            placeholder="Mensagem pré definida"
+                            id="message"
+                            defaultValue={customerMessage}
+                            rows={6}
+                          />
+                        </div>
+                      </form>
+                      <DialogFooter>
+                        <DialogClose asChild>
+                          <Button
+                            className="w-full"
+                            type="button"
+                            onClick={onConfirm}
+                          >
+                            Enviar
+                          </Button>
+                        </DialogClose>
+                      </DialogFooter>
+                    </DialogContent>
+                  </Dialog>
+                </div>
               </div>
             </>
           )}
