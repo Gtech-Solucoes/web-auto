@@ -48,7 +48,7 @@ import { cars } from '@/constants/cars-brands'
 import { FilterProps } from './page'
 import { useRouter, usePathname, useSearchParams } from 'next/navigation'
 import { capitalize, slugify, unSlugify } from '@/utils/utils'
-import { X } from 'lucide-react'
+import { Search, X } from 'lucide-react'
 import { siteConfig } from '@/lib/site-config'
 import {
   Pagination,
@@ -125,6 +125,9 @@ export default function ListVehicles({ filter }: FilterProps) {
   const [exchange, setExchange] = useState<string>(
     (searchParams?.get('exchange') as string) || '',
   )
+  const [search, setSearch] = useState<string>(
+    (searchParams?.get('search') as string) || '',
+  )
   const [page, setPage] = useState(Number(searchParams?.get('page')) || 1)
   const [order, setOrder] = useState(searchParams?.get('order') || '')
 
@@ -136,6 +139,7 @@ export default function ListVehicles({ filter }: FilterProps) {
   const debouncedKmGte = useDebounce(kmGte, 1000)
   const debouncedKmLte = useDebounce(kmLte, 1000)
   const debouncedExchange = useDebounce(exchange, 1000)
+  const debouncedSearch = useDebounce(search, 600)
 
   const swrKey = `${filter?.type || 'vehicles'}?${JSON.stringify({
     yearGte,
@@ -145,6 +149,7 @@ export default function ListVehicles({ filter }: FilterProps) {
     kmGte,
     kmLte,
     exchange,
+    search: debouncedSearch,
     page,
     order,
   })}`
@@ -160,6 +165,7 @@ export default function ListVehicles({ filter }: FilterProps) {
         kmGte,
         kmLte,
         exchange,
+        search: debouncedSearch,
       },
       sort: order,
     }),
@@ -219,6 +225,7 @@ export default function ListVehicles({ filter }: FilterProps) {
     setKmGte('')
     setKmLte('')
     setExchange('')
+    setSearch('')
     setOrder('')
     setPage(1)
     router.push(basePath, { scroll: false })
@@ -290,6 +297,13 @@ export default function ListVehicles({ filter }: FilterProps) {
               onRemove: () => setExchange(''),
             }
           : null,
+        search
+          ? {
+              key: 'search',
+              label: `Busca: ${search}`,
+              onRemove: () => setSearch(''),
+            }
+          : null,
         order
           ? {
               key: 'order',
@@ -312,6 +326,7 @@ export default function ListVehicles({ filter }: FilterProps) {
       orderLabel,
       priceGte,
       priceLte,
+      search,
       yearGte,
       yearLte,
     ],
@@ -396,6 +411,7 @@ export default function ListVehicles({ filter }: FilterProps) {
     debouncedKmGte,
     debouncedKmLte,
     debouncedExchange,
+    debouncedSearch,
     order,
     filter?.brand,
     filter?.model,
@@ -412,6 +428,7 @@ export default function ListVehicles({ filter }: FilterProps) {
       kmGte: debouncedKmGte,
       kmLte: debouncedKmLte,
       exchange: debouncedExchange,
+      search: debouncedSearch,
       order,
     })
 
@@ -425,6 +442,7 @@ export default function ListVehicles({ filter }: FilterProps) {
     debouncedKmGte,
     debouncedKmLte,
     debouncedExchange,
+    debouncedSearch,
     createQueryString,
     pathname,
     router,
@@ -572,37 +590,43 @@ export default function ListVehicles({ filter }: FilterProps) {
           </SideBar>
 
           <div className="flex-1 bg-muted/40">
-            <DashboardTopFilter
-              className={
-                hasFilters
-                  ? 'h-auto flex-wrap justify-between gap-3 py-3'
-                  : undefined
-              }
-            >
-              {hasFilters && (
-                <div className="flex flex-wrap items-center gap-2">
-                  {appliedFilters.map((filter) => (
+            <DashboardTopFilter className="h-auto flex-wrap justify-between gap-3 py-3">
+              <div className="flex flex-1 flex-wrap items-center gap-2">
+                {hasFilters && (
+                  <div className="flex flex-wrap items-center gap-2">
+                    {appliedFilters.map((filter) => (
+                      <Button
+                        key={filter.key}
+                        variant="secondary"
+                        size="xs"
+                        className="rounded-full gap-1"
+                        onClick={filter.onRemove}
+                        aria-label={`Remover filtro ${filter.label}`}
+                      >
+                        <span>{filter.label}</span>
+                        <X className="h-3 w-3" />
+                      </Button>
+                    ))}
                     <Button
-                      key={filter.key}
-                      variant="secondary"
-                      size="xs"
-                      className="rounded-full gap-1"
-                      onClick={filter.onRemove}
-                      aria-label={`Remover filtro ${filter.label}`}
+                      variant="ghost"
+                      size="sm"
+                      onClick={handleClearFilters}
                     >
-                      <span>{filter.label}</span>
-                      <X className="h-3 w-3" />
+                      Limpar filtros
                     </Button>
-                  ))}
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    onClick={handleClearFilters}
-                  >
-                    Limpar filtros
-                  </Button>
+                  </div>
+                )}
+                <div className="relative w-full sm:w-[260px]">
+                  <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
+                  <Input
+                    type="search"
+                    placeholder="Buscar por marca ou modelo"
+                    value={search}
+                    onChange={(event) => setSearch(event.target.value)}
+                    className="w-full bg-background pl-8"
+                  />
                 </div>
-              )}
+              </div>
               <div className="w-full sm:w-auto">
                 <Select onValueChange={(value) => setOrder(value)}>
                   <SelectTrigger className="w-full sm:w-[220px]">

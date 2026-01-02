@@ -115,6 +115,12 @@ export const getVehicles = async ({
       status: "ATIVO",
     };
 
+    const search =
+      typeof searchParams?.search === "string" ? searchParams.search.trim() : "";
+    if (search) {
+      filters.$text = { $search: search };
+    }
+
     if (type) {
       filters.type = {
         $regex: type === "carros" ? "CARRO" : "MOTO",

@@ -130,5 +130,23 @@ const VehiclesSchema = new mongoose.Schema(
   },
 )
 
+VehiclesSchema.index(
+  {
+    brand: 'text',
+    model: 'text',
+    description: 'text',
+    about: 'text',
+  },
+  {
+    default_language: 'portuguese',
+    weights: {
+      brand: 5,
+      model: 4,
+      description: 2,
+      about: 1,
+    },
+  },
+)
+
 export default mongoose.models?.Vehicle ||
   mongoose.model('Vehicle', VehiclesSchema)
