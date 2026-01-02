@@ -12,12 +12,13 @@ import { Button } from '@/components/ui/button'
 
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet'
 import React from 'react'
+import { siteConfig } from '@/lib/site-config'
 
 export function NavigationMobile() {
   return (
     <div className="w-full md:hidden flex justify-between items-center">
       <Link href="/" className="w-full flex items-center gap-2 font-semibold">
-        <span>{process.env.NEXT_PUBLIC_ACCOUNT_NAME}</span>
+        <span>{siteConfig.accountName}</span>
       </Link>
       <Sheet>
         <SheetTrigger asChild>
@@ -32,7 +33,7 @@ export function NavigationMobile() {
               href="/"
               className="flex items-center gap-2 text-lg font-semibold"
             >
-              {process.env.NEXT_PUBLIC_ACCOUNT_NAME}
+              {siteConfig.accountName}
             </Link>
             <Link
               href="/comprar/carros"

@@ -12,6 +12,7 @@ import {
   NavigationMenuList,
   navigationMenuTriggerStyle,
 } from '@/components/ui/navigation-menu'
+import { siteConfig } from '@/lib/site-config'
 
 export function Navigation() {
   return (
@@ -19,7 +20,7 @@ export function Navigation() {
       <div className="w-[250px]">
         <Link href="/" className="flex items-center gap-2 font-semibold">
           <span className="font-bold text-xl">
-            {process.env.NEXT_PUBLIC_ACCOUNT_NAME}
+            {siteConfig.accountName}
           </span>
         </Link>
       </div>

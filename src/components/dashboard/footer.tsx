@@ -1,7 +1,6 @@
-import Image from 'next/image'
 import Link from 'next/link'
-import wpIcon from '../../../public/assets/whatsapp.svg'
 import { Mail, MapPin } from 'lucide-react'
+import { siteConfig, siteLinks } from '@/lib/site-config'
 
 export function Footer() {
   return (
@@ -10,7 +9,7 @@ export function Footer() {
         <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 md:gap-8 py-10 max-sm:max-w-sm max-sm:mx-auto gap-y-8 ">
           <div className="lg:mx-auto text-left ">
             <h4 className="text-lg text-white font-medium mb-7">
-              {process.env.NEXT_PUBLIC_ACCOUNT_NAME}
+              {siteConfig.accountName}
             </h4>
             <ul className="text-base  transition-all duration-500">
               <li className="mb-6">
@@ -47,16 +46,14 @@ export function Footer() {
           <div className="lg:mx-auto text-left ">
             <h4 className="text-lg text-white font-medium mb-7">Localização</h4>
             <span className="text-muted">
-              {' '}
-              R. Pereira Barreto, 3427 - Eldorado, São José do Rio Preto - SP,
-              15043-150
+              {siteConfig.addressLine}
             </span>
 
             <div className="text-primary mt-4 flex gap-2">
               <MapPin />
               <a
                 className="font-semibold"
-                href="https://www.google.com/maps/place/NorthBens+Ve%C3%ADculos/@-20.7819354,-49.4017516,17z/data=!3m1!4b1!4m6!3m5!1s0x94bdadd15efccdb3:0xbd0c05fb174378c9!8m2!3d-20.7819404!4d-49.3991767!16s%2Fg%2F11flxm_h4m?entry=ttu&g_ep=EgoyMDI0MTAyNy4wIKXMDSoASAFQAw%3D%3D"
+                href={siteConfig.mapsUrl}
                 target="_blank"
               >
                 Como chegar?
@@ -67,19 +64,24 @@ export function Footer() {
             <h4 className="text-lg text-white font-medium mb-7">Contatos</h4>
             <ul className="text-base  transition-all duration-500">
               <li className="mb-6 flex gap-2">
-                <img src={wpIcon} width={20} height={20} alt="WhatsApp Icon" />
+                <img
+                  src={siteConfig.whatsappIconUrl}
+                  width={20}
+                  height={20}
+                  alt="WhatsApp Icon"
+                />
                 <a
-                  href="https://api.whatsapp.com/send?phone=5517988034098&text=Ol%C3%A1%20gostaria%20de%20vender%20ou%20trocar%20meu%20carro.%0APode%20me%20ajudar%3F"
+                  href={siteLinks.whatsappDefault}
                   target="_blank"
                   className=" text-muted hover:text-primary"
                 >
-                  17 98803-4098
+                  {siteConfig.whatsappDisplay}
                 </a>
               </li>
               <li className="mb-6 flex gap-2 text-muted">
                 <Mail />
                 <span className=" text-muted hover:text-primary">
-                  northbens@outlook.com
+                  {siteConfig.contactEmail}
                 </span>
               </li>
             </ul>
@@ -88,12 +90,12 @@ export function Footer() {
         <div className="py-7 border-t border-gray-400">
           <div className="flex items-center justify-center flex-col lg:justify-between lg:flexRow">
             <span className="text-sm text-muted ">
-              <span>{process.env.NEXT_PUBLIC_ACCOUNT_NAME}</span> 2024, Todos os
-              direitos reservados.
+              <span>{siteConfig.accountName}</span> 2024, Todos os direitos
+              reservados.
             </span>
             <div className="flex mt-4 space-x-4 sm:justify-center lg:mt-4 ">
               <a
-                href="https://www.instagram.com/northbveiculos/"
+                href={siteConfig.instagramUrl}
                 target="_blank"
                 className="w-9 h-9 rounded-full bg-gray-700 flex justify-center items-center hover:bg-iprimary-600"
               >
@@ -110,7 +112,7 @@ export function Footer() {
                 </svg>
               </a>
               <a
-                href="https://www.facebook.com/profile.php?id=61562896466392"
+                href={siteConfig.facebookUrl}
                 target="_blank"
                 className="w-9 h-9 rounded-full bg-gray-700 flex justify-center items-center hover:bg-iprimary-600"
               >

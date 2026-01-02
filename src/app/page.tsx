@@ -8,6 +8,7 @@ import { HomePageVehicles } from '@/components/homepage-vehicles'
 import { Navigation } from '@/components/navigation/navigation'
 import { NavigationMobile } from '@/components/navigation/navigation-mobile'
 import { Button } from '@/components/ui/button'
+import { siteConfig, siteLinks } from '@/lib/site-config'
 
 import { HandCoins, Headset, ShieldCheck, Star } from 'lucide-react'
 import Image from 'next/image'
@@ -55,7 +56,7 @@ export default function Datail() {
         <section className="w-full flex md:flex-row flex-col md:justify-center md:h-[50vh] h-[60vh] md:mt-20 mt-10 mx-auto max-w-7xl px-6 lg:px-8">
           <div className="w-full flex items-center md:items-start text-center md:text-start flex-col">
             <h1 className="text-4xl lg:text-5xl font-bold">
-              Seu próximo veículo está na {process.env.NEXT_PUBLIC_ACCOUNT_NAME}
+              Seu próximo veículo está na {siteConfig.accountName}
             </h1>
             <span className="text-lg pt-2 text-muted-foreground">
               Carros seminovos incríveis com qualidade certificada
@@ -89,7 +90,7 @@ export default function Datail() {
               </h2>
               <p className="mt-2 text-3xl font-bold tracking-tight text-white sm:text-4xl">
                 4 motivos para comprar seu novo Veículo com a{' '}
-                {process.env.NEXT_PUBLIC_ACCOUNT_NAME}
+                {siteConfig.accountName}
               </p>
               <p className="mt-6 text-lg leading-8 text-muted">
                 Quis tellus eget adipiscing convallis sit sit eget aliquet quis.
@@ -146,7 +147,7 @@ export default function Datail() {
                 className="max-w-72 w-full font-bold mt-8 text-base bg-black xl:flex hidden"
                 size={'lg'}
               >
-                <a href="https://api.whatsapp.com/send?phone=5517988034098&text=Ol%C3%A1%20gostaria%20de%20vender%20ou%20trocar%20meu%20carro.%0APode%20me%20ajudar%3F">
+                <a href={siteLinks.whatsappDefault}>
                   Quero vender ou trocar
                 </a>
               </Button>
@@ -166,7 +167,7 @@ export default function Datail() {
               className="max-w-72 w-full font-bold mt-8 text-base bg-black"
               size={'lg'}
             >
-              <a href="https://api.whatsapp.com/send?phone=5517988034098&text=Ol%C3%A1%20gostaria%20de%20vender%20ou%20trocar%20meu%20carro.%0APode%20me%20ajudar%3F">
+              <a href={siteLinks.whatsappDefault}>
                 Quero vender ou trocar
               </a>
             </Button>
@@ -191,7 +192,7 @@ export default function Datail() {
                 className="max-w-72 w-full mt-10 font-bold text-base bg-primary hidden xl:flex"
                 size={'lg'}
               >
-                <a href="https://api.whatsapp.com/send?phone=5517988034098&text=Olá%2C%20tudo%20bem%3F%20Gostaria%20de%20fazer%20uma%20simulação%20de%20financiamento.">
+                <a href={siteLinks.whatsappFinance}>
                   Fale com um consultor
                 </a>
               </Button>
@@ -211,7 +212,7 @@ export default function Datail() {
               className="max-w-72 w-full mt-10 font-bold text-base bg-primary "
               size={'lg'}
             >
-              <a href="https://api.whatsapp.com/send?phone=5517988034098&text=Ol%C3%A1%20gostaria%20de%20vender%20ou%20trocar%20meu%20carro.%0APode%20me%20ajudar%3F">
+              <a href={siteLinks.whatsappFinance}>
                 Fale com um consultor
               </a>
             </Button>

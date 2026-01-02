@@ -1,22 +1,25 @@
-import mongoose from 'mongoose'
+import mongoose from "mongoose";
 
-let isConnected = false // Variable to track the connection status
+let isConnected = false; // Variable to track the connection status
 
 export const connectToDB = async () => {
-  mongoose.set('strictQuery', true)
+  mongoose.set("strictQuery", true);
 
-  if (!process.env.MONGODB_URL) return
+  if (!process.env.MONGODB_URL) return;
 
   if (isConnected) {
-    return
+    console.log("isConnected", isConnected);
+    return;
   }
 
   try {
     await mongoose.connect(process.env.MONGODB_URL, {
       socketTimeoutMS: 45000,
       serverSelectionTimeoutMS: 30000,
-    })
+    });
 
-    isConnected = true
-  } catch (error) {}
-}
+    isConnected = true;
+  } catch (error) {
+    console.error("Error connecting to MongoDB:", error);
+  }
+};

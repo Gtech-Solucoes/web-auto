@@ -49,6 +49,7 @@ import { FilterProps } from './page'
 import { useRouter, usePathname, useSearchParams } from 'next/navigation'
 import { capitalize, slugify, unSlugify } from '@/utils/utils'
 import { LoadingSpinner } from '@/components/loading-spinner'
+import { siteConfig } from '@/lib/site-config'
 import {
   Pagination,
   PaginationContent,
@@ -65,8 +66,9 @@ export type DashboardGenericProps<T = unknown> = {
 } & T
 
 export const metadata: Metadata = {
-  title: 'Carros usados e seminovos em São José do Rio Preto',
-  description: 'Veículos',
+  title: siteConfig.listingTitle || siteConfig.siteTitle,
+  description:
+    siteConfig.listingDescription || siteConfig.siteDescription || 'Veículos',
 }
 
 function useDebounce(value: string, delay: number) {

@@ -5,6 +5,7 @@ import { capitalize } from '@/utils/utils'
 import { addAccess } from '@/lib/actions/access.action'
 import ListVehicles from './list'
 import { getVehicleById } from '@/lib/actions/vehicles.action'
+import { siteConfig } from '@/lib/site-config'
 
 type Props = {
   params: { slugs: string[] }
@@ -28,7 +29,10 @@ export async function generateMetadata({ params }: Props) {
     const [tipo, marca, modelo, ano] = slugs
 
     if (isDetailsRoute) {
-      const title = `${capitalize(marca)} ${capitalize(modelo)} ${ano} - ${process.env.NEXT_PUBLIC_ACCOUNT_NAME}`
+      const accountName = siteConfig.accountName || siteConfig.siteTitle
+      const title = accountName
+        ? `${capitalize(marca)} ${capitalize(modelo)} ${ano} - ${accountName}`
+        : `${capitalize(marca)} ${capitalize(modelo)} ${ano}`
       const description = `Detalhes do ${capitalize(tipo)} ${capitalize(marca)} ${capitalize(modelo)} ${ano}`
 
       const vehicle = await getVehicleById(slugs[5])
@@ -43,9 +47,9 @@ export async function generateMetadata({ params }: Props) {
       return { title, description }
     }
 
-    const title =
-      'North Bens Veículos | Carros Usados e Seminovos em São José do Rio Preto'
-    const description = `Carros usados e seminovos em São José do Rio Preto e região. Encontre veículos de qualidade e ótimos preços em nossa plataforma. Confira agora!`
+    const title = siteConfig.listingTitle || siteConfig.siteTitle
+    const description =
+      siteConfig.listingDescription || siteConfig.siteDescription
     return { title, description }
   }
 }
