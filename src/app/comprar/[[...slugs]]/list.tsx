@@ -159,6 +159,29 @@ export default function ListVehicles({ filter }: FilterProps) {
     }),
   )
 
+  const totalPages = Math.max(vehicles?.meta?.totalPages ?? 1, 1)
+  const hasPrev = page > 1
+  const hasNext = page < totalPages
+
+  const handlePageChange = (nextPage: number) => {
+    const clamped = Math.min(Math.max(1, nextPage), totalPages)
+    if (clamped !== page) {
+      setPage(clamped)
+    }
+  }
+
+  useEffect(() => {
+    if (!vehicles) return
+
+    if (page > totalPages) {
+      setPage(totalPages)
+    }
+
+    if (page < 1) {
+      setPage(1)
+    }
+  }, [page, totalPages, vehicles])
+
   const handleBrandChange = (value: string) => {
     const selectedCar = cars.find((car) => car.brand === value)
     if (selectedCar) {
@@ -440,32 +463,38 @@ export default function ListVehicles({ filter }: FilterProps) {
                   {!isLoading && vehicles && vehicles.records?.length > 0 && (
                     <Pagination className="py-10">
                       <PaginationContent>
-                        <PaginationItem onClick={() => setPage(page - 1)}>
+                        <PaginationItem
+                          aria-disabled={!hasPrev}
+                          className={!hasPrev ? 'pointer-events-none opacity-50' : ''}
+                          onClick={() => handlePageChange(page - 1)}
+                        >
                           <PaginationPrevious />
                         </PaginationItem>
                         {page > 1 && (
-                          <PaginationItem onClick={() => setPage(page - 1)}>
+                          <PaginationItem onClick={() => handlePageChange(page - 1)}>
                             <PaginationLink>{page - 1}</PaginationLink>
                           </PaginationItem>
                         )}
                         <PaginationItem>
                           <PaginationLink isActive>{page}</PaginationLink>
                         </PaginationItem>
-                        {page + 1 <= vehicles.meta.totalPages && (
-                          <PaginationItem onClick={() => setPage(page + 1)}>
+                        {page + 1 <= totalPages && (
+                          <PaginationItem onClick={() => handlePageChange(page + 1)}>
                             <PaginationLink>{page + 1}</PaginationLink>
                           </PaginationItem>
                         )}
-                        {page + 2 <= vehicles.meta.totalPages && (
+                        {page + 2 <= totalPages && (
                           <PaginationItem>
                             <PaginationEllipsis />
                           </PaginationItem>
                         )}
-                        {page + 1 <= vehicles.meta.totalPages && (
-                          <PaginationItem onClick={() => setPage(page + 1)}>
-                            <PaginationNext />
-                          </PaginationItem>
-                        )}
+                        <PaginationItem
+                          aria-disabled={!hasNext}
+                          className={!hasNext ? 'pointer-events-none opacity-50' : ''}
+                          onClick={() => handlePageChange(page + 1)}
+                        >
+                          <PaginationNext />
+                        </PaginationItem>
                       </PaginationContent>
                     </Pagination>
                   )}
