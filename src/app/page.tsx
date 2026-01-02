@@ -8,6 +8,7 @@ import { HomePageVehicles } from '@/components/homepage-vehicles'
 import { Navigation } from '@/components/navigation/navigation'
 import { NavigationMobile } from '@/components/navigation/navigation-mobile'
 import { Button } from '@/components/ui/button'
+import { HomeHeroSearch } from '@/components/home-hero-search'
 import { siteConfig, siteLinks } from '@/lib/site-config'
 
 import { HandCoins, Headset, ShieldCheck, Star } from 'lucide-react'
@@ -54,23 +55,18 @@ export default function Datail() {
         <div className="hidden xl:flex absolute z-[-1] top-[400px] left-0 w-[58vw] h-[150px] rounded-tr-[20px] rounded-br-[90px] bg-primary"></div>
 
         <section className="w-full flex md:flex-row flex-col md:justify-center md:h-[50vh] h-[60vh] md:mt-20 mt-10 mx-auto max-w-7xl px-6 lg:px-8">
-          <div className="w-full flex items-center md:items-start text-center md:text-start flex-col">
+          <div className="relative z-10 w-full flex items-center md:items-start text-center md:text-start flex-col">
             <h1 className="text-4xl lg:text-5xl font-bold">
               Seu próximo veículo está na {siteConfig.accountName}
             </h1>
             <span className="text-lg pt-2 text-muted-foreground">
               Carros seminovos incríveis com qualidade certificada
             </span>
-            <Button
-              className="max-w-52 mt-3 font-bold text-base bg-black"
-              size={'lg'}
-            >
-              <Link href="/comprar/carros">Ver todos Veículos</Link>
-            </Button>
+            <HomeHeroSearch className="mt-6" />
           </div>
-          <div className="w-full flex justify-end mt-4">
+          <div className="relative z-0 w-full flex justify-end mt-4">
             <img
-              className="absolute lg:right-[-110px] lg:top-[200px]
+              className="absolute pointer-events-none lg:right-[-110px] lg:top-[200px]
                w-[120vw] lg:w-[90vw] xl:w-[80vw] 2xl:w-[65vw] mt-4 md:mt-0 right-[-10px] md:right-[-100x] xl:right-[-100px] xl:top-[100px] 2xl:right-[-100px] 2xl:top-[-10px]"
               src={'/assets/two-cars.png'}
               width={1612}

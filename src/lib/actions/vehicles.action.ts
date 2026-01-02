@@ -49,7 +49,7 @@ export const getHomePageVehicles = async (): Promise<Partial<Vehicle>[]> => {
       status: "ATIVO",
       homePage: true,
     })
-    .limit(4)
+    .limit(8)
     .exec();
 
   const data = vehicles?.map((vehicle) => {

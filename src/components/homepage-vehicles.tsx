@@ -12,16 +12,20 @@ export function HomePageVehicles() {
     getHomePageVehicles,
   )
 
+  const visibleVehicles = vehicles
+    ? vehicles.slice(0, vehicles.length >= 8 ? 8 : vehicles.length)
+    : []
+
   return (
     <>
-      {!isLoading && vehicles?.length && (
+      {!isLoading && visibleVehicles.length > 0 && (
         <section className="w-full flex text-center justify-center flex-col md:pb-24 md:pt-0 sm:py-32 py-24">
           <div className="mx-auto max-w-7xl px-6 xl:px-8">
             <h2 className="text-3xl font-semibold lg:mt-20">
               Encontre seu próximo veículo
             </h2>
             <div className="flex flex-col md:grid md:grid-cols-2 xl:grid-cols-4 justify-center md:space-y-0 md:gap-6 md:mt-8 w-full items-center space-y-6 mt-6">
-              {vehicles.map((car) => (
+              {visibleVehicles.map((car) => (
                 <VehicleCard key={car.id} data={car} />
               ))}
             </div>
