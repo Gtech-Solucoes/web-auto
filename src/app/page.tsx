@@ -1,10 +1,10 @@
-import { AutoplayCarousel } from "@/components/autoplay-carousel/carousel";
+import dynamic from "next/dynamic";
 import {
   Dashboard,
   DashboardContent,
   DashboardHeader,
 } from "@/components/dashboard/dashboard";
-import { HomePageVehicles } from "@/components/homepage-vehicles";
+import { HomePageVehiclesSection } from "@/components/homepage-vehicles-section";
 import { Navigation } from "@/components/navigation/navigation";
 import { NavigationMobile } from "@/components/navigation/navigation-mobile";
 import { Button } from "@/components/ui/button";
@@ -14,6 +14,16 @@ import { siteConfig, siteLinks } from "@/lib/site-config";
 import { HandCoins, Headset, ShieldCheck, Star } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+
+const AutoplayCarousel = dynamic(
+  () =>
+    import("@/components/autoplay-carousel/carousel").then(
+      (mod) => mod.AutoplayCarousel,
+    ),
+  {
+    loading: () => <div className="h-72 w-full" aria-hidden="true" />,
+  },
+);
 
 const features = [
   {
@@ -65,18 +75,20 @@ export default function Datail() {
             <HomeHeroSearch className="mt-6" />
           </div>
           <div className="md:absolute relative z-0 w-full flex justify-end mt-4">
-            <img
+            <Image
               className="absolute pointer-events-none lg:right-[-110px] lg:top-[200px]
                w-[120vw] lg:w-[90vw] xl:w-[80vw] 2xl:w-[65vw] mt-4 md:mt-0 right-[-10px] md:right-[-100x] xl:right-[-100px] xl:top-[100px] 2xl:right-[-100px] 2xl:top-[-10px]"
               src={"/assets/two-cars.png"}
               width={1612}
               height={861}
               alt="Imagem de um carro"
-            ></img>
+              priority
+              sizes="(min-width: 1536px) 65vw, (min-width: 1280px) 80vw, (min-width: 1024px) 90vw, 120vw"
+            />
           </div>
         </section>
 
-        <HomePageVehicles />
+        <HomePageVehiclesSection />
 
         <section className="py-24 sm:py-32 bg-current">
           <div className="mx-auto max-w-7xl px-6 lg:px-8">
@@ -147,12 +159,13 @@ export default function Datail() {
               </Button>
             </div>
             <div className="mt-16 h-full lg:mt-36 w-full">
-              <img
+              <Image
                 alt="App screenshot"
                 src={"/assets/car.webp"}
                 width={1824}
                 height={1080}
                 className="max-w-screen lg:max-w-[50vw] xl:max-w-[45vw]"
+                sizes="(min-width: 1280px) 45vw, (min-width: 1024px) 50vw, 100vw"
               />
             </div>
           </div>
@@ -188,12 +201,13 @@ export default function Datail() {
               </Button>
             </div>
             <div className="relative mt-16 h-full lg:mt-36">
-              <img
+              <Image
                 alt="App screenshot"
                 src={"/assets/car.webp"}
                 width={1824}
                 height={1080}
                 className="max-w-screen lg:max-w-[50vw] xl:max-w-[45vw]"
+                sizes="(min-width: 1280px) 45vw, (min-width: 1024px) 50vw, 100vw"
               />
             </div>
           </div>

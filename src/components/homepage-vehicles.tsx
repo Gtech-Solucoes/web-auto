@@ -6,15 +6,23 @@ import { Button } from './ui/button'
 import { getHomePageVehicles, Vehicle } from '@/lib/actions/vehicles.action'
 import useSWR from 'swr'
 
-export function HomePageVehicles() {
+type HomePageVehiclesProps = {
+  initialVehicles?: Partial<Vehicle>[]
+}
+
+export function HomePageVehicles({ initialVehicles }: HomePageVehiclesProps) {
   const { data: vehicles, isLoading } = useSWR<Partial<Vehicle>[]>(
     'homePageVehicles',
     getHomePageVehicles,
+    {
+      fallbackData: initialVehicles,
+      revalidateOnFocus: false,
+      revalidateOnReconnect: false,
+      revalidateOnMount: !initialVehicles?.length,
+    },
   )
 
-  const visibleVehicles = vehicles
-    ? vehicles.slice(0, vehicles.length >= 8 ? 8 : vehicles.length)
-    : []
+  const visibleVehicles = vehicles?.slice(0, 8) ?? []
 
   return (
     <>

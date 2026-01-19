@@ -1,9 +1,6 @@
 "use server";
 
-import { SortOrder } from "mongoose";
-import vehiclesModel from "../models/vehicles.model";
-import { connectToDB } from "../moongose";
-import { unSlugify } from "@/utils/utils";
+import { fetchApi } from "./api";
 
 export type Vehicle = {
   id: string;
@@ -12,6 +9,7 @@ export type Vehicle = {
   images: string[];
   brand: string;
   model: string;
+  version?: string;
   year: number;
   description: string;
   price: number;
@@ -42,41 +40,13 @@ export type Vehicle = {
 };
 
 export const getHomePageVehicles = async (): Promise<Partial<Vehicle>[]> => {
-  await connectToDB();
+  const response = await fetchApi(`/public/vehicles/home?limit=8`);
 
-  const vehicles = await vehiclesModel
-    .find({
-      status: "ATIVO",
-      homePage: true,
-    })
-    .limit(8)
-    .exec();
+  if (!response.ok) {
+    throw new Error("Error fetching home page vehicles");
+  }
 
-  const data = vehicles?.map((vehicle) => {
-    return {
-      id: vehicle._id.toString(),
-      type: vehicle.type,
-      images: vehicle.images,
-      brand: vehicle.brand,
-      model: vehicle.model,
-      year: vehicle.year,
-      price: vehicle.price,
-      description: vehicle.description,
-      status: vehicle.status,
-      modelYear: vehicle.modelYear,
-      about: vehicle.about,
-      itens: vehicle.itens,
-      km: vehicle.km,
-      fuel: vehicle.fuel,
-      exchange: vehicle.exchange,
-      singleOwner: vehicle.singleOwner,
-      paidIPVA: vehicle.paidIPVA,
-      licensed: vehicle.licensed,
-      accessCount: vehicle?.accessCount || 0,
-    };
-  });
-
-  return data;
+  return (await response.json()) as Partial<Vehicle>[];
 };
 
 export type GetVehiclesInput = {
@@ -97,6 +67,22 @@ export type GetVehiclesOutput = {
   records: Partial<Vehicle>[];
 };
 
+const PAGE_SIZE = 16;
+
+const normalizeSearchParam = (value?: string | string[]) => {
+  if (!value) return undefined;
+  return Array.isArray(value) ? value[0] : value;
+};
+
+const appendParam = (
+  params: URLSearchParams,
+  key: string,
+  value?: string | number,
+) => {
+  if (value === undefined || value === null || value === "") return;
+  params.set(key, String(value));
+};
+
 export const getVehicles = async ({
   type,
   model,
@@ -107,171 +93,79 @@ export const getVehicles = async ({
   sort,
 }: GetVehiclesInput): Promise<GetVehiclesOutput> => {
   try {
-    await connectToDB();
+    const params = new URLSearchParams();
+    const pageNumber = Number.isFinite(page) && page > 0 ? page : 1;
 
-    const skip = (page - 1) * 16;
+    params.set("page", String(pageNumber));
+    params.set("limit", String(PAGE_SIZE));
 
-    const filters: any = {
-      status: "ATIVO",
-    };
+    appendParam(params, "type", type);
+    appendParam(params, "brand", brand);
+    appendParam(params, "model", model);
+    if (Number.isFinite(year)) {
+      appendParam(params, "year", year as number);
+    }
+    appendParam(params, "sort", sort);
 
-    const search =
-      typeof searchParams?.search === "string" ? searchParams.search.trim() : "";
+    const search = normalizeSearchParam(searchParams?.search);
     if (search) {
-      filters.$text = { $search: search };
+      appendParam(params, "search", search.trim());
     }
 
-    if (type) {
-      filters.type = {
-        $regex: type === "carros" ? "CARRO" : "MOTO",
-        $options: "i",
-      };
-    }
-    if (model) {
-      filters.model = { $regex: unSlugify(model), $options: "i" };
-    }
-    if (brand) {
-      console.log("brand", brand);
-      filters.brand = { $regex: unSlugify(brand), $options: "i" };
-    }
-    if (year) {
-      filters.year = year; // Para o ano, a busca é case sensitive, mas você pode ajustar conforme necessário.
+    appendParam(params, "yearGte", normalizeSearchParam(searchParams?.yearGte));
+    appendParam(params, "yearLte", normalizeSearchParam(searchParams?.yearLte));
+    appendParam(
+      params,
+      "priceGte",
+      normalizeSearchParam(searchParams?.priceGte),
+    );
+    appendParam(
+      params,
+      "priceLte",
+      normalizeSearchParam(searchParams?.priceLte),
+    );
+    appendParam(params, "kmGte", normalizeSearchParam(searchParams?.kmGte));
+    appendParam(params, "kmLte", normalizeSearchParam(searchParams?.kmLte));
+    appendParam(
+      params,
+      "exchange",
+      normalizeSearchParam(searchParams?.exchange),
+    );
+
+    const response = await fetchApi(`/public/vehicles?${params.toString()}`);
+
+    if (!response.ok) {
+      throw new Error("Error fetching vehicles");
     }
 
-    if (searchParams?.yearGte) {
-      filters.year = { ...filters.year, $gte: Number(searchParams.yearGte) };
-    }
-    if (searchParams?.yearLte) {
-      filters.year = { ...filters.year, $lte: Number(searchParams.yearLte) };
-    }
-    if (searchParams?.priceGte) {
-      filters.price = { ...filters.price, $gte: Number(searchParams.priceGte) };
-    }
-    if (searchParams?.priceLte) {
-      filters.price = { ...filters.price, $lte: Number(searchParams.priceLte) };
-    }
-    if (searchParams?.kmGte) {
-      filters.km = { ...filters.km, $gte: Number(searchParams.kmGte) };
-    }
-    if (searchParams?.kmLte) {
-      filters.km = { ...filters.km, $lte: Number(searchParams.kmLte) };
-    }
-    if (searchParams?.exchange) {
-      filters.exchange = { $regex: searchParams.exchange, $options: "i" };
-    }
-
-    const sortOptions: Record<string, SortOrder> = {}; // Define um objeto de ordenação
-
-    switch (sort) {
-      case "maiorPreco":
-        sortOptions.price = -1; // Ordem decrescente
-        break;
-      case "menorPreco":
-        sortOptions.price = 1; // Ordem crescente
-        break;
-      case "menorKm":
-        sortOptions.km = 1; // Ordem crescente
-        break;
-      case "anoMaisNovo":
-        sortOptions.year = -1; // Ordem decrescente
-        break;
-      default:
-        sortOptions.createdAt = -1; // Ordem padrão, por exemplo, pela data de criação
-    }
-
-    console.log("sortOptions", sortOptions);
-    const vehicles = await vehiclesModel
-      .find(filters)
-      .sort(sortOptions as any)
-      .skip(skip)
-      .limit(16)
-      .exec();
-
-    const data = vehicles?.map((vehicle) => {
-      return {
-        id: vehicle._id.toString(),
-        type: vehicle.type,
-        images: vehicle.images,
-        brand: vehicle.brand,
-        model: vehicle.model,
-        year: vehicle.year,
-        price: vehicle.price,
-        description: vehicle.description,
-        status: vehicle.status,
-        modelYear: vehicle.modelYear,
-        about: vehicle.about,
-        itens: vehicle.itens,
-        km: vehicle.km,
-        fuel: vehicle.fuel,
-        exchange: vehicle.exchange,
-        singleOwner: vehicle.singleOwner,
-        paidIPVA: vehicle.paidIPVA,
-        licensed: vehicle.licensed,
-        accessCount: vehicle?.accessCount || 0,
-      };
-    });
-
-    const totalRows = await vehiclesModel.countDocuments({
-      ...filters,
-    });
-
-    const totalPages = Math.ceil(totalRows / 16);
-
-    return {
-      meta: {
-        totalRows,
-        totalPages,
-      },
-      records: data,
-    };
+    return (await response.json()) as GetVehiclesOutput;
   } catch (error) {
     console.error("Error fetching vehicles:", error);
     throw new Error("Error fetching vehicles");
   }
 };
 
+type VehicleResponse = Omit<Vehicle, "createdAt" | "updatedAt"> & {
+  createdAt?: string;
+  updatedAt?: string;
+};
+
 export const getVehicleById = async (id: string): Promise<Vehicle | null> => {
-  await connectToDB();
+  const response = await fetchApi(`/public/vehicles/${id}`);
 
-  const vehicle = await vehiclesModel.findById(id).exec();
-
-  if (!vehicle) {
+  if (response.status === 404) {
     return null;
   }
 
+  if (!response.ok) {
+    throw new Error("Error fetching vehicle by id");
+  }
+
+  const vehicle = (await response.json()) as VehicleResponse;
+
   return {
-    id: vehicle._id.toString(),
-    type: vehicle.type,
-    primaryImage: vehicle.primaryImage,
-    images: vehicle.images,
-    brand: vehicle.brand,
-    model: vehicle.model,
-    year: vehicle.year,
-    description: vehicle.description,
-    price: vehicle.price,
-    modelYear: vehicle.modelYear,
-    about: vehicle.about,
-    itens: vehicle.itens,
-    km: vehicle.km,
-    body: vehicle.body,
-    color: vehicle.color,
-    fuel: vehicle.fuel,
-    exchange: vehicle.exchange,
-    singleOwner: vehicle.singleOwner,
-    paidIPVA: vehicle.paidIPVA,
-    licensed: vehicle.licensed,
-    width: vehicle.width,
-    height: vehicle.height,
-    weight: vehicle.weight,
-    tank: vehicle.tank,
-    length: vehicle.length,
-    wheelbase: vehicle.wheelbase,
-    occupants: vehicle.occupants,
-    trunk: vehicle.trunk,
-    accessCount: vehicle.accessCount,
-    status: vehicle.status,
-    homePage: vehicle.homePage,
-    createdAt: new Date(vehicle.createdAt),
-    updatedAt: new Date(vehicle.updatedAt),
+    ...vehicle,
+    createdAt: vehicle.createdAt ? new Date(vehicle.createdAt) : undefined,
+    updatedAt: vehicle.updatedAt ? new Date(vehicle.updatedAt) : undefined,
   };
 };

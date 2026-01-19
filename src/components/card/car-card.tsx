@@ -62,7 +62,9 @@ export function VehicleCard({ data }: VehicleCardProps) {
                   <img
                     alt="Car image"
                     className="w-full rounded-t-lg"
+                    decoding="async"
                     height="200"
+                    loading="lazy"
                     src={image}
                     style={{
                       aspectRatio: '300/200',

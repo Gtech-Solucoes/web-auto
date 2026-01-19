@@ -1,32 +1,19 @@
 'use server'
 
-import { connectToDB } from '../moongose'
-import Access from '../models/access.model'
-import vehiclesModel from '../models/vehicles.model'
-import mongoose from 'mongoose'
+import { fetchApi } from './api'
 
 export const addAccess = async (id: string) => {
-  console.log('id', id)
-  await connectToDB()
-
   try {
-    const access = new Access({
-      vehicle: new mongoose.Types.ObjectId(id),
+    const response = await fetchApi('/access', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ vehicleId: id }),
     })
 
-    await access.save()
-
-    const vehicle = await vehiclesModel.findById(id)
-
-    if (vehicle) {
-      await vehiclesModel.updateOne(
-        { _id: new mongoose.Types.ObjectId(id) },
-        {
-          $set: {
-            accessCount: (vehicle.accessCount || 0) + 1,
-          },
-        },
-      )
+    if (!response.ok) {
+      console.log('error', await response.text())
     }
   } catch (error) {
     console.log('error', error)

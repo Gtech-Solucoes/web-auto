@@ -1,7 +1,6 @@
 'use server'
 
-import { connectToDB } from '../moongose'
-import Lead from '../models/lead.model'
+import { fetchApi } from './api'
 
 export type AddLeadInput = {
   name: string
@@ -13,16 +12,21 @@ export type AddLeadInput = {
 }
 
 export const addLead = async (input: AddLeadInput) => {
-  await connectToDB()
-
-  const newLead = new Lead({
-    name: input.name,
-    phone: input.phone,
-    message: input.message,
-    interest: input.interest,
-    consultant: input.consultant,
-    vehicle: input.vehicle,
+  const response = await fetchApi('/leads', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      name: input.name,
+      phone: input.phone,
+      message: input.message,
+      interest: input.interest,
+      vehicleId: input.vehicle,
+    }),
   })
 
-  await newLead.save()
+  if (!response.ok) {
+    throw new Error('Error creating lead')
+  }
 }
