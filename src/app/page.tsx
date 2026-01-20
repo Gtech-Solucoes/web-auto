@@ -18,11 +18,11 @@ import Link from "next/link";
 const AutoplayCarousel = dynamic(
   () =>
     import("@/components/autoplay-carousel/carousel").then(
-      (mod) => mod.AutoplayCarousel,
+      (mod) => mod.AutoplayCarousel
     ),
   {
     loading: () => <div className="h-72 w-full" aria-hidden="true" />,
-  },
+  }
 );
 
 const features = [
@@ -60,75 +60,167 @@ export default function Datail() {
           <Navigation />
           <NavigationMobile />
         </DashboardHeader>
-        <div className="absolute  md:top-[60px] top-[360px] right-0 w-[78vw] md:w-[40vw] md:h-[40vh] h-[25vh] lg:h-[58vh] rounded-tl-[250px] rounded-bl-[450px] bg-primary z-[-1]"></div>
-
-        <div className="hidden xl:flex absolute z-[-1] top-[400px] left-0 w-[58vw] h-[150px] rounded-tr-[20px] rounded-br-[90px] bg-primary"></div>
-
-        <section className="w-full flex md:flex-row flex-col md:h-[50vh] h-[60vh] md:mt-20 mt-10 mx-auto max-w-7xl px-6 lg:px-8">
-          <div className="relative z-10 w-full md:w-1/2 flex items-center md:items-start text-center md:text-start flex-col">
-            <h1 className="text-4xl lg:text-5xl font-bold">
-              Seu próximo veículo está na {siteConfig.accountName}
-            </h1>
-            <span className="text-lg pt-2 text-muted-foreground">
-              Carros seminovos incríveis com qualidade certificada
-            </span>
-            <HomeHeroSearch className="mt-6" />
+        <section className="relative overflow-hidden pt-12 pb-20 sm:pt-16 sm:pb-24">
+          <div className="absolute inset-0 -z-10" aria-hidden="true">
+            <div className="absolute -right-36 -top-16 h-[360px] w-[360px] rounded-full bg-primary sm:h-[460px] sm:w-[460px] lg:h-[560px] lg:w-[560px]"></div>
+            <div className="absolute -left-24 bottom-6 h-[120px] w-[70%] max-w-[760px] rounded-r-[999px] bg-primary sm:bottom-10 sm:h-[150px]"></div>
           </div>
-          <div className="md:absolute relative z-0 w-full flex justify-end mt-4">
-            <Image
-              className="absolute pointer-events-none lg:right-[-110px] lg:top-[200px]
-               w-[120vw] lg:w-[90vw] xl:w-[80vw] 2xl:w-[65vw] mt-4 md:mt-0 right-[-10px] md:right-[-100x] xl:right-[-100px] xl:top-[100px] 2xl:right-[-100px] 2xl:top-[-10px]"
-              src={"/assets/two-cars.png"}
-              width={1612}
-              height={861}
-              alt="Imagem de um carro"
-              priority
-              sizes="(min-width: 1536px) 65vw, (min-width: 1280px) 80vw, (min-width: 1024px) 90vw, 120vw"
-            />
+          <div className="mx-auto max-w-7xl px-6 lg:px-8">
+            <div className="grid items-center gap-12 lg:grid-cols-[0.95fr_1.05fr] lg:gap-16">
+              <div className="text-center lg:text-left">
+                <p className="text-xs font-semibold uppercase tracking-[0.28em] text-primary">
+                  Seminovos certificados
+                </p>
+                <h1 className="mt-4 text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl">
+                  Seu próximo veículo está na {siteConfig.accountName}
+                </h1>
+                <p className="mt-6 text-lg leading-8 text-muted-foreground">
+                  Carros e motos selecionados com inspeção criteriosa, prontos
+                  para você sair dirigindo com tranquilidade.
+                </p>
+                <div className="mt-6 flex flex-wrap justify-center gap-3 lg:justify-start">
+                  <span className="rounded-full bg-primary px-3.5 py-1.5 text-[12px] font-semibold text-background">
+                    Estoque atualizado
+                  </span>
+                  <span className="rounded-full bg-primary px-3.5 py-1.5 text-[12px] font-semibold text-background">
+                    Avaliação transparente
+                  </span>
+                  <span className="rounded-full bg-primary px-3.5 py-1.5 text-[12px] font-semibold text-background">
+                    Atendimento humano
+                  </span>
+                </div>
+                <HomeHeroSearch className="mt-8" />
+              </div>
+              <div className="relative">
+                <div className="absolute -left-6 top-20 z-10 hidden w-60 flex-col gap-3 rounded-2xl border border-foreground/10 bg-background/90 p-4 text-xs shadow-sm backdrop-blur xl:flex">
+                  <span className="text-[10px] font-semibold uppercase tracking-[0.3em] text-muted-foreground">
+                    Destaques
+                  </span>
+                  <div className="space-y-3 border-t border-dashed border-foreground/20 pt-3 text-sm">
+                    <div className="flex items-center justify-between">
+                      <span className="font-semibold">Revisado</span>
+                      <span className="text-xs text-muted-foreground">
+                        Checklist
+                      </span>
+                    </div>
+                    <div className="flex items-center justify-between">
+                      <span className="font-semibold">Garantia</span>
+                      <span className="text-xs text-muted-foreground">
+                        Assistida
+                      </span>
+                    </div>
+                    <div className="flex items-center justify-between">
+                      <span className="font-semibold">Financiamento</span>
+                      <span className="text-xs text-muted-foreground">
+                        Flexível
+                      </span>
+                    </div>
+                  </div>
+                </div>
+                <Image
+                  className="relative z-20 pointer-events-none ml-auto w-[110%] max-w-[920px] sm:w-[112%] lg:w-[170%] lg:max-w-[1040px]"
+                  src={"/assets/two-cars.png"}
+                  width={1612}
+                  height={861}
+                  alt="Imagem de um carro"
+                  priority
+                  sizes="(min-width: 1280px) 45vw, (min-width: 1024px) 55vw, 100vw"
+                />
+              </div>
+            </div>
           </div>
         </section>
 
         <HomePageVehiclesSection />
 
-        <section className="py-24 sm:py-32 bg-current">
+        <section className="relative overflow-hidden py-24 sm:py-32">
           <div className="mx-auto max-w-7xl px-6 lg:px-8">
-            <div className="mx-auto max-w-2xl lg:text-center">
-              <h2 className="text-base font-semibold leading-7 text-primary">
-                Nossa história
-              </h2>
-              <p className="mt-2 text-3xl font-bold tracking-tight text-white sm:text-4xl">
-                4 motivos para comprar seu novo Veículo com a{" "}
-                {siteConfig.accountName}
-              </p>
-              <p className="mt-6 text-lg leading-8 text-muted">
-                Quis tellus eget adipiscing convallis sit sit eget aliquet quis.
-                Suspendisse eget egestas a elementum pulvinar et feugiat blandit
-                at. In mi viverra elit nunc.
-              </p>
-            </div>
-            <div className="mx-auto mt-16 max-w-2xl sm:mt-20 lg:mt-24 lg:max-w-4xl">
-              <dl className="grid max-w-xl grid-cols-1 gap-x-8 gap-y-10 lg:max-w-none lg:grid-cols-2 lg:gap-y-16">
-                {features.map((feature) => (
-                  <div key={feature.name} className="relative pl-16">
-                    <dt className="text-base font-semibold leading-7 text-white">
-                      <div className="absolute left-0 top-0 flex h-10 w-10 items-center justify-center rounded-lg bg-primary">
-                        <feature.icon
-                          aria-hidden="true"
-                          className="h-6 w-6 text-white"
-                        />
-                      </div>
-                      {feature.name}
-                    </dt>
-                    <dd className="mt-2 text-base leading-7 text-muted">
-                      {feature.description}
-                    </dd>
+            <div className="grid items-end gap-12 lg:grid-cols-[0.95fr_1.05fr] lg:gap-16">
+              <div className="text-center lg:text-left">
+                <p className="text-xs font-semibold uppercase tracking-[0.28em] text-primary">
+                  Nossa história
+                </p>
+                <h2 className="mt-4 text-3xl font-bold tracking-tight sm:text-4xl">
+                  4 motivos para comprar seu novo veículo com a{" "}
+                  {siteConfig.accountName}
+                </h2>
+                <p className="mt-6 text-lg leading-8 text-muted-foreground">
+                  Do primeiro atendimento até a entrega, você encontra um
+                  processo transparente, com suporte técnico e dedicação em cada
+                  detalhe do veículo.
+                </p>
+                <div className="mt-8 flex flex-wrap justify-center gap-3 lg:justify-start">
+                  <span className="rounded-full border border-foreground/10 bg-foreground/5 px-4 py-2 text-xs font-semibold text-foreground">
+                    Processo transparente
+                  </span>
+                  <span className="rounded-full border border-foreground/10 bg-foreground/5 px-4 py-2 text-xs font-semibold text-foreground">
+                    Inspeção criteriosa
+                  </span>
+                  <span className="rounded-full border border-foreground/10 bg-foreground/5 px-4 py-2 text-xs font-semibold text-foreground">
+                    Atendimento humano
+                  </span>
+                </div>
+              </div>
+              <div className="rounded-3xl border border-foreground/10 bg-background/80 p-6 shadow-sm backdrop-blur">
+                <div className="flex items-center justify-between text-xs font-semibold uppercase tracking-[0.3em] text-muted-foreground">
+                  <span>Relatório</span>
+                  <span className="text-primary">Confiança</span>
+                </div>
+                <div className="mt-6 space-y-4 text-sm">
+                  <div className="flex items-center justify-between border-b border-dashed border-foreground/20 pb-3">
+                    <span className="font-semibold">Inspeção técnica</span>
+                    <span className="text-muted-foreground">
+                      Rigor em cada veículo
+                    </span>
                   </div>
-                ))}
-              </dl>
+                  <div className="flex items-center justify-between border-b border-dashed border-foreground/20 pb-3">
+                    <span className="font-semibold">Negociação clara</span>
+                    <span className="text-muted-foreground">Sem surpresas</span>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <span className="font-semibold">Entrega segura</span>
+                    <span className="text-muted-foreground">
+                      Documentação cuidada
+                    </span>
+                  </div>
+                </div>
+                <div className="mt-6 flex items-center gap-2 text-xs text-muted-foreground">
+                  <span className="h-2 w-2 rounded-full bg-primary"></span>
+                  Suporte do início ao pós-venda
+                </div>
+              </div>
             </div>
-            <div className="flex w-full justify-center">
+            <div className="mt-12 grid gap-6 lg:grid-cols-2">
+              {features.map((feature, index) => (
+                <div
+                  key={feature.name}
+                  className="group relative overflow-hidden rounded-2xl border border-foreground/10 bg-background/70 p-6 shadow-sm"
+                >
+                  <div className="absolute right-6 top-6 text-xs font-semibold text-muted-foreground">
+                    {`#0${index + 1}`}
+                  </div>
+                  <div className="flex items-start gap-4">
+                    <div className="flex h-12 w-12 items-center justify-center rounded-xl border border-primary/20 bg-primary/10 text-primary">
+                      <feature.icon aria-hidden="true" className="h-6 w-6" />
+                    </div>
+                    <div>
+                      <h3 className="text-lg font-semibold">{feature.name}</h3>
+                      <p className="mt-2 text-sm leading-6 text-muted-foreground">
+                        {feature.description}
+                      </p>
+                    </div>
+                  </div>
+                  <div className="pointer-events-none absolute inset-x-6 bottom-0 h-px bg-primary/30"></div>
+                </div>
+              ))}
+            </div>
+            <div className="mt-12 flex flex-col items-center justify-between gap-4 rounded-2xl border border-foreground/10 bg-foreground/5 p-6 text-center md:flex-row md:text-left">
+              <p className="text-sm text-muted-foreground">
+                Pronto para escolher seu próximo veículo? A equipe acompanha
+                você até a entrega.
+              </p>
               <Button
-                className="max-w-72 w-full mt-10 font-bold text-base bg-primary"
+                className="w-full max-w-72 font-bold text-base bg-primary"
                 size={"lg"}
               >
                 <Link href="/comprar/carros">Ver todos Veículos</Link>
@@ -137,100 +229,208 @@ export default function Datail() {
           </div>
         </section>
 
-        <section className="py-24 sm:py32 xl:flex xl:items-center" id="vender">
-          <div className="mx-auto max-w-7xl px-6 lg:px-8 lg:flex">
-            <div className="mx-auto max-w-md text-center lg:mx-0 lg:flex-auto lg:py-32 lg:text-left">
-              <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
-                Troque ou venda
-                <br />
-                seu Veículo.
-              </h2>
-              <p className="mt-6 text-lg leading-8 text-muted-foreground">
-                Está na hora de atualizar? Aqui, você pode trocar ou vender seu
-                veículo de forma rápida e segura. Nossa equipe oferece uma
-                avaliação justa e transparente, garantindo que você faça o
-                melhor negócio.
-              </p>
-              <Button
-                className="max-w-72 w-full font-bold mt-8 text-base bg-black xl:flex hidden"
-                size={"lg"}
-              >
-                <a href={siteLinks.whatsappDefault}>Quero vender ou trocar</a>
-              </Button>
+        <section
+          className="relative overflow-hidden py-24 sm:py-32"
+          id="vender"
+        >
+          <div className="mx-auto max-w-7xl px-6 lg:px-8">
+            <div className="grid items-center gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16">
+              <div className="text-center lg:text-left">
+                <p className="text-xs font-semibold uppercase tracking-[0.28em] text-primary">
+                  Venda ou troca
+                </p>
+                <h2 className="mt-4 text-3xl font-bold tracking-tight sm:text-4xl">
+                  Troque ou venda seu veículo com avaliação clara
+                </h2>
+                <p className="mt-6 text-lg leading-8 text-muted-foreground">
+                  Envie os detalhes do carro, receba uma avaliação justa e
+                  escolha o melhor caminho para fechar negócio com
+                  tranquilidade.
+                </p>
+                <div className="mt-8 flex flex-wrap justify-center gap-3 lg:justify-start">
+                  <span className="rounded-full border border-foreground/10 bg-foreground/5 px-4 py-2 text-xs font-semibold text-foreground">
+                    Avaliação justa
+                  </span>
+                  <span className="rounded-full border border-foreground/10 bg-foreground/5 px-4 py-2 text-xs font-semibold text-foreground">
+                    Sem burocracia
+                  </span>
+                  <span className="rounded-full border border-foreground/10 bg-foreground/5 px-4 py-2 text-xs font-semibold text-foreground">
+                    Pagamento rápido
+                  </span>
+                </div>
+                <div className="mt-10 flex flex-col items-center gap-4 lg:flex-row lg:items-center">
+                  <Button
+                    className="w-full max-w-72 font-bold text-base bg-black"
+                    size={"lg"}
+                  >
+                    <a href={siteLinks.whatsappDefault}>
+                      Quero vender ou trocar
+                    </a>
+                  </Button>
+                  <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                    <span className="h-2 w-2 rounded-full bg-primary"></span>
+                    Resposta rápida no WhatsApp
+                  </div>
+                </div>
+              </div>
+              <div className="relative">
+                <div className="absolute -left-10 top-10 hidden xl:flex w-[258px] flex-col gap-3 rounded-2xl border border-foreground/10 bg-background/80 p-4 text-xs shadow-sm backdrop-blur">
+                  <span className="text-[10px] font-semibold uppercase tracking-[0.3em] text-muted-foreground">
+                    Ticket
+                  </span>
+                  <div className="space-y-3 border-t border-dashed border-foreground/20 pt-3 text-sm">
+                    <div className="flex items-center justify-between">
+                      <span className="font-semibold">1. Avaliação</span>
+                      <span className="text-xs text-muted-foreground">
+                        15 min
+                      </span>
+                    </div>
+                    <div className="flex items-center justify-between">
+                      <span className="font-semibold">2. Proposta</span>
+                      <span className="text-xs text-muted-foreground">
+                        Transparente
+                      </span>
+                    </div>
+                    <div className="flex items-center justify-between">
+                      <span className="font-semibold">3. Fechamento</span>
+                      <span className="text-xs text-muted-foreground">
+                        No seu tempo
+                      </span>
+                    </div>
+                  </div>
+                </div>
+                <Image
+                  alt="Imagem de veículo para venda ou troca"
+                  src={"/assets/car.webp"}
+                  width={1200}
+                  height={900}
+                  className="w-full max-w-[560px] mx-auto"
+                  sizes="(min-width: 1280px) 40vw, (min-width: 1024px) 50vw, 100vw"
+                />
+                <div className="mt-6 grid grid-cols-3 gap-3 text-center text-xs text-muted-foreground">
+                  <div className="rounded-xl border border-foreground/10 bg-foreground/5 py-3">
+                    Envio dos dados
+                  </div>
+                  <div className="rounded-xl border border-foreground/10 bg-foreground/5 py-3">
+                    Avaliação
+                  </div>
+                  <div className="rounded-xl border border-foreground/10 bg-foreground/5 py-3">
+                    Fechamento
+                  </div>
+                </div>
+              </div>
             </div>
-            <div className="mt-16 h-full lg:mt-36 w-full">
-              <Image
-                alt="App screenshot"
-                src={"/assets/car.webp"}
-                width={1824}
-                height={1080}
-                className="max-w-screen lg:max-w-[50vw] xl:max-w-[45vw]"
-                sizes="(min-width: 1280px) 45vw, (min-width: 1024px) 50vw, 100vw"
-              />
-            </div>
-          </div>
-          <div className="flex justify-center xl:hidden">
-            <Button
-              className="max-w-72 w-full font-bold mt-8 text-base bg-black"
-              size={"lg"}
-            >
-              <a href={siteLinks.whatsappDefault}>Quero vender ou trocar</a>
-            </Button>
           </div>
         </section>
 
         <section
-          className="py-24 sm:py32 bg-current xl:flex xl:items-center"
+          className="relative overflow-hidden py-24 sm:py-32 bg-foreground text-background"
           id="financiar"
         >
-          <div className="mx-auto max-w-7xl px-6 lg:px-8 lg:flex lg:flex-row-reverse">
-            <div className="mx-auto max-w-md text-center lg:mx-0 lg:flex-auto lg:py-32 lg:text-left">
-              <h2 className="text-3xl font-bold tracking-tight sm:text-4xl text-white">
-                Simule o financiamento do seu novo carro
-              </h2>
-              <p className="mt-6 text-lg leading-8 text-muted">
-                Descubra as melhores condições para o seu novo veículo de forma
-                simples e rápida! Fale conosco pelo WhatsApp e faça uma
-                simulação personalizada agora mesmo!
-              </p>
-              <Button
-                className="max-w-72 w-full mt-10 font-bold text-base bg-primary hidden xl:flex"
-                size={"lg"}
-              >
-                <a href={siteLinks.whatsappFinance}>Fale com um consultor</a>
-              </Button>
+          <div className="mx-auto max-w-7xl px-6 lg:px-8">
+            <div className="grid items-center gap-12 lg:grid-cols-[0.95fr_1.05fr] lg:gap-16">
+              <div className="order-2 lg:order-1">
+                <Image
+                  alt="Imagem de financiamento de veículo"
+                  src={"/assets/car-financiamento.png"}
+                  width={1200}
+                  height={900}
+                  className="w-full max-w-[560px] mx-auto"
+                  sizes="(min-width: 1280px) 40vw, (min-width: 1024px) 50vw, 100vw"
+                />
+                <div className="mt-6 flex flex-wrap justify-center gap-3 text-xs text-background/70">
+                  <span className="rounded-full border border-white/10 bg-white/5 px-4 py-2">
+                    Entrada flexível
+                  </span>
+                  <span className="rounded-full border border-white/10 bg-white/5 px-4 py-2">
+                    Parcelas ajustadas
+                  </span>
+                  <span className="rounded-full border border-white/10 bg-white/5 px-4 py-2">
+                    Resposta rápida
+                  </span>
+                </div>
+              </div>
+              <div className="order-1 text-center lg:order-2 lg:text-left">
+                <p className="text-xs font-semibold uppercase tracking-[0.28em] text-primary">
+                  Financiamento
+                </p>
+                <h2 className="mt-4 text-3xl font-bold tracking-tight sm:text-4xl text-background">
+                  Simule o financiamento do seu novo carro
+                </h2>
+                <p className="mt-6 text-lg leading-8 text-background/70">
+                  Descubra a melhor condição para o seu perfil, com parcelas que
+                  cabem no seu orçamento e acompanhamento completo da equipe.
+                </p>
+                <div className="mt-8 grid gap-3 rounded-2xl border border-white/10 bg-white/5 p-5 text-sm text-background">
+                  <div className="flex items-center justify-between">
+                    <span className="font-semibold">Entrada flexível</span>
+                    <span className="text-background/60">Personalizada</span>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <span className="font-semibold">Parcelas</span>
+                    <span className="text-background/60">
+                      Ajustadas ao perfil
+                    </span>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <span className="font-semibold">Prazo</span>
+                    <span className="text-background/60">Até 60x</span>
+                  </div>
+                </div>
+                <Button
+                  className="mt-10 w-full max-w-72 font-bold text-base bg-primary"
+                  size={"lg"}
+                >
+                  <a href={siteLinks.whatsappFinance}>Fale com um consultor</a>
+                </Button>
+              </div>
             </div>
-            <div className="relative mt-16 h-full lg:mt-36">
-              <Image
-                alt="App screenshot"
-                src={"/assets/car.webp"}
-                width={1824}
-                height={1080}
-                className="max-w-screen lg:max-w-[50vw] xl:max-w-[45vw]"
-                sizes="(min-width: 1280px) 45vw, (min-width: 1024px) 50vw, 100vw"
-              />
-            </div>
-          </div>
-          <div className="flex justify-center xl:hidden">
-            <Button
-              className="max-w-72 w-full mt-10 font-bold text-base bg-primary "
-              size={"lg"}
-            >
-              <a href={siteLinks.whatsappFinance}>Fale com um consultor</a>
-            </Button>
           </div>
         </section>
 
-        <section className="py-24 sm:py32">
+        <section className="relative overflow-hidden py-24 sm:py-32">
           <div className="mx-auto max-w-7xl px-6 lg:px-8">
-            <div className="mx-auto max-w-2xl lg:text-center">
-              <h2 className="text-base font-semibold leading-7">Avaliações</h2>
-              <p className="mt-2 text-3xl font-bold tracking-tight sm:text-4xl">
-                Veja nossas avaliações
-              </p>
-            </div>
-            <div className="py-10">
-              <AutoplayCarousel></AutoplayCarousel>
+            <div className="grid items-start gap-12 lg:grid-cols-[minmax(320px,0.95fr)_minmax(0,1.05fr)] lg:gap-20">
+              <div className="text-center lg:text-left lg:pr-6">
+                <p className="text-xs font-semibold uppercase tracking-[0.28em] text-primary">
+                  Avaliações
+                </p>
+                <h2 className="mt-4 text-3xl font-bold tracking-tight sm:text-4xl">
+                  Veja o que os clientes dizem
+                </h2>
+                <p className="mt-6 text-lg leading-8 text-muted-foreground">
+                  Depoimentos de pessoas que compraram, venderam ou financiaram
+                  com a {siteConfig.accountName}.
+                </p>
+                <div className="mt-8 flex flex-wrap justify-center gap-3 lg:justify-start">
+                  <span className="rounded-full border border-foreground/10 bg-foreground/5 px-4 py-2 text-xs font-semibold text-foreground">
+                    Atendimento dedicado
+                  </span>
+                  <span className="rounded-full border border-foreground/10 bg-foreground/5 px-4 py-2 text-xs font-semibold text-foreground">
+                    Processo transparente
+                  </span>
+                  <span className="rounded-full border border-foreground/10 bg-foreground/5 px-4 py-2 text-xs font-semibold text-foreground">
+                    Experiência completa
+                  </span>
+                </div>
+                <div className="mt-10 flex items-center justify-center gap-2 text-sm text-muted-foreground lg:justify-start">
+                  <span className="h-2 w-2 rounded-full bg-primary"></span>
+                  Relatos reais de clientes.
+                </div>
+              </div>
+              <div className="min-w-0 rounded-3xl border border-foreground/10 bg-background/80 p-6 shadow-sm backdrop-blur">
+                <div className="flex items-center justify-between text-xs font-semibold uppercase tracking-[0.3em] text-muted-foreground">
+                  <span>Feedback</span>
+                  <span className="text-primary">Experiências</span>
+                </div>
+                <div className="mt-6 overflow-hidden rounded-2xl border border-foreground/10 bg-foreground/5 p-4">
+                  <AutoplayCarousel></AutoplayCarousel>
+                </div>
+                <div className="mt-4 flex items-center gap-2 text-xs text-muted-foreground">
+                  <span className="h-2 w-2 rounded-full bg-primary"></span>
+                  Depoimentos publicados pelos clientes.
+                </div>
+              </div>
             </div>
           </div>
         </section>

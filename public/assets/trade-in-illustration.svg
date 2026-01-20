@@ -1,0 +1,55 @@
+<svg width="1200" height="900" viewBox="0 0 1200 900" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- soft blob background -->
+  <path d="M210 210C320 90 520 70 680 120C820 165 910 290 1010 350C1120 418 1185 560 1110 660C1015 790 800 820 620 800C450 780 270 720 170 585C85 470 110 315 210 210Z"
+        fill="#F7F1E8"/>
+
+  <!-- subtle dots -->
+  <g opacity="0.25" fill="#E4DED6">
+    <circle cx="220" cy="220" r="3"/><circle cx="250" cy="220" r="3"/><circle cx="280" cy="220" r="3"/><circle cx="310" cy="220" r="3"/>
+    <circle cx="980" cy="700" r="3"/><circle cx="1010" cy="700" r="3"/><circle cx="1040" cy="700" r="3"/><circle cx="1070" cy="700" r="3"/>
+  </g>
+
+  <!-- trade arrows (center) -->
+  <g>
+    <circle cx="620" cy="360" r="78" fill="#FFFFFF" stroke="#E4DED6" stroke-width="2"/>
+    <path d="M592 345H668L648 325" stroke="#F97316" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M648 395H572L592 415" stroke="#F97316" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M572 395C569 374 577 357 592 345" stroke="#F97316" stroke-width="7" stroke-linecap="round"/>
+    <path d="M668 345C671 366 663 383 648 395" stroke="#F97316" stroke-width="7" stroke-linecap="round"/>
+  </g>
+
+  <!-- car silhouette (bottom) -->
+  <g>
+    <!-- body -->
+    <path d="M360 560C360 520 388 488 428 482L502 470C540 430 594 410 656 410H736C806 410 868 446 894 502L914 546C920 562 908 578 890 578H846"
+          fill="#FFFFFF" stroke="#2B2E32" stroke-width="7" stroke-linejoin="round"/>
+    <path d="M390 560H846" stroke="#2B2E32" stroke-width="7" stroke-linecap="round"/>
+    <!-- window hint -->
+    <path d="M536 470H740" stroke="#2B2E32" stroke-width="7" stroke-linecap="round" opacity="0.35"/>
+    <path d="M610 438H700" stroke="#2B2E32" stroke-width="7" stroke-linecap="round" opacity="0.25"/>
+
+    <!-- wheels -->
+    <circle cx="460" cy="590" r="38" fill="#FFFFFF" stroke="#2B2E32" stroke-width="7"/>
+    <circle cx="460" cy="590" r="16" fill="#F4EFE8" stroke="#2B2E32" stroke-width="4"/>
+    <circle cx="820" cy="590" r="38" fill="#FFFFFF" stroke="#2B2E32" stroke-width="7"/>
+    <circle cx="820" cy="590" r="16" fill="#F4EFE8" stroke="#2B2E32" stroke-width="4"/>
+
+    <!-- headlight accent -->
+    <path d="M894 504C874 500 854 500 840 504" stroke="#F97316" stroke-width="7" stroke-linecap="round"/>
+  </g>
+
+  <!-- small "spark" accents (top-right) -->
+  <g stroke="#F97316" stroke-width="4" stroke-linecap="round" opacity="0.9">
+    <path d="M960 260L990 260"/>
+    <path d="M975 245L975 275"/>
+    <path d="M940 310L965 295"/>
+    <path d="M985 330L1008 345"/>
+  </g>
+
+  <!-- tiny label pill (optional, decorative) -->
+  <g>
+    <rect x="820" y="410" width="210" height="44" rx="22" fill="#FFFFFF" stroke="#E4DED6" stroke-width="2"/>
+    <circle cx="848" cy="432" r="6" fill="#F97316"/>
+    <rect x="865" y="425" width="130" height="14" rx="7" fill="#F4EFE8"/>
+  </g>
+</svg>

@@ -4,103 +4,109 @@ import { siteConfig, siteLinks } from '@/lib/site-config'
 
 export function Footer() {
   return (
-    <footer className="w-full bg-current">
-      <div className="mx-auto max-w-7xl px-4 md:px-6 lg:px-8">
-        <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 md:gap-8 py-10 max-sm:max-w-sm max-sm:mx-auto gap-y-8 ">
-          <div className="lg:mx-auto text-left ">
-            <h4 className="text-lg text-white font-medium mb-7">
+    <footer className="relative w-full overflow-hidden border-t border-white/10 bg-foreground text-background">
+      <div className="mx-auto max-w-7xl px-6 py-16 sm:py-20 lg:px-8">
+        <div className="grid gap-10 lg:grid-cols-[1.1fr_1fr] lg:gap-16">
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-[0.28em] text-primary">
               {siteConfig.accountName}
+            </p>
+            <h4 className="mt-4 text-2xl font-semibold text-background">
+              Atendimento completo em cada etapa
             </h4>
-            <ul className="text-base  transition-all duration-500">
-              <li className="mb-6">
-                <Link href="/" className="text-muted hover:text-primary">
-                  Início
-                </Link>
-              </li>
-              <li className="mb-6">
-                <Link
-                  href="/comprar/carros"
-                  className=" text-muted hover:text-primary"
-                >
-                  Comprar
-                </Link>
-              </li>
-              <li className="mb-6">
-                <Link
-                  href="/#vender"
-                  className=" text-muted hover:text-primary"
-                >
-                  Vender
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/#financiar"
-                  className=" text-muted hover:text-primary"
-                >
-                  Financiamento
-                </Link>
-              </li>
-            </ul>
+            <p className="mt-4 text-sm text-background/70">
+              Compra, venda e financiamento com suporte humano e processo
+              transparente.
+            </p>
+            <div className="mt-6 flex flex-wrap gap-3">
+              <Link
+                href="/"
+                className="rounded-full border border-white/10 bg-white/5 px-4 py-2 text-xs font-semibold text-background transition-colors hover:border-primary/60 hover:text-primary"
+              >
+                Início
+              </Link>
+              <Link
+                href="/comprar/carros"
+                className="rounded-full border border-white/10 bg-white/5 px-4 py-2 text-xs font-semibold text-background transition-colors hover:border-primary/60 hover:text-primary"
+              >
+                Comprar
+              </Link>
+              <Link
+                href="/#vender"
+                className="rounded-full border border-white/10 bg-white/5 px-4 py-2 text-xs font-semibold text-background transition-colors hover:border-primary/60 hover:text-primary"
+              >
+                Vender
+              </Link>
+              <Link
+                href="/#financiar"
+                className="rounded-full border border-white/10 bg-white/5 px-4 py-2 text-xs font-semibold text-background transition-colors hover:border-primary/60 hover:text-primary"
+              >
+                Financiamento
+              </Link>
+            </div>
           </div>
-          <div className="lg:mx-auto text-left ">
-            <h4 className="text-lg text-white font-medium mb-7">Localização</h4>
-            <span className="text-muted">
-              {siteConfig.addressLine}
-            </span>
 
-            <div className="text-primary mt-4 flex gap-2">
-              <MapPin />
+          <div className="grid gap-6 sm:grid-cols-2">
+            <div className="rounded-2xl border border-white/10 bg-white/5 p-6 shadow-sm backdrop-blur">
+              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-background/60">
+                Localização
+              </p>
+              <p className="mt-4 text-sm text-background/70">
+                {siteConfig.addressLine}
+              </p>
               <a
-                className="font-semibold"
+                className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-primary"
                 href={siteConfig.mapsUrl}
                 target="_blank"
+                rel="noreferrer"
               >
+                <MapPin className="h-4 w-4" />
                 Como chegar?
               </a>
             </div>
-          </div>
-          <div className="lg:mx-auto text-left">
-            <h4 className="text-lg text-white font-medium mb-7">Contatos</h4>
-            <ul className="text-base  transition-all duration-500">
-              <li className="mb-6 flex gap-2">
-                <img
-                  src={siteConfig.whatsappIconUrl}
-                  width={20}
-                  height={20}
-                  alt="WhatsApp Icon"
-                />
+            <div className="rounded-2xl border border-white/10 bg-white/5 p-6 shadow-sm backdrop-blur">
+              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-background/60">
+                Contatos
+              </p>
+              <div className="mt-4 space-y-3 text-sm text-background/70">
                 <a
                   href={siteLinks.whatsappDefault}
                   target="_blank"
-                  className=" text-muted hover:text-primary"
+                  rel="noreferrer"
+                  className="flex items-center gap-2 text-background transition-colors hover:text-primary"
                 >
+                  <img
+                    src={siteConfig.whatsappIconUrl}
+                    width={18}
+                    height={18}
+                    alt="WhatsApp Icon"
+                  />
                   {siteConfig.whatsappDisplay}
                 </a>
-              </li>
-              <li className="mb-6 flex gap-2 text-muted">
-                <Mail />
-                <span className=" text-muted hover:text-primary">
-                  {siteConfig.contactEmail}
-                </span>
-              </li>
-            </ul>
+                <div className="flex items-center gap-2">
+                  <Mail className="h-4 w-4 text-primary" />
+                  <span>{siteConfig.contactEmail}</span>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-        <div className="py-7 border-t border-gray-400">
-          <div className="flex items-center justify-center flex-col lg:justify-between lg:flexRow">
-            <span className="text-sm text-muted ">
+
+        <div className="mt-12 border-t border-white/10 pt-6">
+          <div className="flex flex-col items-center justify-between gap-4 text-center md:flex-row md:text-left">
+            <span className="text-xs text-background/60">
               <span>{siteConfig.accountName}</span> 2024, Todos os direitos
               reservados.
             </span>
-            <div className="flex mt-4 space-x-4 sm:justify-center lg:mt-4 ">
+            <div className="flex items-center gap-3">
               <a
                 href={siteConfig.instagramUrl}
                 target="_blank"
-                className="w-9 h-9 rounded-full bg-gray-700 flex justify-center items-center hover:bg-iprimary-600"
+                rel="noreferrer"
+                className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/5 text-background transition-colors hover:border-primary/60 hover:text-primary"
               >
                 <svg
-                  className="w-[1.25rem] h-[1.125rem] text-white"
+                  className="h-5 w-5"
                   viewBox="0 0 15 15"
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
@@ -114,11 +120,12 @@ export function Footer() {
               <a
                 href={siteConfig.facebookUrl}
                 target="_blank"
-                className="w-9 h-9 rounded-full bg-gray-700 flex justify-center items-center hover:bg-iprimary-600"
+                rel="noreferrer"
+                className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/5 text-background transition-colors hover:border-primary/60 hover:text-primary"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  className="w-[1.5rem] text-white"
+                  className="h-6 w-6"
                   x="0px"
                   y="0px"
                   width="100"

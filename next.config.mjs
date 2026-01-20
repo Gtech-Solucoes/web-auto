@@ -13,6 +13,11 @@ const nextConfig = {
         hostname: 'fastback.fiat.com.br',
         port: '',
       },
+      {
+        protocol: 'https',
+        hostname: 'ntnln8aau1.ufs.sh',
+        port: '',
+      }
     ],
   },
 }

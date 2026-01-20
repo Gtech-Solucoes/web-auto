@@ -14,24 +14,28 @@ export function AutoplayCarousel() {
   )
   return (
     <Carousel
+      className="min-w-0 w-full"
       plugins={[plugin.current]}
       onMouseEnter={plugin.current.stop}
       onMouseLeave={plugin.current.reset}
       opts={{
         loop: true,
-        align: 'center',
+        align: 'start',
       }}
     >
-      <CarouselContent>
+      <CarouselContent className="min-w-0">
         {testimonials.map((testimonial) => (
-          <CarouselItem key={testimonial.name} className="md:basis-1/3">
-            <div className="group bg-white border border-solid border-gray-300 flex justify-between flex-col rounded-xl p-6 transition-all duration-500  w-full mx-auto hover:border-indigo-600 slide_active:border-indigo-600 hover:shadow-sm h-72">
+          <CarouselItem
+            key={testimonial.name}
+            className="basis-full"
+          >
+            <div className="group flex h-72 w-full flex-col justify-between rounded-2xl border border-foreground/10 bg-background p-6 transition-all duration-300 hover:border-primary/60 hover:shadow-sm slide_active:border-primary/60">
               <div className="">
-                <div className="flex items-center mb-7 gap-2 text-amber-500 transition-all duration-500  ">
+                <div className="mb-7 flex items-center gap-2 text-primary transition-all duration-300">
                   {Array.from(Array(testimonial.stars)).map((_, index) => (
                     <svg
                       key={index}
-                      className="w-5 h-5"
+                      className="h-5 w-5"
                       viewBox="0 0 18 17"
                       fill="none"
                       xmlns="http://www.w3.org/2000/svg"
@@ -43,13 +47,13 @@ export function AutoplayCarousel() {
                     </svg>
                   ))}
                 </div>
-                <p className="text-base text-gray-600 leading-6  transition-all duration-500 pb-8 group-hover:text-gray-800 slide_active:text-gray-800">
+                <p className="pb-8 text-base leading-6 text-muted-foreground transition-all duration-300 group-hover:text-foreground slide_active:text-foreground">
                   {testimonial.text}
                 </p>
               </div>
-              <div className="flex items-center gap-5 pt-5 border-t border-solid border-gray-200">
+              <div className="flex items-center gap-5 border-t border-foreground/10 pt-5">
                 <div className="block">
-                  <h5 className="text-gray-900 font-medium transition-all duration-500  mb-1">
+                  <h5 className="mb-1 font-medium text-foreground transition-all duration-300">
                     {testimonial.name}
                   </h5>
                 </div>

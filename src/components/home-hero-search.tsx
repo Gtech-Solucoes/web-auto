@@ -60,13 +60,13 @@ export function HomeHeroSearch({ className }: HomeHeroSearchProps) {
     <form
       onSubmit={handleSubmit}
       className={cn(
-        'relative z-10 w-full max-w-xl rounded-2xl border border-muted-foreground/20 bg-background p-4 shadow-lg',
+        'relative z-10 w-full max-w-xl rounded-2xl border border-foreground/10 bg-background/80 p-5 shadow-sm backdrop-blur',
         className,
       )}
     >
       <div className="flex flex-col gap-3 md:flex-row md:items-end">
         <div className="flex-1">
-          <span className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+          <span className="text-xs font-semibold uppercase tracking-[0.2em] text-muted-foreground">
             Marca
           </span>
           <Select onValueChange={handleBrandChange} value={brand}>
@@ -85,7 +85,7 @@ export function HomeHeroSearch({ className }: HomeHeroSearchProps) {
           </Select>
         </div>
         <div className="flex-1">
-          <span className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+          <span className="text-xs font-semibold uppercase tracking-[0.2em] text-muted-foreground">
             Modelo
           </span>
           <Select onValueChange={setModel} value={model}>
@@ -103,12 +103,15 @@ export function HomeHeroSearch({ className }: HomeHeroSearchProps) {
             </SelectContent>
           </Select>
         </div>
-        <Button type="submit" className="w-full md:w-auto">
+        <Button
+          type="submit"
+          className="w-full md:w-auto bg-black text-white hover:bg-black/90 font-semibold"
+        >
           <Search className="mr-2 h-4 w-4" />
           Buscar
         </Button>
       </div>
-      <div className="mt-3 flex justify-center">
+      <div className="mt-4 flex justify-center md:justify-start">
         <Button variant="ghost" size="sm" asChild>
           <Link href="/comprar/carros">Ver todos Veículos</Link>
         </Button>
