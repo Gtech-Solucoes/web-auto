@@ -17,6 +17,11 @@ const nextConfig = {
         protocol: 'https',
         hostname: 'ntnln8aau1.ufs.sh',
         port: '',
+      },
+      {
+        protocol: 'https',
+        hostname: 'garagempro-api.gtechsoftwares.com.br',
+        port: '',
       }
     ],
   },
