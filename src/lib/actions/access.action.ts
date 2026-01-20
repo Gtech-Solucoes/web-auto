@@ -1,10 +1,10 @@
 'use server'
 
-import { fetchApi } from './api'
+import { apiFetch } from './api'
 
 export const addAccess = async (id: string) => {
   try {
-    const response = await fetchApi('/access', {
+    const response = await apiFetch('/access', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

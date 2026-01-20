@@ -1,6 +1,6 @@
 "use server";
 
-import { fetchApi } from "./api";
+import { apiFetch } from "./api";
 
 export type Vehicle = {
   id: string;
@@ -40,7 +40,7 @@ export type Vehicle = {
 };
 
 export const getHomePageVehicles = async (): Promise<Partial<Vehicle>[]> => {
-  const response = await fetchApi(`/public/vehicles/home?limit=8`);
+  const response = await apiFetch(`/public/vehicles/home?limit=8`);
 
   if (!response.ok) {
     throw new Error("Error fetching home page vehicles");
@@ -132,7 +132,7 @@ export const getVehicles = async ({
       normalizeSearchParam(searchParams?.exchange),
     );
 
-    const response = await fetchApi(`/public/vehicles?${params.toString()}`);
+    const response = await apiFetch(`/public/vehicles?${params.toString()}`);
 
     if (!response.ok) {
       throw new Error("Error fetching vehicles");
@@ -151,7 +151,7 @@ type VehicleResponse = Omit<Vehicle, "createdAt" | "updatedAt"> & {
 };
 
 export const getVehicleById = async (id: string): Promise<Vehicle | null> => {
-  const response = await fetchApi(`/public/vehicles/${id}`);
+  const response = await apiFetch(`/public/vehicles/${id}`);
 
   if (response.status === 404) {
     return null;

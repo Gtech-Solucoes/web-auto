@@ -1,6 +1,6 @@
 'use server'
 
-import { fetchApi } from './api'
+import { apiFetch } from './api'
 
 export type AddLeadInput = {
   name: string
@@ -12,7 +12,7 @@ export type AddLeadInput = {
 }
 
 export const addLead = async (input: AddLeadInput) => {
-  const response = await fetchApi('/leads', {
+  const response = await apiFetch('/leads', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

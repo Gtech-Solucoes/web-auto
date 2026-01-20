@@ -11,13 +11,26 @@ const resolveApiBaseUrl = () => {
   return baseUrl.replace(/\/$/, '')
 }
 
-const resolveTenantHost = () => {
-  if (process.env.TENANT_HOST) {
-    return process.env.TENANT_HOST
-  }
+const normalizeTenantDomain = (value: string) =>
+  value
+    .trim()
+    .replace(/^https?:\/\//, '')
+    .replace(/\/.*$/, '')
 
-  const headerList = headers()
-  return headerList.get('x-forwarded-host') ?? headerList.get('host') ?? ''
+const readTenantDomainFromRequest = () => {
+  try {
+    const headerList = headers()
+    return (
+      headerList.get('x-tenant-domain') ??
+      headerList.get('x-forwarded-host') ??
+      headerList.get('host') ??
+      headerList.get('origin') ??
+      headerList.get('referer') ??
+      ''
+    )
+  } catch {
+    return ''
+  }
 }
 
 const buildApiUrl = (path: string) => {
@@ -25,26 +38,49 @@ const buildApiUrl = (path: string) => {
   return path.startsWith('/') ? `${baseUrl}${path}` : `${baseUrl}/${path}`
 }
 
-const buildHeaders = (initHeaders?: HeadersInit) => {
-  const headerBag = new Headers(initHeaders)
-  const tenantHost = resolveTenantHost()
+const resolveTenantDomain = (
+  headerBag: Headers,
+  explicitTenantDomain?: string,
+) => {
+  if (explicitTenantDomain) {
+    return normalizeTenantDomain(explicitTenantDomain)
+  }
 
-  if (!tenantHost) {
+  const headerTenantDomain = headerBag.get('x-tenant-domain')
+  if (headerTenantDomain) {
+    return normalizeTenantDomain(headerTenantDomain)
+  }
+
+  const requestTenantDomain = readTenantDomainFromRequest()
+  return requestTenantDomain ? normalizeTenantDomain(requestTenantDomain) : ''
+}
+
+const buildHeaders = (
+  initHeaders?: HeadersInit,
+  tenantDomain?: string,
+) => {
+  const headerBag = new Headers(initHeaders)
+  const resolvedTenantDomain = resolveTenantDomain(headerBag, tenantDomain)
+
+  if (!resolvedTenantDomain) {
     throw new Error(
-      'Tenant host header is missing. Set TENANT_HOST or send Host/X-Forwarded-Host.',
+      'Tenant domain header is missing. Pass tenantDomain or send Host/X-Forwarded-Host/Origin.',
     )
   }
 
-  headerBag.set('X-Forwarded-Host', tenantHost)
+  headerBag.set('x-tenant-domain', resolvedTenantDomain)
   return headerBag
 }
 
-export const fetchApi = async (path: string, init: RequestInit = {}) => {
+export type ApiFetchInit = RequestInit & { tenantDomain?: string }
+
+export const apiFetch = async (path: string, init: ApiFetchInit = {}) => {
+  const { tenantDomain, headers: initHeaders, ...fetchInit } = init
   const url = buildApiUrl(path)
-  const headerBag = buildHeaders(init.headers)
+  const headerBag = buildHeaders(initHeaders, tenantDomain)
 
   return fetch(url, {
-    ...init,
+    ...fetchInit,
     headers: headerBag,
     cache: 'no-store',
   })
