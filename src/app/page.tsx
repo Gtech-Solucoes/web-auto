@@ -10,6 +10,11 @@ import { NavigationMobile } from "@/components/navigation/navigation-mobile";
 import { Button } from "@/components/ui/button";
 import { HomeHeroSearch } from "@/components/home-hero-search";
 import { siteConfig, siteLinks } from "@/lib/site-config";
+import {
+  OrganizationJsonLd,
+  WebSiteJsonLd,
+  FAQJsonLd,
+} from "@/components/seo/json-ld";
 
 import { HandCoins, Headset, ShieldCheck, Star } from "lucide-react";
 import Image from "next/image";
@@ -52,11 +57,15 @@ const features = [
   },
 ];
 
-export default function Datail() {
+export default function Home() {
   return (
-    <Dashboard className="flex justify-center w-screen overflow-x-hidden relative">
-      <DashboardContent className="w-full">
-        <DashboardHeader className="bg-background">
+    <>
+      <OrganizationJsonLd />
+      <WebSiteJsonLd />
+      <FAQJsonLd />
+      <Dashboard className="flex justify-center w-screen overflow-x-hidden relative">
+        <DashboardContent className="w-full">
+          <DashboardHeader className="bg-background">
           <Navigation />
           <NavigationMobile />
         </DashboardHeader>
@@ -433,8 +442,9 @@ export default function Datail() {
               </div>
             </div>
           </div>
-        </section>
-      </DashboardContent>
-    </Dashboard>
+          </section>
+        </DashboardContent>
+      </Dashboard>
+    </>
   );
 }

@@ -38,6 +38,7 @@ export const siteConfig = {
   siteDescription,
   listingTitle,
   listingDescription,
+  siteUrl: normalize(process.env.NEXT_PUBLIC_SITE_URL),
   ogImage: normalize(process.env.NEXT_PUBLIC_OG_IMAGE),
   analyticsDomain: normalize(process.env.NEXT_PUBLIC_ANALYTICS_DOMAIN),
   analyticsScriptUrl: normalize(process.env.NEXT_PUBLIC_ANALYTICS_SCRIPT_URL),
